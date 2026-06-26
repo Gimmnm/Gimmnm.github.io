@@ -4,12 +4,17 @@ date: {{ .Date }}
 draft: true
 tags: []
 categories: []
-translationKey: ""
 summary: ""
 ShowToc: true
 TocOpen: false
 ---
 
-Write your post here. Use `$...$` for inline math and `$$...$$` for display math.
+Write your post here — English or 中文, whichever you prefer.
 
-Link translations with the same `translationKey` in the English and Chinese versions.
+Inline math: `$E=mc^2$`
+
+Display math (use shortcode for multi-line formulas):
+
+{{% mathdisplay %}}
+\mathbf{x}_t = \sqrt{\bar{\alpha}_t}\,\mathbf{x}_0 + \cdots
+{{% /mathdisplay %}}

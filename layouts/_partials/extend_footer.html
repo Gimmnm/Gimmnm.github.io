@@ -1,4 +1,4 @@
-{{- /* Render math after deferred KaTeX scripts */ -}}
+{{- /* Render math after KaTeX scripts load */ -}}
 <script>
   (function () {
     var katexOpts = {
@@ -14,6 +14,22 @@
     };
 
     function renderAllMath() {
+      if (typeof katex === "undefined") return;
+
+      document.querySelectorAll('script[type="math/tex; mode=display"]').forEach(function (el) {
+        try {
+          katex.render(el.textContent.trim(), el.parentElement, {
+            displayMode: true,
+            throwOnError: false,
+            strict: false,
+            trust: true
+          });
+          el.remove();
+        } catch (e) {
+          console.warn("KaTeX display error:", e);
+        }
+      });
+
       if (typeof renderMathInElement === "function") {
         renderMathInElement(document.body, katexOpts);
       }

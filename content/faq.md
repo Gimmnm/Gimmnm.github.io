@@ -2,7 +2,6 @@
 title: "FAQ"
 date: 2026-06-26
 draft: false
-translationKey: "faq"
 ---
 
 **What is this blog?**
@@ -11,7 +10,7 @@ Learning notes on machine learning, mathematics, and related topics — written 
 
 **Languages?**
 
-Most posts have English and Chinese versions, linked at the top of each article.
+Each post is written in either English or 中文, whichever I prefer for that topic. There is no requirement to publish both versions.
 
 **Math rendering?**
 

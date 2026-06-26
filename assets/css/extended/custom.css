@@ -102,14 +102,14 @@ details.toc,
     font-size: 2rem;
 }
 
-/* Math blocks */
-.math-block {
+.post-content .math-block {
     margin: 1.4em 0;
+    padding: 0.6em 0;
     overflow-x: auto;
     text-align: center;
 }
 
-.post-content .math-block > .katex-display {
+.post-content .math-block .katex-display {
     margin: 0;
 }
 
@@ -118,6 +118,10 @@ details.toc,
     padding: 0.6em 0;
     overflow-x: auto;
     overflow-y: hidden;
+}
+
+.post-content .katex {
+    font-size: 1.08em;
 }
 
 .post-content .katex {

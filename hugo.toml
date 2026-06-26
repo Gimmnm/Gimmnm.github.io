@@ -1,8 +1,8 @@
 baseURL = "https://gimmnm.github.io/"
 title = "Gzh' Blog"
 theme = "PaperMod"
+locale = "en-us"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
@@ -10,118 +10,12 @@ buildExpired = false
 enableEmoji = true
 pygmentsUseClasses = true
 
-[languages.en]
-locale = "en-us"
-label = "English"
-weight = 1
-title = "Gzh' Blog"
-
-[languages.en.params]
-description = "Learning notes on machine learning, mathematics, and more."
-author = "Gzh"
-
-[languages.en.params.homeInfoParams]
-Title = "👋 Welcome to Gzh' Blog"
-Content = """
-Hi, this is Gzh. I'm documenting learning notes here — mostly machine learning, applied mathematics, and related topics.
-
-Posts are written in **English** and **中文**. Switch language from the top menu.
-"""
-
-[[languages.en.menu.main]]
-identifier = "posts"
-name = "Posts"
-url = "posts/"
-weight = 10
-
-[[languages.en.menu.main]]
-identifier = "archives"
-name = "Archive"
-url = "archives/"
-weight = 20
-
-[[languages.en.menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "tags/"
-weight = 30
-
-[[languages.en.menu.main]]
-identifier = "search"
-name = "Search"
-url = "search/"
-weight = 40
-
-[[languages.en.menu.main]]
-identifier = "about"
-name = "About"
-url = "about/"
-weight = 50
-
-[[languages.en.menu.main]]
-identifier = "faq"
-name = "FAQ"
-url = "faq/"
-weight = 60
-
-[languages.zh]
-locale = "zh-cn"
-label = "中文"
-weight = 2
-title = "Gzh' Blog"
-
-[languages.zh.params]
-description = "机器学习、数学等领域的学习笔记。"
-author = "Gzh"
-
-[languages.zh.params.homeInfoParams]
-Title = "👋 欢迎来到 Gzh' Blog"
-Content = """
-你好，我是 Gzh。这里记录我的学习笔记——主要是机器学习、应用数学及相关话题。
-
-文章有 **English** 和 **中文** 两个版本，可通过顶部菜单切换语言。
-"""
-
-[[languages.zh.menu.main]]
-identifier = "posts"
-name = "文章"
-url = "posts/"
-weight = 10
-
-[[languages.zh.menu.main]]
-identifier = "archives"
-name = "归档"
-url = "archives/"
-weight = 20
-
-[[languages.zh.menu.main]]
-identifier = "tags"
-name = "标签"
-url = "tags/"
-weight = 30
-
-[[languages.zh.menu.main]]
-identifier = "search"
-name = "搜索"
-url = "search/"
-weight = 40
-
-[[languages.zh.menu.main]]
-identifier = "about"
-name = "关于"
-url = "about/"
-weight = 50
-
-[[languages.zh.menu.main]]
-identifier = "faq"
-name = "FAQ"
-url = "faq/"
-weight = 60
-
 [params]
 env = "production"
+author = "Gzh"
+description = "Learning notes on machine learning, mathematics, and related topics."
 defaultTheme = "auto"
-displayFullLangName = true
+disableLangToggle = true
 ShowReadingTime = true
 ShowShareButtons = false
 ShowPostNavLinks = true
@@ -135,6 +29,50 @@ hideSummary = false
 showtoc = true
 tocopen = false
 math = true
+
+[params.homeInfoParams]
+Title = "👋 Welcome to Gzh' Blog"
+Content = """
+Hi, this is Gzh. I document learning notes here — mostly machine learning, applied mathematics, and related topics.
+
+Posts may be in **English** or **中文**, depending on the topic. No fixed pairing — just write in whichever language fits.
+"""
+
+[[menu.main]]
+identifier = "posts"
+name = "Posts"
+url = "posts/"
+weight = 10
+
+[[menu.main]]
+identifier = "archives"
+name = "Archive"
+url = "archives/"
+weight = 20
+
+[[menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "tags/"
+weight = 30
+
+[[menu.main]]
+identifier = "search"
+name = "Search"
+url = "search/"
+weight = 40
+
+[[menu.main]]
+identifier = "about"
+name = "About"
+url = "about/"
+weight = 50
+
+[[menu.main]]
+identifier = "faq"
+name = "FAQ"
+url = "faq/"
+weight = 60
 
 [params.assets]
 disableFingerprinting = true
