@@ -8,4 +8,4 @@ draft: false
 
 文章可能是英文、中文，或两者对照（通过翻译链接切换）。公式使用 KaTeX 渲染。
 
-联系方式：在 [GitHub](https://github.com/Gimnnm/Gimnnm.github.io) 上提 issue。
+联系方式：在 [GitHub](https://github.com/Gimmnm/Gimmnm.github.io) 上提 issue。

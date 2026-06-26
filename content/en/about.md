@@ -8,4 +8,4 @@ This is **Gzh' Blog** — a place for learning notes on machine learning, applie
 
 Posts may appear in English, Chinese, or both (linked translations). Code and formulas are rendered with standard Markdown and KaTeX.
 
-Contact: open an issue on [GitHub](https://github.com/Gimnnm/Gimnnm.github.io).
+Contact: open an issue on [GitHub](https://github.com/Gimmnm/Gimmnm.github.io).
