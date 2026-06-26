@@ -1,0 +1,229 @@
+/* Gzh' Blog — Lil'Log clarity + Terence Tao academic tone */
+
+:root {
+    --main-width: 760px;
+    --nav-width: 960px;
+    --gap: 28px;
+    --content-gap: 22px;
+    --font-serif: "Source Serif 4", "Noto Serif SC", Georgia, "Times New Roman", serif;
+    --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --link: #1a5fb4;
+    --link-hover: #104080;
+}
+
+[data-theme="dark"] {
+    --link: #79b8ff;
+    --link-hover: #a8d4ff;
+}
+
+body {
+    font-family: var(--font-serif);
+    letter-spacing: 0.01em;
+}
+
+.header,
+.menu,
+.post-meta,
+.breadcrumbs,
+.footer,
+details.toc,
+.home-info,
+.post-tags,
+.paginav,
+.lang-menu,
+.share-buttons,
+#menu {
+    font-family: var(--font-sans);
+}
+
+/* Lil'Log: clean header */
+.header {
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 0.5rem;
+}
+
+.logo a {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+}
+
+/* Tao: serif prose, generous leading */
+.post-content,
+.home-info .entry-content {
+    font-size: 1.0625rem;
+    line-height: 1.78;
+    color: var(--content);
+}
+
+.post-content p,
+.post-content li {
+    margin-bottom: 1.05em;
+}
+
+.post-content h2 {
+    font-family: var(--font-sans);
+    font-size: 1.45rem;
+    font-weight: 600;
+    margin-top: 2.2em;
+    margin-bottom: 0.75em;
+    padding-bottom: 0.25em;
+    border-bottom: 1px solid var(--border);
+}
+
+.post-content h3 {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-top: 1.6em;
+}
+
+/* Tao-style links in body */
+.post-content a {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+}
+
+.post-content a:hover {
+    color: var(--link-hover);
+}
+
+/* Lil'Log: post title */
+.post-title,
+.home-info h1 {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    letter-spacing: -0.03em;
+    line-height: 1.2;
+}
+
+.post-title {
+    font-size: 2rem;
+}
+
+/* Math blocks */
+.math-block {
+    margin: 1.4em 0;
+    overflow-x: auto;
+    text-align: center;
+}
+
+.post-content .math-block > .katex-display {
+    margin: 0;
+}
+
+.post-content .katex-display {
+    margin: 1.4em 0;
+    padding: 0.6em 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.post-content .katex {
+    font-size: 1.08em;
+}
+
+/* Display math on its own — avoid broken <p> wrappers */
+.post-content p:has(> .katex-display:only-child),
+.post-content p:has(> .math-block:only-child) {
+    margin: 0;
+}
+
+/* Lil'Log welcome block */
+.home-info {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1.75rem 1.5rem 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.home-info h1 {
+    font-size: 1.85rem;
+    margin-bottom: 0.85rem;
+}
+
+.welcome-content {
+    font-family: var(--font-serif);
+    font-size: 1.05rem;
+    line-height: 1.72;
+    color: var(--content);
+}
+
+.welcome-content p {
+    margin-bottom: 0.75em;
+}
+
+/* Lil'Log: card-style post list on home */
+.list .post-entry {
+    background: var(--entry);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 1.25rem;
+    padding-bottom: 0.25rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.list .post-entry:hover {
+    border-color: var(--tertiary);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+[data-theme="dark"] .list .post-entry:hover {
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.25);
+}
+
+.post-entry .entry-header h2 {
+    font-family: var(--font-sans);
+    font-size: 1.35rem;
+    font-weight: 600;
+}
+
+.post-entry .entry-content {
+    font-family: var(--font-serif);
+    line-height: 1.65;
+    color: var(--secondary);
+}
+
+.post-entry .entry-footer {
+    font-family: var(--font-sans);
+    font-size: 0.875rem;
+}
+
+/* Tao: post meta — understated */
+.post-meta {
+    font-size: 0.875rem;
+    letter-spacing: 0.01em;
+}
+
+.post-meta a {
+    color: var(--secondary);
+}
+
+/* Single post: slightly narrower feel for long formulas */
+@media (min-width: 768px) {
+    .post-single {
+        max-width: var(--main-width);
+    }
+}
+
+/* TOC — subtle academic sidebar feel */
+details.toc {
+    font-family: var(--font-sans);
+    font-size: 0.92rem;
+}
+
+/* Footer — minimal like Tao */
+.footer {
+    font-size: 0.875rem;
+    opacity: 0.85;
+    border-top: 1px solid var(--border);
+    padding-top: 1.5rem;
+    margin-top: 3rem;
+}
+
+/* Hide noisy share row on mobile-first academic reading */
+.share-buttons {
+    opacity: 0.7;
+}

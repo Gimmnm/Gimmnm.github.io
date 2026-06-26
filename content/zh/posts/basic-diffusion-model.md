@@ -58,11 +58,9 @@ $$
 \;\ge\;
 \mathbb{E}_{q}\Big[
 \underbrace{D_{\mathrm{KL}}\big(q(\mathbf{x}_T \mid \mathbf{x}_0)\,\|\,p(\mathbf{x}_T)\big)}_{\text{LT}}
-+
-\sum_{t=2}^{T}
++ \sum_{t=2}^{T}
 \underbrace{D_{\mathrm{KL}}\big(q(\mathbf{x}_{t-1} \mid \mathbf{x}_t, \mathbf{x}_0)\,\|\,p_\theta(\mathbf{x}_{t-1} \mid \mathbf{x}_t)\big)}_{\mathcal{L}_t}
--
-\underbrace{\log p_\theta(\mathbf{x}_0 \mid \mathbf{x}_1)}_{\mathcal{L}_0}
+- \underbrace{\log p_\theta(\mathbf{x}_0 \mid \mathbf{x}_1)}_{\mathcal{L}_0}
 \Big].
 $$
 

@@ -2,7 +2,7 @@ baseURL = "https://gimmnm.github.io/"
 title = "Gzh' Blog"
 theme = "PaperMod"
 defaultContentLanguage = "en"
-defaultContentLanguageInSubdir = true
+defaultContentLanguageInSubdir = false
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
@@ -21,9 +21,9 @@ description = "Learning notes on machine learning, mathematics, and more."
 author = "Gzh"
 
 [languages.en.params.homeInfoParams]
-Title = "Gzh' Blog"
+Title = "👋 Welcome to Gzh' Blog"
 Content = """
-Hi, this is Gzh. I document learning notes here — mostly machine learning and applied math.
+Hi, this is Gzh. I'm documenting learning notes here — mostly machine learning, applied mathematics, and related topics.
 
 Posts are written in **English** and **中文**. Switch language from the top menu.
 """
@@ -58,6 +58,12 @@ name = "About"
 url = "about/"
 weight = 50
 
+[[languages.en.menu.main]]
+identifier = "faq"
+name = "FAQ"
+url = "faq/"
+weight = 60
+
 [languages.zh]
 locale = "zh-cn"
 label = "中文"
@@ -69,9 +75,9 @@ description = "机器学习、数学等领域的学习笔记。"
 author = "Gzh"
 
 [languages.zh.params.homeInfoParams]
-Title = "Gzh' Blog"
+Title = "👋 欢迎来到 Gzh' Blog"
 Content = """
-你好，我是 Gzh。这里记录我的学习笔记——主要是机器学习与应用数学。
+你好，我是 Gzh。这里记录我的学习笔记——主要是机器学习、应用数学及相关话题。
 
 文章有 **English** 和 **中文** 两个版本，可通过顶部菜单切换语言。
 """
@@ -106,14 +112,22 @@ name = "关于"
 url = "about/"
 weight = 50
 
+[[languages.zh.menu.main]]
+identifier = "faq"
+name = "FAQ"
+url = "faq/"
+weight = 60
+
 [params]
 env = "production"
+defaultTheme = "auto"
+displayFullLangName = true
 ShowReadingTime = true
-ShowShareButtons = true
+ShowShareButtons = false
 ShowPostNavLinks = true
 ShowBreadCrumbs = true
 ShowCodeCopyButtons = true
-disableSpecial1stPost = false
+disableSpecial1stPost = true
 disableScrollToTop = false
 comments = false
 hidemeta = false
@@ -138,6 +152,13 @@ home = ["HTML", "RSS", "JSON"]
 
 [markup.goldmark.renderer]
 unsafe = true
+
+[markup.goldmark.extensions.passthrough]
+enable = true
+
+[markup.goldmark.extensions.passthrough.delimiters]
+block = [['\[', '\]'], ['$$', '$$']]
+inline = [['\(', '\)'], ['$', '$']]
 
 [markup.highlight]
 noClasses = false

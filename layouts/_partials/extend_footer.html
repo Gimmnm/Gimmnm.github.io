@@ -1,0 +1,24 @@
+{{- /* Render math after deferred KaTeX scripts */ -}}
+<script>
+  (function () {
+    var katexOpts = {
+      delimiters: [
+        { left: "$$", right: "$$", display: true },
+        { left: "$", right: "$", display: false },
+        { left: "\\(", right: "\\)", display: false },
+        { left: "\\[", right: "\\]", display: true }
+      ],
+      throwOnError: false,
+      strict: false,
+      trust: true
+    };
+
+    function renderAllMath() {
+      if (typeof renderMathInElement === "function") {
+        renderMathInElement(document.body, katexOpts);
+      }
+    }
+
+    window.addEventListener("load", renderAllMath);
+  })();
+</script>
