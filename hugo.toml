@@ -1,0 +1,147 @@
+baseURL = "https://gimnnm.github.io/"
+title = "Gzh' Blog"
+theme = "PaperMod"
+defaultContentLanguage = "en"
+defaultContentLanguageInSubdir = true
+enableRobotsTXT = true
+buildDrafts = false
+buildFuture = false
+buildExpired = false
+enableEmoji = true
+pygmentsUseClasses = true
+
+[languages.en]
+locale = "en-us"
+label = "English"
+weight = 1
+title = "Gzh' Blog"
+
+[languages.en.params]
+description = "Learning notes on machine learning, mathematics, and more."
+author = "Gzh"
+
+[languages.en.params.homeInfoParams]
+Title = "Gzh' Blog"
+Content = """
+Hi, this is Gzh. I document learning notes here — mostly machine learning and applied math.
+
+Posts are written in **English** and **中文**. Switch language from the top menu.
+"""
+
+[[languages.en.menu.main]]
+identifier = "posts"
+name = "Posts"
+url = "posts/"
+weight = 10
+
+[[languages.en.menu.main]]
+identifier = "archives"
+name = "Archive"
+url = "archives/"
+weight = 20
+
+[[languages.en.menu.main]]
+identifier = "tags"
+name = "Tags"
+url = "tags/"
+weight = 30
+
+[[languages.en.menu.main]]
+identifier = "search"
+name = "Search"
+url = "search/"
+weight = 40
+
+[[languages.en.menu.main]]
+identifier = "about"
+name = "About"
+url = "about/"
+weight = 50
+
+[languages.zh]
+locale = "zh-cn"
+label = "中文"
+weight = 2
+title = "Gzh' Blog"
+
+[languages.zh.params]
+description = "机器学习、数学等领域的学习笔记。"
+author = "Gzh"
+
+[languages.zh.params.homeInfoParams]
+Title = "Gzh' Blog"
+Content = """
+你好，我是 Gzh。这里记录我的学习笔记——主要是机器学习与应用数学。
+
+文章有 **English** 和 **中文** 两个版本，可通过顶部菜单切换语言。
+"""
+
+[[languages.zh.menu.main]]
+identifier = "posts"
+name = "文章"
+url = "posts/"
+weight = 10
+
+[[languages.zh.menu.main]]
+identifier = "archives"
+name = "归档"
+url = "archives/"
+weight = 20
+
+[[languages.zh.menu.main]]
+identifier = "tags"
+name = "标签"
+url = "tags/"
+weight = 30
+
+[[languages.zh.menu.main]]
+identifier = "search"
+name = "搜索"
+url = "search/"
+weight = 40
+
+[[languages.zh.menu.main]]
+identifier = "about"
+name = "关于"
+url = "about/"
+weight = 50
+
+[params]
+env = "production"
+ShowReadingTime = true
+ShowShareButtons = true
+ShowPostNavLinks = true
+ShowBreadCrumbs = true
+ShowCodeCopyButtons = true
+disableSpecial1stPost = false
+disableScrollToTop = false
+comments = false
+hidemeta = false
+hideSummary = false
+showtoc = true
+tocopen = false
+math = true
+
+[params.assets]
+disableFingerprinting = true
+
+[params.profileMode]
+enabled = false
+
+[params.cover]
+hidden = true
+hiddenInList = true
+hiddenInSingle = true
+
+[outputs]
+home = ["HTML", "RSS", "JSON"]
+
+[markup.goldmark.renderer]
+unsafe = true
+
+[markup.highlight]
+noClasses = false
+
+[services]
+[services.googleAnalytics]
+ID = ""
