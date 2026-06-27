@@ -45,8 +45,15 @@ DDIM变成纯隐式后，从Gaussian到$P_Data$变成一个确定的map，由此
 
 我需要再咀嚼一下这种概率过程，然后再看看DDIM中关于SDE、ODE的解释。
 
+## 分布
+
+学习了score matching，终于看懂一些DDPM论文中的内容，实际上我们要学的就是一个$P_data$，理解成在比如$\mathbb{R}^{H\times W \times C}$空间中的概率分布，而diffusion、score matching的思路都转化为学习怎么从一个Gaussian分布中的点，走到我们要的这个分布中去。
+
+Diffusion的总体思路是，我设定一个从数据分布到Gaussian分布的路径，然后学习反向过程。DDPM一开始是学习反向的Gaussian的Markov chain过程的均值，重要的突破是改成学习$\varepsilon_{\theta}$，这个总噪音实际上描述了一种方向。在DDPM的反向采样过程中，每一步有随机性，可以说是往数据采样方向一步步走，所以不能跳步太快。看成一个SDE，类比数值方法中的内容，跳步太快肯定会偏。DDIM的好处就在于，整个过程是确定的，Gaussian分布中的点怎么变换到数据分布是确定的，那么采样生成方式就能够找到方式加速。
+
+Score matching直接考虑怎么从一个任意的初始采样点（Maybe Gaussian）走到好的数据分布点上去，虽然也要走多步，但并不是Diffusion那样的latent variable，而是直接根据梯度走。但是真实的数据分布并不知道，更加不知道梯度怎么算，所以要对已有的数据（Training data）去加高斯噪音，得到可以学习以及计算的梯度，成为score，然后沿着score做Langevin sampling。
+
 ## References
 
 - Author. *Paper title.* Venue, year. [link]()
 - Add papers as you read them
-
