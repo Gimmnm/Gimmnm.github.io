@@ -17,7 +17,7 @@
 
 5. 等 1～2 分钟，工作流出现绿色 ✓ 后，再访问：
    - 首页：https://gimmnm.github.io/
-   - 文章：https://gimmnm.github.io/posts/basic-diffusion-model/
+   - 文章：https://gimmnm.github.io/posts/diffusion-summary/
 
 ## 以后更新博客
 

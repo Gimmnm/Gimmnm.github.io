@@ -13,4 +13,4 @@ clean:
 deploy-check: build
 	@grep -rl 'katex.min.css' public/ | head -1 | xargs test -f && echo "OK: KaTeX CSS found"
 	@grep -rl 'renderMathInElement' public/ | head -1 | xargs test -f && echo "OK: KaTeX auto-render found"
-	@grep -c 'katex-display' public/posts/basic-diffusion-model/index.html 2>/dev/null || true
+	@grep -c 'math/tex' public/posts/diffusion-summary/index.html 2>/dev/null || true
