@@ -53,6 +53,48 @@ Diffusion的总体思路是，我设定一个从数据分布到Gaussian分布的
 
 Score matching直接考虑怎么从一个任意的初始采样点（Maybe Gaussian）走到好的数据分布点上去，虽然也要走多步，但并不是Diffusion那样的latent variable，而是直接根据梯度走。但是真实的数据分布并不知道，更加不知道梯度怎么算，所以要对已有的数据（Training data）去加高斯噪音，得到可以学习以及计算的梯度，成为score，然后沿着score做Langevin sampling。
 
+感觉，score matching里用不同尺度的加噪和diffusion里的forward很像，暂时看到的区别是diffusion有确定的latent variable. 另一个区别是，diffusion是variance preserving的，但是score matching会出现variane explosion. 两种算法用不同的方式加噪音。
+
+## SDE
+
+Wow，在SDE那篇文章中，用连续的SDE来描述离散的diffusion和score matching，真的统一了两者！后续要重点读一下这篇文章！转化为连续的SDE后，forward过程可以写成
+
+{{% mathdisplay %}}
+dx = f(x,t)dt + g(t)dW
+{{% /mathdisplay %}}
+
+where $dW$ is the Wiener process. $f(x,t)$项是drift part，$g(t)$项是diffusion，反向过程可以用SDE的逆过程来描述，有完整的理论！
+
+从这个出发可以有类似DDPM $\to$ DDIM的故事。通过一些推导，可以从SDE转化为ODE，PF-ODE.
+
+## RL
+
+强化学习训练中和一般的网络比较不同的是，需要有和环境的交互得到对应的reward，一般的Policy Gradient要每次更新model后重新交互收集数据形成reward，因为One man's meat is another man's poison!
+
+- On-Policy
+The actor to train and the actor for interacting is the same.
+
+- Off-policy
+The actor to train and the actor for interacting are different. Then, the actor to train has to know its difference from the actor to interact.
+
+This lead to Proximal Policy Optimization (PPO) algorithm.
+
+并且，在收集数据的时候，The actor needs to have randomness during data collection. 也就是Exploration.
+
+## Flow matching
+
+穿插一下Flow方法，首先Flow想要的是把原分布变换到目标分布，从采样点角度，single sample满足一个ODE，而从概率分布角度，满足一个概率连续变化，由此确定了变换过程中核心关系，continuity equation:
+
+{{% mathdisplay %}}
+\frac{\partial p_t(x_t)}{\partial t} = -\nabla \cdot (p_t u_t(x_t))
+{{% /mathdisplay %}}
+
+也就是说，只要找到满足这个方程的$p_t$和$u_t$以及初始条件，就可以得到一个变换。
+
+由此，我们要找容易计算的loss，因为直接考虑maximize likelihood是一个积分过程，每次都要从0积分到1算一次。
+
+有点像PDE中基本解的思路，考虑把initial distribution变换到一个dirac distribution，这种情况下的$u_t$和$p_t$很好算。然后实际的情况，然后从$p_t$角度，是插值叠加，从$u_t$角度，是概率加权的叠加，并且我们转而考虑将$u^{\theta}_t$往这个叠加的$u_t$上学，而不是直接降低likelihood，并且，可以得到的等价的Conditional Loss，更加容易计算!
+
 ## References
 
 - Author. *Paper title.* Venue, year. [link]()
