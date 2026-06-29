@@ -97,5 +97,48 @@ This lead to Proximal Policy Optimization (PPO) algorithm.
 
 ## References
 
-- Author. *Paper title.* Venue, year. [link]()
-- Add papers as you read them
+### Diffusion
+
+- Ho, Jain, Abbeel. *Denoising Diffusion Probabilistic Models.* NeurIPS, 2020. [arXiv:2006.11239](https://arxiv.org/abs/2006.11239)
+- Song, Meng, Ermon. *Denoising Diffusion Implicit Models.* ICLR, 2021. [arXiv:2010.02502](https://arxiv.org/abs/2010.02502)
+- Nichol, Dhariwal. *Improved Denoising Diffusion Probabilistic Models.* ICML, 2021. [arXiv:2102.09672](https://arxiv.org/abs/2102.09672)
+- Kingma et al. *Variational Diffusion Models.* NeurIPS, 2021. [arXiv:2107.00630](https://arxiv.org/abs/2107.00630)
+- Lu et al. *DPM-Solver: A Fast ODE Solver for Diffusion Probabilistic Model Sampling in Around 10 Steps.* NeurIPS, 2022. [arXiv:2206.00927](https://arxiv.org/abs/2206.00927)
+- Rafailov et al. *Direct Preference Optimization: Your Language Model is Secretly a Reward Model.* NeurIPS, 2023. [arXiv:2305.18290](https://arxiv.org/abs/2305.18290)
+- Wallace et al. *Diffusion Model Alignment Using Direct Preference Optimization.* arXiv, 2023. [arXiv:2311.12908](https://arxiv.org/abs/2311.12908)
+- Lu et al. *InPO: Inversion Preference Optimization with Reparametrized DDIM for Efficient Diffusion Model Alignment.* arXiv, 2025. [arXiv:2503.18454](https://arxiv.org/abs/2503.18454)
+- Lu et al. *Smoothed Preference Optimization via ReNoise Inversion for Aligning Diffusion Models with Varied Human Preferences.* arXiv, 2025. [arXiv:2506.02698](https://arxiv.org/abs/2506.02698)
+
+### Score
+
+- Hyvärinen. *Estimation of Non-Normalized Statistical Models by Score Matching.* JMLR, 2005.
+- Vincent. *A Connection Between Score Matching and Denoising Autoencoders.* Neural Computation, 2011.
+- Song, Ermon. *Generative Modeling by Estimating Gradients of the Data Distribution.* NeurIPS, 2019. [arXiv:1907.05600](https://arxiv.org/abs/1907.05600)
+- Song et al. *Score-Based Generative Modeling through Stochastic Differential Equations.* ICLR, 2021. [arXiv:2011.13456](https://arxiv.org/abs/2011.13456)
+- Karras et al. *Elucidating the Design Space of Diffusion-Based Generative Models.* NeurIPS, 2022. [arXiv:2206.00364](https://arxiv.org/abs/2206.00364)
+
+### Flow
+
+- Liu, Gong, Liu. *Flow Straight and Fast: Learning to Generate and Transfer Data with Rectified Flow.* ICLR, 2023. [arXiv:2209.03003](https://arxiv.org/abs/2209.03003)
+- Lipman et al. *Flow Matching for Generative Modeling.* ICLR, 2023. [arXiv:2210.02747](https://arxiv.org/abs/2210.02747)
+- Yin et al. *One-step Diffusion with Distribution Matching Distillation.* CVPR, 2024. [arXiv:2311.18828](https://arxiv.org/abs/2311.18828)
+- Lipman et al. *Flow Matching Guide and Code.* arXiv, 2024. [arXiv:2412.06264](https://arxiv.org/abs/2412.06264)
+- Lu et al. *Reward Forcing: Efficient Streaming Video Generation with Rewarded Distribution Matching Distillation.* arXiv, 2025. [arXiv:2512.04678](https://arxiv.org/abs/2512.04678)
+- Lu et al. *Offline Preference Optimization for Rectified Flow with Noise-Tracked Pairs.* arXiv, 2026. [arXiv:2605.09433](https://arxiv.org/abs/2605.09433)
+
+### SDE
+
+- Anderson. *Reverse-time diffusion equation models.* Stochastic Processes and their Applications, 1982.
+
+### Networks
+
+- Ronneberger, Fischer, Brox. *U-Net: Convolutional Networks for Biomedical Image Segmentation.* MICCAI, 2015. [arXiv:1505.04597](https://arxiv.org/abs/1505.04597)
+- Salimans et al. *PixelCNN++: Improving the PixelCNN with Discretized Logistic Mixture Likelihood and Other Modifications.* ICLR, 2017. [arXiv:1701.05517](https://arxiv.org/abs/1701.05517)
+- Vaswani et al. *Attention Is All You Need.* NeurIPS, 2017. [arXiv:1706.03762](https://arxiv.org/abs/1706.03762)
+- Wu, He. *Group Normalization.* ECCV, 2018. [arXiv:1803.08494](https://arxiv.org/abs/1803.08494)
+
+### Reinforcement Learning
+
+- Sutton et al. *Policy Gradient Methods for Reinforcement Learning with Function Approximation.* NeurIPS, 1999.
+- Konda, Tsitsiklis. *Actor-Critic Algorithms.* NeurIPS, 1999.
+- Schulman et al. *Proximal Policy Optimization Algorithms.* arXiv, 2017. [arXiv:1707.06347](https://arxiv.org/abs/1707.06347)
