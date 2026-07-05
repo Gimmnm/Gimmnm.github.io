@@ -227,6 +227,7 @@ Stanford 相关课程的笔记目录，点击链接跳转到对应笔记。
 |------|------|
 | CS 296 | [CS 296 笔记](/posts/stanford-cs296/) |
 | CS 295 | [CS 295 笔记](/posts/stanford-cs295/) |
+| CS 336 | [CS 336 笔记](/posts/stanford-cs336/) |
 | CS 25 | [CS 25 笔记](/posts/stanford-cs25/) |
 | CS 231N | [CS 231N 笔记](/posts/stanford-cs231n/) |
 | CS 224N | [CS 224N 笔记](/posts/stanford-cs224n/) |

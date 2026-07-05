@@ -13,9 +13,23 @@ CS 295 课程笔记。
 
 ---
 
+## Lecture1 Transformer
+
+
+
+---
+
 ## TODO
 
-- [ ] 
+- [ ]  Lecture1
+- [ ]  Lecture2
+- [ ]  Lecture3
+- [ ]  Lecture4
+- [ ]  Lecture5
+- [ ]  Lecture6
+- [ ]  Lecture7
+- [ ]  Lecture8
+- [ ]  Lecture9
 
 ---
 
