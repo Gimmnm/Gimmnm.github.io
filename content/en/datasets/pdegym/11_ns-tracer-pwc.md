@@ -28,13 +28,9 @@ description: "An NS-PwC velocity field drives a passive concentration through on
 
 # NS-Tracer-PwC: Passive-Scalar Transport in Incompressible Flow
 
-> **One-line description:** An NS-PwC velocity field drives a passive concentration through one-way coupled advection–diffusion.
+**Description:** An NS-PwC velocity field drives a passive concentration through one-way coupled advection–diffusion. This task adds a new physical variable and equation to the pretraining fluid dynamics. The tracer is transported by the flow without feedback, representing a pollutant or dye.
 
-## Longer description
-
-This task adds a new physical variable and equation to the pretraining fluid dynamics. The tracer is transported by the flow without feedback, representing a pollutant or dye.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** Velocity generated with AZEBAN; the passive scalar is stored with the same flow.
 
 ## Identity
@@ -70,7 +66,6 @@ Its initial condition is the central disk
 $$
 c_0(x,y)=\mathbf 1_{B_{1/4}(1/2,1/2)}(x,y).
 $$
-
 
 ### Physical quantities
 
@@ -171,19 +166,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: NS-PwC](https://huggingface.co/datasets/camlab-ethz/NS-PwC).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

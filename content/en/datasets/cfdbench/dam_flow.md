@@ -33,15 +33,14 @@ description: "Water enters a rectangular air-filled domain through a low left ve
 
 # CFDBench — Gravity-driven two-phase flow over an obstacle
 
-**One-line description:** Water enters a rectangular air-filled domain through a low left velocity inlet, crosses a fixed vertical obstacle, and forms a jet, recirculation, and wall impact under gravity; inlet speed, density/viscosity, and obstacle geometry are varied separately.
+![Dam flow schematic and parameter ranges](./dam-flow.png)
 
-**Longer description:** The paper simplifies a dam-break/overflow scenario into a two-dimensional water--air flow over a vertical step. At low Reynolds number, viscous effects dominate and the fluid descends along the obstacle; at higher inlet velocity, inertia produces an over-obstacle jet that falls under gravity and impacts the bottom wall. The problem combines a source term, a phase interface, mixed inlet boundaries, and an explicit obstacle. It has the highest reported per-frame generation time among the four configurations.
+**Description:** Water enters a rectangular air-filled domain through a low left velocity inlet, crosses a fixed vertical obstacle, and forms a jet, recirculation, and wall impact under gravity; inlet speed, density/viscosity, and obstacle geometry are varied separately. The paper simplifies a dam-break/overflow scenario into a two-dimensional water--air flow over a vertical step. At low Reynolds number, viscous effects dominate and the fluid descends along the obstacle; at higher inlet velocity, inertia produces an over-obstacle jet that falls under gravity and impacts the bottom wall. The problem combines a source term, a phase interface, mixed inlet boundaries, and an explicit obstacle. It has the highest reported per-frame generation time among the four configurations.
 
 - Parent dataset: **CFDBench**
 - Dataset authors: Yining Luo, Yingfa Chen, and Zhen Zhang
 - Generator: ANSYS Fluent 2021R1 with VOF and gravity
 - Official loader: [`src/dataset/dam.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/dam.py)
-
 
 ## Governing equations
 
@@ -85,8 +84,7 @@ $$
 \right)+g_y.
 $$
 
-> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants, so they are not presented here as if they were explicitly documented target equations.
-
+> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants.
 
 For this problem, $\mathbf g=(0,-g)^{\mathsf T}$. Fluent also solves a VOF phase fraction; its standard no-mass-transfer form is
 
@@ -131,7 +129,7 @@ with no-slip conditions on solid walls and the obstacle.
 | Total frames | 21,916 |
 | Mean frames per case | 99.62; not a fixed length |
 | Time interval | $\Delta t=0.1\,\mathrm s$ |
-| Common $t_\max$ | Not reported; determine it from each array length |
+| Common $t_{\mathrm{max}}$ | Not reported; determine it from each array length |
 | Raw size per frame in paper | Approximately 2.0 MB |
 | Generation time in paper | Approximately 3.98 s/frame |
 | Current archive | `dam.zip`, approximately 1.35 GB (2026-07-21) |
@@ -161,21 +159,17 @@ Current loader parameter order:
 
 Here `height=0.4` and `width=1.5` are outer-domain dimensions. The varying obstacle geometry in the GEO subset is primarily supplied through the mask.
 
-## Parameter sweep: varied versus fixed
+## Parameters
 
-| Subset | Cases | Parameters actually varied | Conditions held fixed |
+Cases are generated in mutually exclusive subsets: each subset varies one operating-condition family while the others stay at the baseline above. Values follow paper Table 4. The outer domain is fixed at $1.5\,\mathrm{m}\times0.4\,\mathrm{m}$.
+
+| Subset | Cases | Varied parameters and values | Held fixed (baseline) |
 |---|---:|---|---|
-| BC | 70 | $u_\mathrm{{in}}\in\{{0.05,0.10,\ldots,1.00\}}\cup\{{1.02,1.04,\ldots,2.00\}}\,\mathrm{{m/s}}$, giving $20+50$ values | $\rho=100$, $\mu=0.1$, $h=0.1$, $w=0.05$; outer domain, gravity, and boundary types fixed |
-| PROP | 100 | Main text and generation scripts agree on $\rho=\{{10,120,230,340,450,560,670,780,890,1000\}}$ and $\mu=\{{0.01,0.12,0.23,0.34,0.45,0.56,0.67,0.78,0.89,1.00\}}$, all $10\times10$ combinations | $u_\mathrm{{in}}=1$, $h=0.1$, $w=0.05$; outer domain, gravity, and boundaries fixed |
-| GEO | Paper total: 50 | $h\in\{{0.11,0.12,0.13,0.14,0.15\}}\,\mathrm m$; $w\in\{{0.01,0.02,\ldots,0.09\}}\,\mathrm m$ | $u_\mathrm{{in}}=1$, $\rho=100$, $\mu=0.1$; outer domain, obstacle position, gravity, and boundary types fixed |
+| BC | 70 | $u_{\mathrm{in}}=u_{\mathcal{B}}\in\{0.05,0.1,\ldots,1\}\cup\{1.02,1.04,\ldots,2\}\,\mathrm{m/s}$ (steps $0.05$ then $0.02$) | $\rho=100\,\mathrm{kg\,m^{-3}}$, $\mu=0.1\,\mathrm{Pa\cdot s}$, $h=0.1\,\mathrm{m}$, $w=0.05\,\mathrm{m}$ |
+| PROP | 100 | Table 4: $\rho\in\{0.1,0.5,1,2,3,\ldots,10\}\,\mathrm{kg\,m^{-3}}$; $\mu\in\{10^{-5},5\times10^{-5},\ldots,5\times10^{-3},10^{-2}\}\,\mathrm{Pa\cdot s}$ | $u_{\mathrm{in}}=1\,\mathrm{m/s}$, $h=0.1\,\mathrm{m}$, $w=0.05\,\mathrm{m}$ |
+| GEO | 50 | $h\in\{0.11,0.12,0.13,0.14,0.15\}\,\mathrm{m}$; $w\in\{0.01,0.02,\ldots,0.09\}\,\mathrm{m}$ ($5\times10=50$) | $u_{\mathrm{in}}=1\,\mathrm{m/s}$, $\rho=100\,\mathrm{kg\,m^{-3}}$, $\mu=0.1\,\mathrm{Pa\cdot s}$ |
 
-> **Two internal conflicts in the Dam description.**
->
-> 1. Table 4 prints a low-density/low-viscosity set resembling Cavity, while the main text and official generation scripts agree on the $10\times10$ grid above. This page follows the mutually supported text/code version.
-> 2. Five heights times nine widths give 45 full combinations, whereas the summary table reports 50 GEO cases. The public text does not identify the additional five, so the downloaded `case.json` files are authoritative.
-
-**Adjustable but held fixed:** gravitational acceleration, pressure-inlet/outlet values, obstacle position, outer-domain dimensions, air-phase properties, surface tension, and initial phase distribution are fixed or not exposed as explicit sweep parameters.
-
+> The Dam PROP prose incorrectly copies the Tube $\rho,\mu$ narrative (and points at Table 3); the table above follows Table 4. Verify the released case metadata before reconstructing the list.
 
 ## Numerical generation setup
 
@@ -189,8 +183,6 @@ Here `height=0.4` and `width=1.5` are outer-domain dimensions. The varying obsta
 - Convergence: the paper sets the global residual criterion to $10^{-9}$; final velocity residuals reach at least approximately the $10^{-6}$ level.
 - Generation hardware: AMD Ryzen Threadripper 3990X with 30 solver processes.
 - Numerical precision: the paper does not state single versus double precision; the dtype of the released NumPy arrays should not be used to infer Fluent solver precision.
-
-
 
 ## Learning tasks, inputs, and outputs
 
@@ -217,8 +209,6 @@ A typical input consists of the current two-component velocity field, a case-par
 
 Each base subset is divided into train/validation/test at an 8:1:1 ratio by case. Frames from one trajectory are not distributed across different splits, ensuring that test operating conditions remain unseen during training. Exact reproduction requires a fixed code revision, random seed, and resolved case list.
 
-
-
 ## Download and directory layout
 
 ### Official links
@@ -228,7 +218,6 @@ Each base subset is divided into train/validation/test at an 8:1:1 ratio by case
 - Interpolated data: [https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - Raw Fluent data: [https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - Baidu Drive mirror for raw data: [https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4), extraction code `cfd4`
-- Documentation style reference: [https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 The repository README describes the interpolated release as approximately 13.4 GB; the Hugging Face page reported approximately 14.4 GB on **2026-07-21**. The README describes the complete raw data as approximately 460 GB, while the current raw Hugging Face page reports about 205 GB and notes that parts of Cylinder are still being uploaded. Reproducible work should record the download date and repository revision.
 
@@ -278,7 +267,6 @@ data/
 └── cylinder/
 ```
 
-
 ### Download only this problem
 
 ```bash
@@ -301,17 +289,6 @@ unzip ./downloads/CFDBench/dam.zip -d ./data
 - Current loader `height,width` are outer-domain dimensions, not the obstacle dimensions varied in the paper.
 - Stored arrays are $64\times64$, while loader padding may produce $66\times65$.
 - Raw data may include VOF and pressure; standardized interpolated targets remain $u,v$.
-
-## Citation
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## Source locations
 

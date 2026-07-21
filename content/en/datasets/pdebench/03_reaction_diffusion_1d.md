@@ -100,16 +100,67 @@ The diffusion part uses second-order centered differences in space and time; the
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_tu-\nu\partial_{xx}u-\rho u(1-u)=0,
+\qquad x\in(0,1),\quad t\in(0,1],
+\]
+\[
+u(0,x)=u_0(x).
+\]
+
+### Released file configs
+
+Test `react_*` files **also carry $(\nu,\rho)$** in the filename, including $\nu=10$ outside the Train $4\times4$ grid. Paper Table 1 lists $N_t=200$; release is typically **201**.
+
+| Data file | Split | $\nu$ | $\rho$ | Boundary | Per trajectory | Fixed |
+|---|---|---:|---:|---|---|---|
+| `ReacDiff_Nu0.5_Rho1.0.hdf5` | Train | $0.5$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu0.5_Rho2.0.hdf5` | Train | $0.5$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu0.5_Rho5.0.hdf5` | Train | $0.5$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu0.5_Rho10.0.hdf5` | Train | $0.5$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu1.0_Rho1.0.hdf5` | Train | $1$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu1.0_Rho2.0.hdf5` | Train | $1$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu1.0_Rho5.0.hdf5` | Train | $1$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu1.0_Rho10.0.hdf5` | Train | $1$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu2.0_Rho1.0.hdf5` | Train | $2$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu2.0_Rho2.0.hdf5` | Train | $2$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu2.0_Rho5.0.hdf5` | Train | $2$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu2.0_Rho10.0.hdf5` | Train | $2$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu5.0_Rho1.0.hdf5` | Train | $5$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu5.0_Rho2.0.hdf5` | Train | $5$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu5.0_Rho5.0.hdf5` | Train | $5$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_Nu5.0_Rho10.0.hdf5` | Train | $5$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho1.0.hdf5` | Test | $0.5$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho2.0.hdf5` | Test | $0.5$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho5.0.hdf5` | Test | $0.5$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho10.0.hdf5` | Test | $0.5$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho1.0.hdf5` | Test | $1$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho2.0.hdf5` | Test | $1$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho5.0.hdf5` | Test | $1$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho10.0.hdf5` | Test | $1$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho1.0.hdf5` | Test | $2$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho2.0.hdf5` | Test | $2$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho5.0.hdf5` | Test | $2$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho10.0.hdf5` | Test | $2$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho1.0.hdf5` | Test | $5$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho2.0.hdf5` | Test | $5$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho5.0.hdf5` | Test | $5$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho10.0.hdf5` | Test | $5$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho1.0.hdf5` | Test | $10$ | $1$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho2.0.hdf5` | Test | $10$ | $2$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho5.0.hdf5` | Test | $10$ | $5$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho10.0.hdf5` | Test | $10$ | $10$ | periodic | IC spectrum/amp/phase | $N_x=1024$, $N_t=201$ |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $\nu$ (diffusion) | differs across HDF5 files | $\nu\in\{0.5,1,2,5\}$ |
-| $\rho$ (reaction rate) | differs across HDF5 files | $\rho\in\{1,2,5,10\}$ → $4\times4=16$ training files |
-| IC spectrum / amplitude / phase | per trajectory | Fourier sum, then abs + normalize |
-| BC, grid, time, scheme | fixed | periodic; $N_x=1024$; $t\in[0,1]$ |
-
-## Released configurations
-
-Sixteen released training files form a $4\times4$ parameter grid, with 10,000 trajectories per file. The current download category also includes additional reaction test files.
+| $\nu$ (diffusion) | any positive scalar; `multi/` goes up to $\nu=10$ | Train: $\{0.5,1,2,5\}$; Test also has $10$ |
+| $\rho$ (reaction rate) | any positive scalar | yes: $\{1,2,5,10\}$ |
+| IC construction | editable | no (default: sine sum → abs → normalize) |
+| BC, grid, time | editable | release fixed |
 
 ## Data files
 

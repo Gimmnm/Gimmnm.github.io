@@ -28,13 +28,9 @@ description: "具有随机厚度、位移和 Fourier 扰动的双剪切层初值
 
 # NS-SL：随机双剪切层
 
-> **一句话描述：** 具有随机厚度、位移和 Fourier 扰动的双剪切层初值。
+**描述：** 具有随机厚度、位移和 Fourier 扰动的双剪切层初值。 双剪切层快速发生 Kelvin–Helmholtz 型卷起，是不可压流中检验不稳定性、涡旋形成和长期 rollout 的经典任务。
 
-## 更长描述
-
-双剪切层快速发生 Kelvin–Helmholtz 型卷起，是不可压流中检验不稳定性、涡旋形成和长期 rollout 的经典任务。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** AZEBAN；$128^2$。
 
 ## 基本信息
@@ -71,7 +67,6 @@ $$
 $$
 \sigma_\delta(x)=\xi+\delta\sum_{k=1}^{p}\alpha_k\sin(2\pi kx-\beta_k).
 $$
-
 
 ### 物理量
 
@@ -171,19 +166,3 @@ python assemble_data.py --input_dir . --output_file NS-SL.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: NS-SL](https://huggingface.co/datasets/camlab-ethz/NS-SL)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

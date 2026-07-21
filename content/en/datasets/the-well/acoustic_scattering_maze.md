@@ -32,16 +32,20 @@ description: "These datasets solve a first-order variable-coefficient acoustic s
 
 # Acoustic Scattering — Maze
 
-> **Parent collection:** The Well  
-> **Directory:** `acoustic_scattering_maze`  
-> **Equation family:** Variable-coefficient acoustics  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Maze density map](/the-well/acoustic_scattering_maze__mazes_density.png)
+
+![Pressure evolution](/the-well/acoustic_scattering_maze__pressure_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `acoustic_scattering_maze`
+> **Equation family:** Variable-coefficient acoustics
 
 ## 1. Scope and physical overview
 
 These datasets solve a first-order variable-coefficient acoustic system. A pressure disturbance travels through materials whose density changes sharply in space. The three releases share the same PDE and solver but use different families of coefficient fields: a single discontinuous interface, randomly placed inclusions, or a maze-like high-contrast medium.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -62,8 +66,7 @@ The local acoustic speed is \(c(x,y)=\sqrt{K(x,y)/\rho(x,y)}\).
 
 - \(p(x,y,t)\): acoustic pressure.
 - \(u(x,y,t),v(x,y,t)\): Cartesian velocity components.
-- \(
-ho(x,y)\): time-independent material density.
+- \(\rho(x,y)\): time-independent material density.
 - \(K(x,y)\): bulk modulus.
 - \(c(x,y)\): derived, time-independent speed of sound.
 
@@ -71,8 +74,7 @@ ho(x,y)\): time-independent material density.
 
 | Category | Released-data interpretation |
 |---|---|
-| Theoretically adjustable | Material density \(
-ho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
+| Theoretically adjustable | Material density \(\rho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
 | Actually varied in this release | Maze topology and pressure sources vary. A coarse maze with initial wall/path width between 6 and 16 pixels is nearest-neighbor upsampled to \(256^2\). Walls use \(\rho=10^6\), paths use \(\rho=3\). Each trajectory has 1–6 pressure rings placed on paths, with amplitude \(\mathcal U(3,5)\) and radius \(\mathcal U(0.01,0.04)\); overlap with walls is removed. |
 | Fixed in this release | Bulk modulus \(K=4\); wall/path density values; grid, domain, boundaries and CFL rule. |
 
@@ -204,7 +206,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -216,13 +217,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended simulation citation: Mandli et al., *Clawpack: building an open source ecosystem for solving hyperbolic PDEs* (2016).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

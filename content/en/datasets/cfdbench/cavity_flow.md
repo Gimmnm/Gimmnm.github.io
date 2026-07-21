@@ -31,15 +31,14 @@ description: "A two-dimensional closed rectangular cavity is driven by a moving 
 
 # CFDBench — Lid-driven cavity flow
 
-**One-line description:** A two-dimensional closed rectangular cavity is driven by a moving top wall, producing a primary recirculating vortex and smaller corner vortices; the dataset separately varies lid speed, density/viscosity, and cavity dimensions.
+![Cavity flow schematic and parameter ranges](./cavity-flow.png)
 
-**Longer description:** Lid-driven cavity flow is a classical CFD verification problem. It combines a moving no-slip wall, three stationary no-slip walls, and a discontinuous boundary condition where the lid meets the side walls. CFDBench uses it to evaluate inference-time generalization to unseen boundary speeds, fluid properties, and rectangular geometries. The BC, PROP, and GEO subsets are generated separately rather than as one five-dimensional Cartesian product.
+**Description:** A two-dimensional closed rectangular cavity is driven by a moving top wall, producing a primary recirculating vortex and smaller corner vortices; the dataset separately varies lid speed, density/viscosity, and cavity dimensions. Lid-driven cavity flow is a classical CFD verification problem. It combines a moving no-slip wall, three stationary no-slip walls, and a discontinuous boundary condition where the lid meets the side walls. CFDBench uses it to evaluate inference-time generalization to unseen boundary speeds, fluid properties, and rectangular geometries. The BC, PROP, and GEO subsets are generated separately rather than as one five-dimensional Cartesian product.
 
 - Parent dataset: **CFDBench**
 - Dataset authors: Yining Luo, Yingfa Chen, and Zhen Zhang (Tsinghua University)
 - Generator: ANSYS Fluent 2021R1; mesh and batch-generation scripts are under `generation-code/`
 - Official loader: [`src/dataset/cavity.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/cavity.py)
-
 
 ## Governing equations
 
@@ -83,8 +82,7 @@ $$
 \right)+g_y.
 $$
 
-> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants, so they are not presented here as if they were explicitly documented target equations.
-
+> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants.
 
 ## Physical domain, coordinates, and boundary conditions
 
@@ -122,7 +120,7 @@ The generation Scheme initializes pressure and velocity at rest and then applies
 | Total frames | 34,582 |
 | Mean frames per case | 217.50; this is not a fixed trajectory length |
 | Stored interval | Both paper and loader use $\Delta t=0.1\,\mathrm s$ |
-| Common $t_\max$ | Not reported; derive it per case from `u.npy.shape[0]` and $\Delta t$ |
+| Common $t_{\mathrm{max}}$ | Not reported; derive it per case from `u.npy.shape[0]` and $\Delta t$ |
 | Raw size per frame in paper | Approximately 5.2 MB |
 | Generation time in paper | Approximately 0.92 s/frame |
 | Current archive | `cavity.zip`, approximately 786 MB (2026-07-21) |
@@ -145,16 +143,15 @@ The code orders the case parameters as
 [vel_top, density, viscosity, height, width]
 ```
 
-## Parameter sweep: varied versus fixed
+## Parameters
 
-| Subset | Cases | Parameters actually varied | Conditions held fixed |
+Cases are generated in mutually exclusive subsets: each subset varies one operating-condition family while the others stay at the baseline above. Values follow paper Table 2.
+
+| Subset | Cases | Varied parameters and values | Held fixed (baseline) |
 |---|---:|---|---|
-| BC | 50 | $u_\mathrm{{top}}\in\{{1,2,\ldots,50\}}\,\mathrm{{m/s}}$ | $\rho=1$, $\mu=10^{{-5}}$, $l=w=0.01$; initialization and wall types fixed |
-| PROP | 84 | $\rho\in\{{0.1,0.5,1,2,\ldots,10\}}\,\mathrm{{kg/m^3}}$; $\mu\in\{{10^{{-5}},5\times10^{{-5}},10^{{-4}},5\times10^{{-4}},10^{{-3}},5\times10^{{-3}},10^{{-2}}\}}\,\mathrm{{Pa\,s}}$; all $12\times7$ combinations | $u_\mathrm{{top}}=10$, $l=w=0.01$; boundary types and initialization fixed |
-| GEO | 25 | $l,w\in\{{0.01,0.02,0.03,0.04,0.05\}}\,\mathrm m$, all $5\times5$ combinations | $u_\mathrm{{top}}=10$, $\rho=1$, $\mu=10^{{-5}}$; wall types fixed |
-
-**Adjustable but not jointly swept:** $u_\mathrm{{top}},\rho,\mu,l,w$ are all adjustable in the PDE or geometry, but CFDBench varies them by subset. Lid direction, wall types, initialization, two-dimensional assumption, and numerical scheme are fixed.
-
+| BC | 50 | $u_{\mathrm{top}}=u_{\mathcal{B}}\in\{1,2,3,\ldots,50\}\,\mathrm{m/s}$ (step $1$) | $\rho=1\,\mathrm{kg\,m^{-3}}$, $\mu=10^{-5}\,\mathrm{Pa\cdot s}$, $l=w=0.01\,\mathrm{m}$ |
+| PROP | 84 | $\rho\in\{0.1,0.5,1,2,3,\ldots,10\}\,\mathrm{kg\,m^{-3}}$ (12 values); $\mu\in\{10^{-5},5\times10^{-5},\ldots,5\times10^{-3},10^{-2}\}\,\mathrm{Pa\cdot s}$ (7 values); $12\times7=84$ | $u_{\mathrm{top}}=10\,\mathrm{m/s}$, $l=w=0.01\,\mathrm{m}$ |
+| GEO | 25 | $l,w\in\{0.01,0.02,0.03,0.04,0.05\}\,\mathrm{m}$ (25 combinations) | $u_{\mathrm{top}}=10\,\mathrm{m/s}$, $\rho=1\,\mathrm{kg\,m^{-3}}$, $\mu=10^{-5}\,\mathrm{Pa\cdot s}$ |
 
 ## Numerical generation setup
 
@@ -168,8 +165,6 @@ The code orders the case parameters as
 - Convergence: the paper sets the global residual criterion to $10^{-9}$; final velocity residuals reach at least approximately the $10^{-6}$ level.
 - Generation hardware: AMD Ryzen Threadripper 3990X with 30 solver processes.
 - Numerical precision: the paper does not state single versus double precision; the dtype of the released NumPy arrays should not be used to infer Fluent solver precision.
-
-
 
 ## Learning tasks, inputs, and outputs
 
@@ -196,8 +191,6 @@ A typical input consists of the current two-component velocity field, a case-par
 
 Each base subset is divided into train/validation/test at an 8:1:1 ratio by case. Frames from one trajectory are not distributed across different splits, ensuring that test operating conditions remain unseen during training. Exact reproduction requires a fixed code revision, random seed, and resolved case list.
 
-
-
 ## Download and directory layout
 
 ### Official links
@@ -207,7 +200,6 @@ Each base subset is divided into train/validation/test at an 8:1:1 ratio by case
 - Interpolated data: [https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - Raw Fluent data: [https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - Baidu Drive mirror for raw data: [https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4), extraction code `cfd4`
-- Documentation style reference: [https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 The repository README describes the interpolated release as approximately 13.4 GB; the Hugging Face page reported approximately 14.4 GB on **2026-07-21**. The README describes the complete raw data as approximately 460 GB, while the current raw Hugging Face page reports about 205 GB and notes that parts of Cylinder are still being uploaded. Reproducible work should record the download date and repository revision.
 
@@ -257,7 +249,6 @@ data/
 └── cylinder/
 ```
 
-
 ### Download only this problem
 
 ```bash
@@ -279,17 +270,6 @@ unzip ./downloads/CFDBench/cavity.zip -d ./data
 - The abstract mentions velocity and pressure fields, but the interpolated release and current loader consistently use $u,v$. Pressure requires processing the raw Fluent exports.
 - Trajectory length is not constant. Do not replace each true $T_i$ with the ratio 34,582/159.
 - The current cavity mask is all ones; moving-wall information is primarily carried by the case vector and boundary handling rather than a complete spatial boundary-value channel.
-
-## Citation
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## Source locations
 

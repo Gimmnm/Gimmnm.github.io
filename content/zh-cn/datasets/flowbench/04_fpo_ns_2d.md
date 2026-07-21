@@ -27,14 +27,10 @@ description: "不可压缩流体流过静止复杂钝体，数据保存高分辨
 
 # 二维复杂几何绕流（FPO–NS–2D）
 
-**一句话描述：** 不可压缩流体流过静止复杂钝体，数据保存高分辨率长时序速度和压力场，用于涡脱落预测。
+**描述：** 不可压缩流体流过静止复杂钝体，数据保存高分辨率长时序速度和压力场，用于涡脱落预测。 FPO 是 FlowBench 唯一公开的瞬态 family。物体位于长通道上游，尾迹中出现周期或非周期涡脱落。它既可构造成过去场到未来场的 sequence-to-sequence 任务，也可进一步加入 Reynolds 数、mask 和 SDF，形成 geometry-conditioned trajectory prediction。
 
-**较长描述：** FPO 是 FlowBench 唯一公开的瞬态 family。物体位于长通道上游，尾迹中出现周期或非周期涡脱落。它既可构造成过去场到未来场的 sequence-to-sequence 任务，也可进一步加入 Reynolds 数、mask 和 SDF，形成 geometry-conditioned trajectory prediction。
-
-**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。  
-**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。  
-
-
+**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。
+**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。
 
 ## 所属数据集与链接
 
@@ -49,7 +45,6 @@ description: "不可压缩流体流过静止复杂钝体，数据保存高分辨
 | 项目主页 | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | 许可证 | **CC-BY-NC-4.0** |
 | 数据格式 | NumPy compressed archives (`.npz`) |
-
 
 ## 方程
 
@@ -99,7 +94,6 @@ $$
 - 物体表面：静止、无滑移。
 
 论文称发布时截取了物理尺寸约为 $[0,16]\times[0,4]$ 的尾迹区域，以平衡文件大小和保留的物理信息。这里的写法描述 cropped span；实际数组坐标原点和方向应从文件或下采样脚本验证。
-
 
 ## 几何条件
 
@@ -169,7 +163,6 @@ s(\mathbf x)=
 $$
 
 **文件级注意事项：** 部分旧版 DataPrep 代码把 mask 写成 `0/255`，并通过 `SDF > 0` 构造 mask；这与论文文字中的符号/数值约定不完全一致。下载后必须画出 mask 与 SDF，确认实际文件的正负号和缩放，而不要只依赖文字定义。
-
 
 ## 关于数据
 
@@ -272,7 +265,6 @@ $$
 - 速度和压力合计约 353,934 个自由度；
 - 若用最细尺度的全域均匀网格，论文估算约 201M 自由度。
 
-
 ## 数值生成与后处理
 
 - 求解框架：大规模并行、基于 quadtree/octree 的有限元 CFD/多物理代码；
@@ -284,7 +276,6 @@ $$
 - 论文报告总计算成本约为 65K node-hours。
 
 发布的低分辨率数据不是独立的低分辨率 CFD 重算，而是从 fully resolved 解后处理得到，因此可用于多分辨率学习与 super-resolution。
-
 
 ## 有趣且具有挑战性的地方
 
@@ -331,27 +322,6 @@ allow_patterns=["FPO_NS_2D_1024x256/nurbs/*"]
 
 但该目录非常大。下载后应逐个检查 `Re_*.npz` 的 key 和 shape，不要预先假定每个几何有相同数量的 Reynolds 条件。
 
-
-## 引用
-
-使用该数据时应引用 FlowBench 论文：
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-数据和官方工具代码标注为 **CC-BY-NC-4.0**；商业使用前应核对许可证原文。
-
-
-
 ## 资料来源与可信度说明
 
 本文档按以下优先级交叉核对：
@@ -362,5 +332,5 @@ allow_patterns=["FPO_NS_2D_1024x256/nurbs/*"]
 4. [官方训练与评测代码 Geometry Matters](https://github.com/baskargroup/GeometryMatters)；
 5. [FlowBench 项目主页](https://baskargroup.bitbucket.io/FlowBench/)。
 
-论文、代码和当前数据仓库并非完全同一版本。本文档会把“论文定义”“旧版数据整理脚本”和“当前仓库状态”分开写明。  
+论文、代码和当前数据仓库并非完全同一版本。
 核对日期： **2026-07-21**。

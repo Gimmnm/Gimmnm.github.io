@@ -28,13 +28,9 @@ description: "Richtmyer–Meshkov trajectories in which a shock interacts with a
 
 # CE-RM: Richtmyer–Meshkov Instability
 
-> **One-line description:** Richtmyer–Meshkov trajectories in which a shock interacts with a randomly perturbed density interface.
+**Description:** Richtmyer–Meshkov trajectories in which a shock interacts with a randomly perturbed density interface. This classical instability produces interface growth, mixing, and multiscale structure. It differs from pretraining Euler data in generator, time scale, and dataset size.
 
-## Longer description
-
-This classical instability produces interface growth, mixing, and multiscale structure. It differs from pretraining Euler data in generator, time scale, and dataset size.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** FISH high-resolution finite-volume hydrodynamics code; released at $128^2$.
 
 ## Identity
@@ -75,7 +71,6 @@ $$
 $$
 v_x^0=v_y^0=0,\qquad I=0.25+\epsilon\sum_{j=1}^{10}a_j\sin\bigl(2\pi((x,y)+b_j)\bigr).
 $$
-
 
 ### Physical quantities
 
@@ -175,19 +170,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: CE-RM](https://huggingface.co/datasets/camlab-ethz/CE-RM).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

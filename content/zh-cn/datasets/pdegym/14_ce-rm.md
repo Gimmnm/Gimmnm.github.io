@@ -28,13 +28,9 @@ description: "冲击波撞击随机扰动密度界面的 Richtmyer–Meshkov 轨
 
 # CE-RM：Richtmyer–Meshkov 不稳定性
 
-> **一句话描述：** 冲击波撞击随机扰动密度界面的 Richtmyer–Meshkov 轨迹。
+**描述：** 冲击波撞击随机扰动密度界面的 Richtmyer–Meshkov 轨迹。 该经典不稳定性产生界面增长、混合和多尺度结构。与预训练 Euler 数据相比，它使用不同的生成代码、时间尺度和数据规模。
 
-## 更长描述
-
-该经典不稳定性产生界面增长、混合和多尺度结构。与预训练 Euler 数据相比，它使用不同的生成代码、时间尺度和数据规模。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** FISH 高分辨率有限体积流体代码；发布分辨率 $128^2$。
 
 ## 基本信息
@@ -75,7 +71,6 @@ $$
 $$
 v_x^0=v_y^0=0,\qquad I=0.25+\epsilon\sum_{j=1}^{10}a_j\sin\bigl(2\pi((x,y)+b_j)\bigr).
 $$
-
 
 ### 物理量
 
@@ -175,19 +170,3 @@ python assemble_data.py --input_dir . --output_file CE-RM.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: CE-RM](https://huggingface.co/datasets/camlab-ethz/CE-RM)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

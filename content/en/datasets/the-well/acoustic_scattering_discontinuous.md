@@ -32,16 +32,18 @@ description: "These datasets solve a first-order variable-coefficient acoustic s
 
 # Acoustic Scattering — Single Discontinuity
 
-> **Parent collection:** The Well  
-> **Directory:** `acoustic_scattering_discontinuous`  
-> **Equation family:** Variable-coefficient acoustics  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Density field / material map](/the-well/acoustic_scattering_discontinuous__discontinuous_density.png)
+
+
+> **Parent collection:** The Well
+> **Directory:** `acoustic_scattering_discontinuous`
+> **Equation family:** Variable-coefficient acoustics
 
 ## 1. Scope and physical overview
 
 These datasets solve a first-order variable-coefficient acoustic system. A pressure disturbance travels through materials whose density changes sharply in space. The three releases share the same PDE and solver but use different families of coefficient fields: a single discontinuous interface, randomly placed inclusions, or a maze-like high-contrast medium.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -62,8 +64,7 @@ The local acoustic speed is \(c(x,y)=\sqrt{K(x,y)/\rho(x,y)}\).
 
 - \(p(x,y,t)\): acoustic pressure.
 - \(u(x,y,t),v(x,y,t)\): Cartesian velocity components.
-- \(
-ho(x,y)\): time-independent material density.
+- \(\rho(x,y)\): time-independent material density.
 - \(K(x,y)\): bulk modulus.
 - \(c(x,y)\): derived, time-independent speed of sound.
 
@@ -71,8 +72,7 @@ ho(x,y)\): time-independent material density.
 
 | Category | Released-data interpretation |
 |---|---|
-| Theoretically adjustable | Material density \(
-ho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
+| Theoretically adjustable | Material density \(\rho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
 | Actually varied in this release | Each trajectory varies the static density field and initial pressure rings. The domain is split into two subdomains separated by one discontinuous interface. Each side independently selects one smooth density family: (i) Gaussian bump with peak \(\mathcal U(1,7)\), \(\sigma\sim\mathcal U(0.1,5)\), random center; (ii) bilinear gradient from four corner values \(\mathcal U(1,7)\); (iii) constant \(\rho\sim\mathcal U(1,7)\); or (iv) background \(\mathcal U(1,7)\) plus smoothed IID Gaussian noise with filter \(\sigma\sim\mathcal U(5,10)\). |
 | Fixed in this release | Bulk modulus \(K=4\); Cartesian domain and \(256^2\) grid; open \(y\) boundaries; reflective \(x\) walls; CFL safety factor 0.25; released sampling interval and trajectory duration. |
 
@@ -204,7 +204,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -216,13 +215,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended simulation citation: Mandli et al., *Clawpack: building an open source ecosystem for solving hyperbolic PDEs* (2016).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

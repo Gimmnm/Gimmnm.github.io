@@ -101,15 +101,32 @@ The paper uses PhiFlow. Current `ns_incomp.yaml` sets `domain_size=[1,1]`, `grid
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\nabla\cdot\mathbf v=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\mathbf f(\mathbf x).
+\]
+
+### Released file configs
+
+274 shards share **one** physical config. The name contains `512`, but paper / YAML use **$256\times256$**.
+
+| Data file (pattern) | $\nu$ | Boundary | Per trajectory | Fixed |
+|---|---:|---|---|---|
+| `ns_incom_inhom_2d_512-{0…274\setminus49}.h5` | $0.01$ | no-slip Dirichlet | velocity GRF, force GRF | domain $[0,1]^2$, $256^2$, $N_t=1000$ |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| velocity GRF / force GRF | per trajectory | paper: $\tau_{v_0}=-3,\sigma_{v_0}=0.15$; $\tau_f=-1,\sigma_f=0.4$ |
-| $\nu$ (viscosity) | fixed | $\nu=0.01$ |
-| GRF hyperparameters, BC, domain | fixed | no-slip Dirichlet; $[0,1]^2$; $256^2$ |
-
-## Released configurations
-
-One physical configuration is distributed as many `ns_incom_inhom_2d_512-*.h5` shards. Both the paper shape and current YAML point to $256^2$, so the `512` token in filenames must not be treated as the actual grid without inspection.
+| $\nu$ (`NU`) | any positive scalar | no (fixed $0.01$) |
+| GRF: `smoothness, scale, force_smoothness, force_scale` | editable | no (YAML defaults) |
+| `grid_size`, `DT`, `n_steps`, `frame_int` | editable | no (release $256^2$, $N_t=1000$) |
+| boundary extrapolation | editable | no (`ZERO` no-slip) |
 
 ## Data files
 

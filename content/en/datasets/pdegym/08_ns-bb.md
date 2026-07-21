@@ -28,13 +28,9 @@ description: "Brownian-bridge random fields are generated in Fourier space, pre-
 
 # NS-BB: Brownian-Bridge Rough Random Initial Conditions
 
-> **One-line description:** Brownian-bridge random fields are generated in Fourier space, pre-evolved from $t=-0.5$ to 0, and then used as initial data.
+**Description:** Brownian-bridge random fields are generated in Fourier space, pre-evolved from $t=-0.5$ to 0, and then used as initial data. This construction provides rougher turbulence-like random fields than smooth Fourier initial conditions and tests statistical-flow learning and robustness to low-regularity inputs.
 
-## Longer description
-
-This construction provides rougher turbulence-like random fields than smooth Fourier initial conditions and tests statistical-flow learning and robustness to low-regularity inputs.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** AZEBAN; $128^2$.
 
 ## Identity
@@ -63,7 +59,6 @@ $$
 where $\mathbf u=(u_x,u_y)$ is the Cartesian velocity field and $p$ is pressure. In the released PDEgym incompressible-flow simulations, spectral hyperviscosity is used only on sufficiently high Fourier modes. With $N=128$, $m_N=\sqrt N$, and $\varepsilon_N=0.05/N$, the effective viscosity scale is approximately $\nu\simeq4\times10^{-4}$. This is a stabilization choice intended to approximate the inviscid limit; it is not a viscosity sweep in the published data.
 
 The Brownian bridge is built in Fourier space with $\lVert k\rVert_2^{-3/2}$ decay and random sine/cosine combinations. It is pre-evolved by the discrete Navier–Stokes system from $t=-0.5$ to $t=0$; the resulting velocity is the recorded trajectory initial condition.
-
 
 ### Physical quantities
 
@@ -160,19 +155,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: NS-BB](https://huggingface.co/datasets/camlab-ethz/NS-BB).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

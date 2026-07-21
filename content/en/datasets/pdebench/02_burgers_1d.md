@@ -101,15 +101,42 @@ The nonlinear advective flux is discretized by a second-order upwind scheme; the
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_tu+\partial_x\!\left(\frac{u^2}{2}\right)=\frac{\nu}{\pi}\partial_{xx}u,
+\qquad x\in(0,1),\quad t\in(0,2],
+\]
+\[
+u(0,x)=u_0(x).
+\]
+
+### Released file configs
+
+| Data file | $\nu$ | Boundary | Per trajectory | Fixed |
+|---|---:|---|---|---|
+| `1D_Burgers_Sols_Nu0.001.hdf5` | $0.001$ | periodic | IC $n_i,A_i,\phi_i$ | $N_x=1024$, $N_t=201$, domain $(0,1)\times[0,2]$ |
+| `1D_Burgers_Sols_Nu0.002.hdf5` | $0.002$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.004.hdf5` | $0.004$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.01.hdf5` | $0.01$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.02.hdf5` | $0.02$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.04.hdf5` | $0.04$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.1.hdf5` | $0.1$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.2.hdf5` | $0.2$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu0.4.hdf5` | $0.4$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu1.0.hdf5` | $1.0$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu2.0.hdf5` | $2.0$ | periodic | same | same |
+| `1D_Burgers_Sols_Nu4.0.hdf5` | $4.0$ | periodic | same | same |
+
+10,000 trajectories per file. Paper Table 1 lists $N_t=200$; release is typically **201**.
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $\nu$ (viscosity) | differs across HDF5 files | $\{0.001,0.002,0.004,0.01,0.02,0.04,0.1,0.2,0.4,1,2,4\}$ (12 files) |
-| IC $n_i,A_i,\phi_i$ | per trajectory | same random Fourier IC family as 1D advection |
-| BC, time, resolution, scheme | fixed | periodic; $N_x=1024$; $t\in[0,2]$ |
-
-## Released configurations
-
-Twelve training parameter files, each fixing one $\nu$ and containing 10,000 trajectories.
+| $\nu$ (viscosity) | any positive scalar (`multi/*.yaml`); more examples under `args/` | yes: the 12 values above |
+| IC family / amplitude scale | editable (extra sin / possin templates) | no (default random-sine family) |
+| BC, domain, grid, time | editable | release fixed |
 
 ## Data files
 

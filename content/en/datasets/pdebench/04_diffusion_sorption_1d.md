@@ -107,15 +107,30 @@ Space is discretized by a finite-volume method. The paper text says a built-in f
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_tu(t,x)=\frac{D}{R(u)}\,\partial_{xx}u(t,x),\qquad x\in(0,1),\quad t\in(0,500],
+\]
+\[
+R(u)=1+\frac{1-\phi}{\phi}\rho_s k n_f u^{n_f-1}.
+\]
+
+### Released file configs
+
+One file; material parameters are **fixed** in the release (`NA_NA`) but still have explicit values.
+
+| Data file | $(D,\phi,\rho_s,k,n_f)$ | Boundary | Per trajectory | Fixed |
+|---|---|---|---|---|
+| `1D_diff-sorp_NA_NA.h5` | $(5\times10^{-4},\,0.29,\,2880,\,3.5\times10^{-4},\,0.874)$ | Cauchy | $u(0,x)\sim\mathcal U(0,0.2)$ | $N_x=1024$; domain $[0,1]\times[0,500]$; often $N_t=101$ (paper: 100; raw up to 501) |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $D,\phi,\rho_s,k,n_f$ | fixed | $D=5\times10^{-4}$, $\phi=0.29$, $\rho_s=2880$, $k=3.5\times10^{-4}$, $n_f=0.874$; filename `NA_NA` |
-| initial concentration | per trajectory | $u(0,x)\sim\mathcal U(0,0.2)$ (examples: spatially constant draws) |
-| BC, domain, grid, time | fixed | Cauchy; $x\in(0,1)$; $N_x=1024$ |
-
-## Released configurations
-
-One main released file, `1D_diff-sorp_NA_NA.h5`, containing 10,000 trajectories. `NA_NA` reflects the absence of a released parameter scan.
+| $D,\phi,\rho_s,k,n_f$ | all editable in generator config | no (one fixed tuple above) |
+| initial concentration law | editable | partial: $\mathcal U(0,0.2)$ |
+| BC, domain, grid, time | editable | release fixed |
 
 ## Data files
 

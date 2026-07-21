@@ -32,16 +32,18 @@ description: "A horizontally periodic fluid layer is heated from below and coole
 
 # Rayleigh–Bénard Convection — Native Grid
 
-> **Parent collection:** The Well  
-> **Directory:** `rayleigh_benard`  
-> **Equation family:** Boussinesq convection  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Buoyancy field](/the-well/rayleigh_benard__buoyancy_good_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `rayleigh_benard`
+> **Equation family:** Boussinesq convection
 
 ## 1. Scope and physical overview
 
 A horizontally periodic fluid layer is heated from below and cooled from above. Buoyancy drives convection against viscosity and thermal diffusion, producing Bénard cells whose location and turbulent evolution are sensitive to small initial perturbations.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -206,7 +208,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -218,13 +219,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Dedalus; the physical setup also follows the Rayleigh–Bénard references in The Well appendix.
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

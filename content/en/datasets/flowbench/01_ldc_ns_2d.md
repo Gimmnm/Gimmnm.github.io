@@ -27,14 +27,10 @@ description: "Steady incompressible flow is driven by a moving lid in a square c
 
 # 2-D complex-geometry lid-driven cavity (LDC–NS–2D)
 
-**One-line description:** Steady incompressible flow is driven by a moving lid in a square cavity containing a stationary complex object.
+**Description:** Steady incompressible flow is driven by a moving lid in a square cavity containing a stationary complex object. This subset studies steady solutions of the same incompressible Navier–Stokes equations across Reynolds numbers and complex embedded boundaries. It is the canonical FlowBench geometry-to-field subset and the principal data used by the official Geometry Matters benchmark.
 
-**Longer description:** This subset studies steady solutions of the same incompressible Navier–Stokes equations across Reynolds numbers and complex embedded boundaries. It is the canonical FlowBench geometry-to-field subset and the principal data used by the official Geometry Matters benchmark.
-
-**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.  
-**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.  
-
-
+**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.
+**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.
 
 ## Parent dataset and links
 
@@ -49,7 +45,6 @@ description: "Steady incompressible flow is driven by a moving lid in a square c
 | Project website | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | License | **CC-BY-NC-4.0** |
 | Storage format | NumPy compressed archives (`.npz`) |
-
 
 ## Equation
 
@@ -100,7 +95,6 @@ $$
 $$
 
 Thus, the top wall moves in the $x$ direction with unit speed, while the other outer walls and the object surface are no-slip. The dataset section of the paper does not specify the precise pressure-gauge implementation.
-
 
 ## Geometry conditioning
 
@@ -171,7 +165,6 @@ $$
 
 **File-level caveat:** some older DataPrep code uses a `0/255` mask and derives it with `SDF > 0`. This is not identical to the semantic convention in the paper. Always plot the downloaded mask and SDF to verify sign and scale.
 
-
 ## About the data
 
 | Property | Value |
@@ -232,7 +225,6 @@ where `C` packages engineering summaries derived from $C_D/C_L$ constants files.
 
 The paper treats this as a steady problem and does not release the initialization or convergence trajectory. It should be modeled as a steady operator-learning problem rather than trajectory forecasting.
 
-
 ## Numerical generation and post-processing
 
 - massively parallel quadtree/octree finite-element CFD and multiphysics framework;
@@ -244,7 +236,6 @@ The paper treats this as a steady problem and does not release the initializatio
 - the paper reports approximately 65K node-hours of total compute.
 
 The lower-resolution releases are post-processed from fully resolved simulations rather than independently rerun coarse CFD simulations, which makes the data useful for multi-resolution and super-resolution studies.
-
 
 ## What is interesting and challenging
 
@@ -261,7 +252,6 @@ The lower-resolution releases are post-processed from fully resolved simulations
 3. Verify the SDF sign from the actual archive.
 4. Files are split by geometry family and resolution.
 5. An 80/20 random split is the paper's basic recommendation, but geometry-generalization studies should split by geometry instance or family to prevent Reynolds-condition leakage across the same shape.
-
 
 ## Download
 
@@ -302,28 +292,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 The tensor formulas in the paper describe **semantic axis order**. Always inspect the actual key, shape, channel order, mask values, and SDF sign before training.
 
-
-
-## Citation
-
-Please cite the FlowBench paper when using this data:
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-The dataset and official tools are released under **CC-BY-NC-4.0**. Consult the full license text before commercial use.
-
-
-
 ## Sources and evidence policy
 
 This document cross-checks the following official sources, in descending priority:
@@ -334,5 +302,5 @@ This document cross-checks the following official sources, in descending priorit
 4. [official Geometry Matters training/evaluation repository](https://github.com/baskargroup/GeometryMatters);
 5. [FlowBench project website](https://baskargroup.bitbucket.io/FlowBench/).
 
-The paper, the older preparation scripts, and the current data repository do not represent exactly the same release. This document therefore distinguishes the **paper specification**, the **preparation-code convention**, and the **current hosted release**.  
+The paper, the older preparation scripts, and the current data repository do not represent exactly the same release.
 Last verified: **2026-07-21**.

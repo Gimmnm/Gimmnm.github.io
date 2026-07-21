@@ -131,15 +131,45 @@ Q(\mathbf{x},t=0)=(Q_L,Q_R),\qquad Q=(\rho,\mathbf{v},p),
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### 发布文件配置
+
+**与论文差异：** 论文参数表还有三维 $(\eta,\zeta)=(10^{-2},10^{-2})$ 等行，当前可下载训练文件仅近无粘 $(10^{-8},10^{-8})$。  
+`BlastWave` / `Turb_M*` 为**额外测试集**，参数来自文件名与 YAML（例如 `M0`）。
+
+| 数据文件 | initial field | boundary | $(\eta,\zeta,M)$ | 每轨迹随机 | 备注 |
+|---|---|---|---|---|---|
+| `3D_CFD_Rand_M1.0_Eta1e-08_Zeta1e-08_periodic_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},1.0)$ | 随机场 | 主训练 |
+| `3D_CFD_Turb_M1.0_Eta1e-08_Zeta1e-08_periodic_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$ | 湍流 seed | 主训练 |
+| `BlastWave.hdf5` | blast wave | outgoing (`trans`) | $(10^{-8},10^{-8},1.0)$；$256^3$ | 否 | 额外测试集（YAML） |
+| `Turb_M01.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.1)$；$256^3$ | 否（`numbers=4`） | 额外测试集（YAML） |
+| `Turb_M05.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.5)$；$256^3$ | 否（少样本） | 额外测试集 |
+| `Turb_M1.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$；$256^3$ | 否（少样本） | 额外测试集 |
+| `Turb_M2.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},2.0)$；$256^3$ | 否（少样本） | 额外测试集 |
+| `Turb_M4.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},4.0)$；$256^3$ | 否（少样本） | 额外测试集 |
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| 初值族 / $M$ / $(\eta,\zeta)$ | 不同 HDF5 配置文件不同（2 个主配置） | 常见口径：① random，$M=1$，近无粘；② turbulence，$M=1$，近无粘。以实际文件名与 HDF5 attributes 为准 |
-| 场 realization | 每轨迹随机 | seed |
-| $\Gamma$、网格、数值格式 | 固定 | $\Gamma=5/3$；$128^3$；21 帧 |
-
-## 论文配置
-
-发布主配置通常为 2 个、每配置 100 条：inviscid random 与 inviscid turbulence；额外测试文件不并入这 200 条。
+| $\eta,\zeta$ | 任意非负；论文亦列 $10^{-2}$ | 训练发布仅 $10^{-8}$；可用生成器补扫 |
+| $M$ | 任意正实数 | 训练发布 $M=1$；测试另有 $0.1,0.5,2,4$ |
+| 初值族 | random / turbulence / blast … | 是 |
+| 网格（YAML 测试可为 $256^3$ 等） | 可改 | 主训练发布标称 $128^3$ |
 
 ## 数据文件
 

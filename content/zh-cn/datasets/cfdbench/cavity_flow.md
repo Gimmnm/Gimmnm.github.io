@@ -31,15 +31,14 @@ description: "二维矩形封闭腔体的顶部壁面以给定速度运动，黏
 
 # CFDBench — 顶盖驱动方腔流（Cavity Flow）
 
-**一句话描述：** 二维矩形封闭腔体的顶部壁面以给定速度运动，黏性作用驱动腔内形成主涡和角部次级涡；数据分别扫描顶盖速度、流体密度/黏度和腔体长宽。
+![Cavity Flow 示意与参数范围](./cavity-flow.png)
 
-**较长描述：** 顶盖驱动方腔流是验证 CFD 数值方法的经典问题。它同时包含移动无滑移壁面、静止无滑移壁面以及顶盖与侧壁连接处的边界不连续。CFDBench 以该问题评估模型对未见边界速度、物性和矩形几何的推断时泛化。该数据不是五维参数的全组合，而是分别生成 BC、PROP、GEO 三个子集。
+**描述：** 二维矩形封闭腔体的顶部壁面以给定速度运动，黏性作用驱动腔内形成主涡和角部次级涡；数据分别扫描顶盖速度、流体密度/黏度和腔体长宽。 顶盖驱动方腔流是验证 CFD 数值方法的经典问题。它同时包含移动无滑移壁面、静止无滑移壁面以及顶盖与侧壁连接处的边界不连续。CFDBench 以该问题评估模型对未见边界速度、物性和矩形几何的推断时泛化。该数据不是五维参数的全组合，而是分别生成 BC、PROP、GEO 三个子集。
 
 - 所属数据集： **CFDBench**
 - 数据集作者：Yining Luo、Yingfa Chen、Zhen Zhang（清华大学）
 - 生成软件：ANSYS Fluent 2021R1；网格/批处理脚本见 `generation-code/`
 - 官方 loader：[`src/dataset/cavity.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/cavity.py)
-
 
 ## 控制方程
 
@@ -83,8 +82,7 @@ $$
 \right)+g_y.
 $$
 
-> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数，因此本文档不会把这些未明示的方程伪装成数据集论文的原始公式。
-
+> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数。
 
 ## 物理区域、坐标与边界条件
 
@@ -122,7 +120,7 @@ $$
 | 总帧数 | 34,582 |
 | 平均帧数 | 217.50，仅为平均值，不是固定 $T$ |
 | 存储时间间隔 | 论文和 loader 均为 $\Delta t=0.1\,\mathrm s$ |
-| 统一 $t_\max$ | 论文未给出；应由每个 `u.npy.shape[0]` 和 $\Delta t$ 计算 |
+| 统一 $t_{\mathrm{max}}$ | 论文未给出；应由每个 `u.npy.shape[0]` 和 $\Delta t$ 计算 |
 | 论文每帧原始量 | 约 5.2 MB |
 | 论文生成时间 | 约 0.92 s/帧 |
 | 当前压缩包 | `cavity.zip`，约 786 MB（2026-07-21） |
@@ -145,16 +143,15 @@ $$
 [vel_top, density, viscosity, height, width]
 ```
 
-## 参数扫描：改变了什么，固定了什么
+## 参数
 
-| 子集 | case 数 | 实际扫描参数 | 固定条件 |
+数据按互斥子集分别生成：每个子集只改变一类工况，其余固定为上一节的基准工况。取值来自论文表 2。
+
+| 子集 | cases | 扫描参数与取值 | 固定（基准） |
 |---|---:|---|---|
-| BC | 50 | $u_\mathrm{{top}}\in\{{1,2,\ldots,50\}}\,\mathrm{{m/s}}$ | $\rho=1$，$\mu=10^{{-5}}$，$l=w=0.01$，初始场和壁面类型固定 |
-| PROP | 84 | $\rho\in\{{0.1,0.5,1,2,\ldots,10\}}\,\mathrm{{kg/m^3}}$；$\mu\in\{{10^{{-5}},5\times10^{{-5}},10^{{-4}},5\times10^{{-4}},10^{{-3}},5\times10^{{-3}},10^{{-2}}\}}\,\mathrm{{Pa\,s}}$；采用 $12\times7$ 组合 | $u_\mathrm{{top}}=10$，$l=w=0.01$，边界类型和初始场固定 |
-| GEO | 25 | $l,w\in\{{0.01,0.02,0.03,0.04,0.05\}}\,\mathrm m$，采用 $5\times5$ 组合 | $u_\mathrm{{top}}=10$，$\rho=1$，$\mu=10^{{-5}}$，壁面类型固定 |
-
-**可调但数据集中没有联合扫描的量：** $u_\mathrm{{top}},\rho,\mu,l,w$ 在方程或几何上都可调，但 CFDBench 只在三个子集中分组扫描；顶盖方向、壁面类型、初始场、二维假设和数值格式固定。
-
+| BC | 50 | $u_{\mathrm{top}}=u_{\mathcal{B}}\in\{1,2,3,\ldots,50\}\,\mathrm{m/s}$（步长 $1$） | $\rho=1\,\mathrm{kg\,m^{-3}}$，$\mu=10^{-5}\,\mathrm{Pa\cdot s}$，$l=w=0.01\,\mathrm{m}$ |
+| PROP | 84 | $\rho\in\{0.1,0.5,1,2,3,\ldots,10\}\,\mathrm{kg\,m^{-3}}$（12 个）；$\mu\in\{10^{-5},5\times10^{-5},\ldots,5\times10^{-3},10^{-2}\}\,\mathrm{Pa\cdot s}$（7 个）；$12\times7=84$ | $u_{\mathrm{top}}=10\,\mathrm{m/s}$，$l=w=0.01\,\mathrm{m}$ |
+| GEO | 25 | $l,w\in\{0.01,0.02,0.03,0.04,0.05\}\,\mathrm{m}$（组合共 25） | $u_{\mathrm{top}}=10\,\mathrm{m/s}$，$\rho=1\,\mathrm{kg\,m^{-3}}$，$\mu=10^{-5}\,\mathrm{Pa\cdot s}$ |
 
 ## 数值生成设置
 
@@ -168,8 +165,6 @@ $$
 - 收敛：论文给出的全局残差收敛阈值为 $10^{-9}$；最终速度残差至少达到约 $10^{-6}$ 量级。
 - 生成硬件：AMD Ryzen Threadripper 3990X，30 个 solver processes。
 - 数值精度：论文未明确说明单精度或双精度；不要仅根据 NumPy 文件 dtype 反推 Fluent 求解精度。
-
-
 
 ## 学习任务、输入与输出
 
@@ -196,8 +191,6 @@ $$
 
 论文对每个基础子集按 case 进行 8:1:1 的训练/验证/测试划分。同一条轨迹的帧不会跨 split，从而保证测试工况在训练时不可见。若要严格复现，需固定代码版本、随机种子以及最终生成的 case 列表。
 
-
-
 ## 下载与目录组织
 
 ### 官方链接
@@ -207,7 +200,6 @@ $$
 - 插值数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - 原始 Fluent 数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - 百度网盘原始数据：[https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4)，提取码 `cfd4`
-- 文档版式参考：[https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 官方仓库把插值数据描述为约 13.4 GB；Hugging Face 页面在 **2026-07-21** 显示总文件大小为约 14.4 GB。原始库在仓库 README 中被描述为约 460 GB，而 Hugging Face 原始页当前显示约 205 GB，并注明 Cylinder 部分仍在上传。对可复现工作，应记录具体下载日期和仓库 revision。
 
@@ -257,7 +249,6 @@ data/
 └── cylinder/
 ```
 
-
 ### 只下载本问题
 
 ```bash
@@ -279,17 +270,6 @@ unzip ./downloads/CFDBench/cavity.zip -d ./data
 - 摘要称数据包含速度和压力场；官方插值文件和当前 loader 统一使用 $u,v$，需要压力时应从原始 Fluent 数据自行处理。
 - 轨迹长度不是统一常数；不要用 34,582/159 的平均值替代每条 `npy` 的真实 $T_i$。
 - 当前 cavity loader 的 mask 为全 1，壁面速度主要由工况向量和边界处理表达，而不是由单独的空间边界值通道完整编码。
-
-## 引用
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## 原始出处定位
 

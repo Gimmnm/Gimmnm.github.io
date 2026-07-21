@@ -32,16 +32,18 @@ description: "Three-dimensional radiation hydrodynamics models the turbulent, co
 
 # Convective Envelope of a Red Supergiant
 
-> **Parent collection:** The Well  
-> **Directory:** `convective_envelope_rsg`  
-> **Equation family:** Radiation hydrodynamics  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Density evolution](/the-well/convective_envelope_rsg__density_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `convective_envelope_rsg`
+> **Equation family:** Radiation hydrodynamics
 
 ## 1. Scope and physical overview
 
 Three-dimensional radiation hydrodynamics models the turbulent, convective envelope of a red supergiant. The released trajectories are temporal cuts from one much longer global stellar simulation rather than independent parameter sweeps.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -65,8 +67,7 @@ The comoving radiation source uses Planck/Rosseland absorption opacities and ele
 
 ### Variables and physical fields
 
-- \(
-ho,\mathbf v,P_{
+- \(\rho,\mathbf v,P_{
 m gas},E\): gas density, velocity, pressure and total gas energy density.
 - \(I(t,\mathbf x,\mathbf n)\): frequency-integrated radiation intensity.
 - \(G_r^0,\mathbf G_r\): radiation four-force components.
@@ -209,7 +210,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -221,13 +221,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Goldberg, Jiang and Bildsten, *Numerical Simulations of Convective Three-dimensional Red Supergiant Envelopes* (2022).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

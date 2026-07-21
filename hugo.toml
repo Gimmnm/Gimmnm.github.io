@@ -88,9 +88,9 @@ text = "PDE Dataset Docs"
 [languages.zh-cn.params.homeInfoParams]
 Title = "PDE Dataset Docs"
 Content = """
-按 [The Well](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/) 的单配置文档风格，整理 The Well、CFDBench、FlowBench、PDEArena、PDEBench、PDEgym 等基准数据介绍。
+整理 PDEBench、The Well、PDEArena、CFDBench、PDEgym、FlowBench 等基准数据介绍。
 
-每个页面包含一句话描述、控制方程、About the data、初边值条件、参数扫描、下载命令与引用信息。
+每个页面包含一句话描述、控制方程、About the data、初边值条件、参数扫描与下载命令。
 
 → 从 [数据集总览](/datasets/) 开始浏览。右上角可切换 English。
 """
@@ -108,39 +108,39 @@ url = "datasets/"
 weight = 20
 
 [[languages.zh-cn.menu.main]]
-identifier = "the-well"
-name = "The Well"
-url = "datasets/the-well/"
+identifier = "pdebench"
+name = "PDEBench"
+url = "datasets/pdebench/"
 weight = 30
 
 [[languages.zh-cn.menu.main]]
-identifier = "cfdbench"
-name = "CFDBench"
-url = "datasets/cfdbench/"
+identifier = "the-well"
+name = "The Well"
+url = "datasets/the-well/"
 weight = 40
-
-[[languages.zh-cn.menu.main]]
-identifier = "flowbench"
-name = "FlowBench"
-url = "datasets/flowbench/"
-weight = 50
 
 [[languages.zh-cn.menu.main]]
 identifier = "pdearena"
 name = "PDEArena"
 url = "datasets/pdearena/"
-weight = 60
+weight = 50
 
 [[languages.zh-cn.menu.main]]
-identifier = "pdebench"
-name = "PDEBench"
-url = "datasets/pdebench/"
-weight = 70
+identifier = "cfdbench"
+name = "CFDBench"
+url = "datasets/cfdbench/"
+weight = 60
 
 [[languages.zh-cn.menu.main]]
 identifier = "pdegym"
 name = "PDEgym"
 url = "datasets/pdegym/"
+weight = 70
+
+[[languages.zh-cn.menu.main]]
+identifier = "flowbench"
+name = "FlowBench"
+url = "datasets/flowbench/"
 weight = 80
 
 [languages.en]
@@ -157,9 +157,9 @@ text = "PDE Dataset Docs"
 [languages.en.params.homeInfoParams]
 Title = "PDE Dataset Docs"
 Content = """
-Dataset documentation styled after [The Well](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), covering The Well, CFDBench, FlowBench, PDEArena, PDEBench, and PDEgym.
+Dataset documentation covering PDEBench, The Well, PDEArena, CFDBench, PDEgym, and FlowBench.
 
-Each page includes a one-line description, governing equations, about-the-data fields, ICs/BCs, parameter sweeps, download commands, and citations.
+Each page includes a one-line description, governing equations, about-the-data fields, ICs/BCs, parameter sweeps, and download commands.
 
 → Start from the [Datasets overview](/en/datasets/). Use the language switch for 中文.
 """
@@ -177,37 +177,37 @@ url = "datasets/"
 weight = 20
 
 [[languages.en.menu.main]]
-identifier = "the-well"
-name = "The Well"
-url = "datasets/the-well/"
+identifier = "pdebench"
+name = "PDEBench"
+url = "datasets/pdebench/"
 weight = 30
 
 [[languages.en.menu.main]]
-identifier = "cfdbench"
-name = "CFDBench"
-url = "datasets/cfdbench/"
+identifier = "the-well"
+name = "The Well"
+url = "datasets/the-well/"
 weight = 40
-
-[[languages.en.menu.main]]
-identifier = "flowbench"
-name = "FlowBench"
-url = "datasets/flowbench/"
-weight = 50
 
 [[languages.en.menu.main]]
 identifier = "pdearena"
 name = "PDEArena"
 url = "datasets/pdearena/"
-weight = 60
+weight = 50
 
 [[languages.en.menu.main]]
-identifier = "pdebench"
-name = "PDEBench"
-url = "datasets/pdebench/"
-weight = 70
+identifier = "cfdbench"
+name = "CFDBench"
+url = "datasets/cfdbench/"
+weight = 60
 
 [[languages.en.menu.main]]
 identifier = "pdegym"
 name = "PDEgym"
 url = "datasets/pdegym/"
+weight = 70
+
+[[languages.en.menu.main]]
+identifier = "flowbench"
+name = "FlowBench"
+url = "datasets/flowbench/"
 weight = 80

@@ -1,14 +1,5 @@
 ---
-title: "PDEArena 方程数据文档索引"
-dataset_family: PDEArena
-dataset_release: PDEArena
-equation: multiple
-spatial_dimension: 0
-coordinate_system: multiple
-task_variant: catalog
-official_status: "documentation index"
-license: MIT
-last_verified: 2026-07-21
+title: "PDEArena"
 linkTitle: PDEArena
 weight: 30
 draft: false
@@ -16,42 +7,45 @@ ShowToc: true
 hidemeta: true
 ShowPostNavLinks: false
 hiddenInHomeList: true
-summary: "面向算子学习的 PDE 基准：Navier–Stokes、浅水方程、Maxwell-3D 与 KS 等。"
-description: "面向算子学习的 PDE 基准：Navier–Stokes、浅水方程、Maxwell-3D 与 KS 等。"
+math: true
+summary: "面向算子学习的 PDE 基准：Navier–Stokes、浅水、Maxwell-3D 与 KS 等。"
+description: "面向算子学习的 PDE 基准：Navier–Stokes、浅水、Maxwell-3D 与 KS 等。"
+dataset_family: PDEArena
 ---
 
-# PDEArena 方程数据文档索引
+# PDEArena
 
-本文档集参考 [The Well 单数据集页面](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/) 的组织方式，并增加适合跨多个 benchmark 统一整理的 YAML front matter、所属数据集、发布状态、下载方法、输入输出张量、参数三分表以及版本差异。
+## 问题定义
 
-## 文档列表
+算子学习（operator learning）把定义在不同域上的解 $u:\mathcal{X}\to\mathbb{R}^{n}$ 与 $u':\mathcal{X}'\to\mathbb{R}^{n'}$ 通过算子 $\mathcal{G}$ 联系起来：
 
-| 文档 | 物理系统/任务 | 官方状态 | 数据规模 |
-|---|---|---|---:|
-| [Navier--Stokes 标准版](../navier_stokes_2d_standard/) | 2D 不可压 NS + 烟雾标量 | PDEArena 官方发布 | 43 GB |
-| [Navier--Stokes 条件化版](../navier_stokes_2d_conditioned/) | 浮力与时间尺度条件化 | PDEArena 官方发布 | 81.7 GB |
-| [浅水方程速度形式](../shallow_water_2d_velocity/) | 1-day/2-day，3 通道 | PDEArena 官方发布/任务视图 | 124 GB（共享） |
-| [浅水方程涡度形式](../shallow_water_2d_vorticity/) | 2-day，2 标量通道 | 同一浅水发布的任务视图 | 不额外计量 |
-| [Maxwell-3D](../maxwell_3d/) | 3D 电磁场 | PDEArena 官方扩展 | 121 GB |
-| [Kuramoto--Sivashinsky-1D](../kuramoto_sivashinsky_1d/) | fixed/conditional viscosity | PDEArena loader 支持的外部数据 | 3.92 GB |
+\[
+\mathcal{G}:(u\in\mathcal{U})\mapsto(u'\in\mathcal{U}'),
+\]
 
-## 当前 PDEArena 官方 Hugging Face 四库
+其中 $\mathcal{U}$、$\mathcal{U}'$ 分别为相应解空间。实践中，神经 PDE 代理通常取同一网格上若干历史时间帧，映射到未来一帧或多帧。
 
-| 发布 | train/valid/test | 总轨迹 | 大小 |
-|---|---:|---:|---:|
-| NavierStokes-2D | 5,200/1,300/1,300 | 7,800 | 43 GB |
-| NavierStokes-2D-conditoned | 6,656/1,664/1,664 | 9,984 | 81.7 GB |
-| ShallowWater-2D | 5,600/1,400/1,400 | 8,400 | 124 GB |
-| Maxwell-3D | 6,400/1,600/1,600 | 9,600 | 121 GB |
-| **合计**|  | **35,784**| **369.7 GB** |
+PDEArena 强调跨初值、跨 PDE 参数与跨时间窗 $\Delta t$ 的泛化。条件化实验中，解对 $\{u,u'\}$ 可来自不同力项刻画的解空间；同时要求映射 $u\mapsto u'$ 能泛化到不同时间窗。力项与 $\Delta t$ 均为连续标量，可用正弦 Fourier 嵌入编码后注入网络。
 
-浅水速度/涡度、1-day/2-day 重用同一发布，不能重复相加。KS 不在当前 PDEArena 组织的四库中，单独统计。
+基准设计原则包括：任务由领域求解器生成、足够困难、速度/涡度等表示多样，并能探测时间尺度与参数泛化。
 
-## 统一字段约定
+## 方程目录
 
-- 原始二维轨迹：$[N,T,C,H,W]$；
-- 原始三维轨迹：$[N,T,C,D,H,W]$；
-- 模型样本：$[T_{in},C,\ldots]\to[T_{out},C,\ldots]$；
-- “物理参数”与“时间/网格条件”分开记录；
-- “代码可调”“发布实际变化”“发布固定”分别列出；
-- 论文、当前主分支和当前数据库不一致时并列保留，不强行拼成一个版本。
+先读 [数据格式](./00_data_format/)；各方程页另列该类下载文件与命名约定。
+
+| # | 方程文档 | Hugging Face 发布 | 当前标称体积 |
+|---:|---|---|---:|
+| — | [数据格式](./00_data_format/) | — | — |
+| 1 | [二维不可压 NS 烟雾浮力流（标准版）](./01_navier_stokes_2d_standard/) | `NavierStokes-2D` | 43 GB |
+| 2 | [二维不可压 NS（参数条件化版）](./02_navier_stokes_2d_conditioned/) | `NavierStokes-2D-conditoned` | 81.7 GB |
+| 3 | [球面浅水方程（速度形式）](./03_shallow_water_2d_velocity/) | `ShallowWater-2D` | 124 GB（共享） |
+| 4 | [球面浅水方程（涡度形式）](./04_shallow_water_2d_vorticity/) | 同一 `ShallowWater-2D` 任务视图 | 不额外计量 |
+| 5 | [三维 Maxwell 时域电磁场](./05_maxwell_3d/) | `Maxwell-3D` | 121 GB |
+| 6 | [一维 Kuramoto–Sivashinsky](./06_kuramoto_sivashinsky_1d/) | 外部 `phlippe/...`（loader 支持） | 3.92 GB |
+
+## 统一口径
+
+- 当前 PDEArena 组织官方四库合计约 **369.7 GB**、**35,784** 条轨迹；浅水速度/涡度与 1-day/2-day 共用同一发布，不能重复相加。KS 单独统计。
+- 轨迹数、时间点数、采样、文件布局与体积以 **Hugging Face 发布 + 官方生成/任务配置** 为准；与论文表述冲突时以实际数据集为准。
+- 原始二维轨迹常写为 $[N,T,C,H,W]$；三维为 $[N,T,C,D,H,W]$。模型样本由历史帧切到未来帧，具体 $\ell$ 由任务配置决定。
+- Maxwell-3D 为官方扩展发布；KS 为代码支持的外部数据，不计入四库总量。

@@ -28,13 +28,9 @@ description: "输入随机 Hicks–Henne 扰动翼型的形状掩码，输出稳
 
 # SE-AF：翼型几何到稳态 Euler 密度场
 
-> **一句话描述：** 输入随机 Hicks–Henne 扰动翼型的形状掩码，输出稳态可压缩 Euler 密度场。
+**描述：** 输入随机 Hicks–Henne 扰动翼型的形状掩码，输出稳态可压缩 Euler 密度场。 该任务不是轨迹预测，而是几何到场的稳态算子。原始求解使用贴体椭圆网格，再插值到 Cartesian 网格。
 
-## 更长描述
-
-该任务不是轨迹预测，而是几何到场的稳态算子。原始求解使用贴体椭圆网格，再插值到 Cartesian 网格。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** NEWTUN/NUWTUN 稳态 Euler 求解器；$243\times43$ 贴体网格后插值到 $128^2$。
 
 ## 基本信息
@@ -72,7 +68,6 @@ $$
 y^{L/U}(\xi)=y_{ref}^{L/U}(\xi)+\sum_{i=1}^{15}a_i^{L/U}B_i(\xi),\qquad B_i(\xi)=\sin^3(\pi\xi^{q_i}).
 $$
 输入为翼型区域特征函数 $f=\chi_S$，输出为稳态密度 $\rho$。
-
 
 ### 物理量
 
@@ -167,19 +162,3 @@ huggingface-cli download camlab-ethz/SE-AF --repo-type dataset --local-dir ./SE-
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: SE-AF](https://huggingface.co/datasets/camlab-ethz/SE-AF)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

@@ -103,16 +103,42 @@ A second-order upwind finite-difference scheme is used in space and time.
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_t u(t,x)+\beta\,\partial_x u(t,x)=0,\qquad x\in(0,1),\quad t\in(0,2],
+\]
+\[
+u(0,x)=u_0(x),\qquad u(t,x)=u_0(x-\beta t).
+\]
+
+### Released file configs
+
+One row per official download file. Paper Table 1 lists $N_t=200$; released HDF5 has **201** steps including $t=0$.
+
+| Data file | $\beta$ | Boundary | Per trajectory | Fixed |
+|---|---:|---|---|---|
+| `1D_Advection_Sols_beta0.1.hdf5` | $0.1$ | periodic | IC $n_i,A_i,\phi_i$; abs / window ~10% each | $N_x=1024$, $N_t=201$, domain $(0,1)\times[0,2]$ |
+| `1D_Advection_Sols_beta0.2.hdf5` | $0.2$ | periodic | same | same |
+| `1D_Advection_Sols_beta0.4.hdf5` | $0.4$ | periodic | same | same |
+| `1D_Advection_Sols_beta0.7.hdf5` | $0.7$ | periodic | same | same |
+| `1D_Advection_Sols_beta1.0.hdf5` | $1.0$ | periodic | same | same |
+| `1D_Advection_Sols_beta2.0.hdf5` | $2.0$ | periodic | same | same |
+| `1D_Advection_Sols_beta4.0.hdf5` | $4.0$ | periodic | same | same |
+| `1D_Advection_Sols_beta7.0.hdf5` | $7.0$ | periodic | same | same |
+
+10,000 trajectories per file; default IC family $N=2$, $n_{\max}=8$, $A_i\sim\mathcal U(0,1)$, $\phi_i\in(0,2\pi)$.
+
+### Generator-tunable ranges
+
+Parameters the Hydra YAML / generator **can** change (even if the download does not sweep them). Re-generate after editing YAML.
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $\beta$ (advection speed) | differs across HDF5 files | $\{0.1,0.2,0.4,0.7,1,2,4,7\}$ (8 files) |
-| IC $n_i,A_i,\phi_i$ | per trajectory | $N=2$, $n_{\max}=8$, $A_i\sim\mathcal U(0,1)$, $\phi_i\in(0,2\pi)$ |
-| abs / window | per trajectory (~10% each) | abs with random signature; window function |
-| BC, domain, grid, time, scheme | fixed | periodic; $x\in(0,1)$; $N_x=1024$; $t\in[0,2]$; 2nd-order upwind |
-
-## Released configurations
-
-The current training manifest contains eight `1D_Advection_Sols_beta*.hdf5` files. Each file fixes one $\beta$ and contains 10,000 trajectories with different initial conditions.
+| $\beta$ (advection speed) | any positive scalar in YAML; repo also has example `beta=10` | yes: $\{0.1,0.2,0.4,0.7,1,2,4,7\}$ |
+| IC $N,n_{\max},A_i,\phi_i$ | editable in scripts/config | no (defaults; only seed varies) |
+| abs / window probability | editable | no (~10% defaults) |
+| BC, domain, grid, time | editable | release fixed: periodic / $(0,1)$ / $1024$ / $[0,2]$ |
 
 ## Data files
 

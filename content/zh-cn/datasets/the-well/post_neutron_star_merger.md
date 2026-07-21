@@ -3,7 +3,7 @@ title: 中子星并合后吸积盘
 parent_collection: "The Well"
 physical_family: "广义相对论 MHD + 中微子输运"
 spatial_dimension: 3D
-coordinate_system: "quasi-spherical $(\\\\log r,\\\\theta,\\\\phi)$"
+coordinate_system: "quasi-spherical $(\\log r,\\theta,\\phi)$"
 storage_format: "HDF5 / The Well unified schema / fp32 release arrays"
 dataset_license: CC-BY-4.0
 code_license: BSD-3-Clause
@@ -32,49 +32,47 @@ description: "该数据模拟双中子星并合后形成的高温吸积盘与外
 
 # 中子星并合后吸积盘
 
-> **所属数据集：** The Well  
-> **数据目录：** `post_neutron_star_merger`  
-> **方程族：** 广义相对论 MHD + 中微子输运  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![电子丰度 Ye](/the-well/post_neutron_star_merger__Ye_good_normalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `post_neutron_star_merger`
+> **方程族：** 广义相对论 MHD + 中微子输运
 
 ## 1. 所属集合与物理概览
 
 该数据模拟双中子星并合后形成的高温吸积盘与外流。理想广义相对论磁流体动力学与电子丰度/轻子数守恒及 Monte Carlo 中微子输运耦合，是 The Well 中计算代价最高的系统之一。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
 采用论文记号，
 $$
-\partial_t(\sqrt g\,\rho_0u^t)+\partial_i(\sqrt g\,\rho_0u^i)=0,
+\partial_t(\sqrt{g}\,\rho_0 u^t)+\partial_i(\sqrt{g}\,\rho_0 u^i)=0,
 $$
 $$
-\partial_t\!\left[\sqrt g\,(T^t_{\ \nu}+\rho_0u^t\delta^t_{\nu})\right]
-+\partial_i\!\left[\sqrt g\,(T^i_{\ \nu}+\rho_0u^i\delta^t_{\nu})\right]
-=\sqrt g\,(T^\kappa_{\ \lambda}\Gamma^\lambda_{\nu\kappa}+G_\nu),
+\partial_t\big[\sqrt{g}\,(T^t{}_{\nu}+\rho_0 u^t\delta^t{}_{\nu})\big]
++\partial_i\big[\sqrt{g}\,(T^i{}_{\nu}+\rho_0 u^i\delta^t{}_{\nu})\big]
+=\sqrt{g}\,(T^\kappa{}_{\lambda}\Gamma^\lambda{}_{\nu\kappa}+G_\nu),
 $$
 $$
-\partial_t(\sqrt g\,B^i)
-+\partial_j\!\left[\sqrt g\,(b^ju^i-b^iu^j)\right]=0,
+\partial_t(\sqrt{g}\,B^i)
++\partial_j\big[\sqrt{g}\,(b^j u^i-b^i u^j)\big]=0,
 $$
 $$
-\partial_t(\sqrt g\,\rho_0Y_eu^t)
-+\partial_i(\sqrt g\,\rho_0Y_eu^i)=\sqrt g\,G_{Y_e},
+\partial_t(\sqrt{g}\,\rho_0 Y_e u^t)
++\partial_i(\sqrt{g}\,\rho_0 Y_e u^i)=\sqrt{g}\,G_{Y_e},
 $$
 中微子强度沿零测地线满足相对论输运方程：
 $$
-\frac{D}{d\lambda}\left(\frac{h^3 I_{\nu,f}}{\epsilon^3}\right)
-=
-\frac{h^2\eta_{\nu,f}}{\epsilon^2}
--\frac{\epsilon\chi_{\nu,f}}{h}
-\left(\frac{h^3 I_{\nu,f}}{\epsilon^3}\right).
+\frac{D}{d\lambda}\Bigl(\frac{h^3 I_{\nu,f}}{\epsilon^3}\Bigr)=\frac{h^2\eta_{\nu,f}}{\epsilon^2}-\frac{\epsilon\chi_{\nu,f}}{h}\Bigl(\frac{h^3 I_{\nu,f}}{\epsilon^3}\Bigr).
 $$
 
 ### 变量与物理场
 
-- \(\rho_0,u^\mu,T^\mu_{\ \nu}\)：静质量密度、流体四速度与应力—能量张量。
-- \(g,\Gamma^\lambda_{\mu\nu}\)：度规行列式绝对值与 Christoffel 符号。
+- \(\rho_0,u^\mu,T^\mu{}_{\nu}\)：静质量密度、流体四速度与应力—能量张量。
+- \(\sqrt{g}\)：时空度规行列式绝对值的平方根（体积因子）；\(\Gamma^\lambda{}_{\mu\nu}\)：Christoffel 符号。
 - \(B^i,b^\mu\)：磁场三向量/四向量。
 - \(Y_e\)：电子丰度。
 - \(G_\nu,G_{Y_e}\)：辐射四力与轻子交换源项。
@@ -216,7 +214,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -228,13 +225,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐引用：\(\nu\)bhlight 论文以及 The Well 附录列出的并合后模拟系列文献 [153–156]。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

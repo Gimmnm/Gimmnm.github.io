@@ -27,14 +27,10 @@ description: "At fixed inertial/viscous conditions, buoyancy strength and comple
 
 # 2-D thermally coupled lid-driven cavity: constant Reynolds number
 
-**One-line description:** At fixed inertial/viscous conditions, buoyancy strength and complex geometry are varied to produce steady velocity, pressure, and temperature fields.
+**Description:** At fixed inertial/viscous conditions, buoyancy strength and complex geometry are varied to produce steady velocity, pressure, and temperature fields. This subset augments the lid-driven cavity with heat transport and Boussinesq buoyancy. Forced convection from the moving lid coexists with natural convection from the heated lower wall. With Reynolds number fixed, the main physical scan is over Grashof/Richardson number.
 
-**Longer description:** This subset augments the lid-driven cavity with heat transport and Boussinesq buoyancy. Forced convection from the moving lid coexists with natural convection from the heated lower wall. With Reynolds number fixed, the main physical scan is over Grashof/Richardson number.
-
-**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.  
-**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.  
-
-
+**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.
+**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.
 
 ## Parent dataset and links
 
@@ -49,7 +45,6 @@ description: "At fixed inertial/viscous conditions, buoyancy strength and comple
 | Project website | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | License | **CC-BY-NC-4.0** |
 | Storage format | NumPy compressed archives (`.npz`) |
-
 
 ## Equations
 
@@ -114,7 +109,6 @@ $$
 $$
 
 The setup combines lid-driven forced convection, buoyancy-driven natural convection, and geometry-induced separation and thermal boundary layers.
-
 
 ## Geometry conditioning
 
@@ -185,7 +179,6 @@ $$
 
 **File-level caveat:** some older DataPrep code uses a `0/255` mask and derives it with `SDF > 0`. This is not identical to the semantic convention in the paper. Always plot the downloaded mask and SDF to verify sign and scale.
 
-
 ## About the data
 
 | Property | Value |
@@ -248,7 +241,6 @@ The paper uses approximately
 
 Increasing Richardson number generally strengthens buoyant recirculation and modifies lift, drag, and heat transfer.
 
-
 ## Numerical generation and post-processing
 
 - massively parallel quadtree/octree finite-element CFD and multiphysics framework;
@@ -260,7 +252,6 @@ Increasing Richardson number generally strengthens buoyant recirculation and mod
 - the paper reports approximately 65K node-hours of total compute.
 
 The lower-resolution releases are post-processed from fully resolved simulations rather than independently rerun coarse CFD simulations, which makes the data useful for multi-resolution and super-resolution studies.
-
 
 ## What is interesting and challenging
 
@@ -277,7 +268,6 @@ The lower-resolution releases are post-processed from fully resolved simulations
 3. The paper's fixed-Re examples use 100, but the folder name does not encode this value; inspect the actual archive or metadata.
 4. `C*` is an engineering-summary channel, not a new physical field.
 5. Paper and script mask/SDF conventions may differ.
-
 
 ## Download
 
@@ -318,28 +308,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 The tensor formulas in the paper describe **semantic axis order**. Always inspect the actual key, shape, channel order, mask values, and SDF sign before training.
 
-
-
-## Citation
-
-Please cite the FlowBench paper when using this data:
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-The dataset and official tools are released under **CC-BY-NC-4.0**. Consult the full license text before commercial use.
-
-
-
 ## Sources and evidence policy
 
 This document cross-checks the following official sources, in descending priority:
@@ -350,5 +318,5 @@ This document cross-checks the following official sources, in descending priorit
 4. [official Geometry Matters training/evaluation repository](https://github.com/baskargroup/GeometryMatters);
 5. [FlowBench project website](https://baskargroup.bitbucket.io/FlowBench/).
 
-The paper, the older preparation scripts, and the current data repository do not represent exactly the same release. This document therefore distinguishes the **paper specification**, the **preparation-code convention**, and the **current hosted release**.  
+The paper, the older preparation scripts, and the current data repository do not represent exactly the same release.
 Last verified: **2026-07-21**.

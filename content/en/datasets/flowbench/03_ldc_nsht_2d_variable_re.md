@@ -27,14 +27,10 @@ description: "Complex geometry, Reynolds number, and the buoyancy-to-inertia rat
 
 # 2-D thermally coupled lid-driven cavity: variable Reynolds number
 
-**One-line description:** Complex geometry, Reynolds number, and the buoyancy-to-inertia ratio are varied jointly to produce steady velocity, pressure, and temperature fields.
+**Description:** Complex geometry, Reynolds number, and the buoyancy-to-inertia ratio are varied jointly to produce steady velocity, pressure, and temperature fields. This subset uses the same coupled equations and boundary conditions as the constant-Re NSHT subset, but scans both inertial/viscous and buoyancy effects. It is therefore the broader multi-parameter operator-learning problem.
 
-**Longer description:** This subset uses the same coupled equations and boundary conditions as the constant-Re NSHT subset, but scans both inertial/viscous and buoyancy effects. It is therefore the broader multi-parameter operator-learning problem.
-
-**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.  
-**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.  
-
-
+**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.
+**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.
 
 ## Parent dataset and links
 
@@ -49,7 +45,6 @@ description: "Complex geometry, Reynolds number, and the buoyancy-to-inertia rat
 | Project website | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | License | **CC-BY-NC-4.0** |
 | Storage format | NumPy compressed archives (`.npz`) |
-
 
 ## Equations
 
@@ -101,7 +96,6 @@ Temperature:
 - top wall: $\theta=0$;
 - left and right walls: $\partial_n\theta=0$;
 - object surface: $\theta=0$.
-
 
 ## Geometry conditioning
 
@@ -172,7 +166,6 @@ $$
 
 **File-level caveat:** some older DataPrep code uses a `0/255` mask and derives it with `SDF > 0`. This is not identical to the semantic convention in the paper. Always plot the downloaded mask and SDF to verify sign and scale.
 
-
 ## About the data
 
 | Property | Value |
@@ -223,7 +216,6 @@ Older preparation documentation may append a `C*` summary channel containing $C_
 
 The paper illustrates parameter pairs such as $(\mathrm{Ri},\mathrm{Re})=(0.321,16)$, $(1.76,640)$, $(2.847,720)$, and $(9.452,952)$. These are examples, not the complete parameter list.
 
-
 ## Numerical generation and post-processing
 
 - massively parallel quadtree/octree finite-element CFD and multiphysics framework;
@@ -235,7 +227,6 @@ The paper illustrates parameter pairs such as $(\mathrm{Ri},\mathrm{Re})=(0.321,
 - the paper reports approximately 65K node-hours of total compute.
 
 The lower-resolution releases are post-processed from fully resolved simulations rather than independently rerun coarse CFD simulations, which makes the data useful for multi-resolution and super-resolution studies.
-
 
 ## What is interesting and challenging
 
@@ -252,7 +243,6 @@ The lower-resolution releases are post-processed from fully resolved simulations
 3. `C*` may be present as a packaged auxiliary channel rather than a local field.
 4. Verify mask and SDF conventions from the actual files.
 5. Geometry-generalization tests should split by geometry ID, not by arbitrary sample.
-
 
 ## Download
 
@@ -293,28 +283,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 The tensor formulas in the paper describe **semantic axis order**. Always inspect the actual key, shape, channel order, mask values, and SDF sign before training.
 
-
-
-## Citation
-
-Please cite the FlowBench paper when using this data:
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-The dataset and official tools are released under **CC-BY-NC-4.0**. Consult the full license text before commercial use.
-
-
-
 ## Sources and evidence policy
 
 This document cross-checks the following official sources, in descending priority:
@@ -325,5 +293,5 @@ This document cross-checks the following official sources, in descending priorit
 4. [official Geometry Matters training/evaluation repository](https://github.com/baskargroup/GeometryMatters);
 5. [FlowBench project website](https://baskargroup.bitbucket.io/FlowBench/).
 
-The paper, the older preparation scripts, and the current data repository do not represent exactly the same release. This document therefore distinguishes the **paper specification**, the **preparation-code convention**, and the **current hosted release**.  
+The paper, the older preparation scripts, and the current data repository do not represent exactly the same release.
 Last verified: **2026-07-21**.

@@ -32,16 +32,18 @@ description: "Two-dimensional FENE-P channel flow supports multiple coexisting a
 
 # Viscoelastic Instability — Corrected v2
 
-> **Parent collection:** The Well  
-> **Directory:** `viscoelastic_instability_v2`  
-> **Equation family:** FENE-P viscoelastic flow  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Conformation component Czz](/the-well/viscoelastic_instability__czz_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `viscoelastic_instability_v2`
+> **Equation family:** FENE-P viscoelastic flow
 
 ## 1. Scope and physical overview
 
 Two-dimensional FENE-P channel flow supports multiple coexisting attractors: laminar flow, steady and chaotic arrowhead states, elasto-inertial turbulence, and edge states separating basins of attraction. The legacy processed release is deprecated; the corrected `viscoelastic_instability_v2` should be preferred for new work.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -200,24 +202,13 @@ This directory is not currently listed among the commonly available The Well Hug
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
 |---|---|
-| Official dataset page | No separate page / 尚无独立页面 |
+| Official dataset page | No separate page |
 | Repository directory | <https://github.com/PolymathicAI/the_well/tree/master/datasets/viscoelastic_instability_v2> |
 | The Well repository | <https://github.com/PolymathicAI/the_well> |
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Beneitez et al., *Multistability of elasto-inertial two-dimensional channel flow* (2024).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

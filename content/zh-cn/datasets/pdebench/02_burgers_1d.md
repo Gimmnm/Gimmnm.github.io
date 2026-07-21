@@ -101,15 +101,42 @@ u(0,x)=u_0(x).
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\partial_tu+\partial_x\!\left(\frac{u^2}{2}\right)=\frac{\nu}{\pi}\partial_{xx}u,
+\qquad x\in(0,1),\quad t\in(0,2],
+\]
+\[
+u(0,x)=u_0(x).
+\]
+
+### 发布文件配置
+
+| 数据文件 | $\nu$ | 边界 | 每轨迹随机 | 固定 |
+|---|---:|---|---|---|
+| `1D_Burgers_Sols_Nu0.001.hdf5` | $0.001$ | periodic | 初值 $n_i,A_i,\phi_i$ | $N_x=1024$，$N_t=201$，域 $(0,1)\times[0,2]$ |
+| `1D_Burgers_Sols_Nu0.002.hdf5` | $0.002$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.004.hdf5` | $0.004$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.01.hdf5` | $0.01$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.02.hdf5` | $0.02$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.04.hdf5` | $0.04$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.1.hdf5` | $0.1$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.2.hdf5` | $0.2$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu0.4.hdf5` | $0.4$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu1.0.hdf5` | $1.0$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu2.0.hdf5` | $2.0$ | periodic | 同上 | 同上 |
+| `1D_Burgers_Sols_Nu4.0.hdf5` | $4.0$ | periodic | 同上 | 同上 |
+
+每文件 10,000 条。论文 Table 1 写 $N_t=200$，实际多为 **201**。
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| $\nu$（黏性） | 不同 HDF5 文件不同 | $\{0.001,0.002,0.004,0.01,0.02,0.04,0.1,0.2,0.4,1,2,4\}$（12 文件） |
-| 初值 $n_i,A_i,\phi_i$ | 每轨迹随机 | 与 1D-advection 同族随机正弦叠加 |
-| 边界、时间、分辨率、离散格式 | 固定 | 周期；$N_x=1024$；$t\in[0,2]$ |
-
-## 论文配置
-
-12 个训练参数文件，每个固定一个 $\nu$ 并含 10,000 条轨迹。
+| $\nu$（黏性） | 任意正实数（`multi/*.yaml`）；仓库另有更多示例黏性 | 是：上表 12 个取值 |
+| 初值族 / 振幅尺度 | 可改（`args/` 下另有 sin / possin 等模板） | 否（发布用默认随机正弦族） |
+| 边界、域、网格、时间 | 可改 | 发布固定 |
 
 ## 数据文件
 

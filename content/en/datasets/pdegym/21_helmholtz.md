@@ -28,13 +28,9 @@ description: "Maps a per-sample medium coefficient field and constant Dirichlet 
 
 # Helmholtz: Random Media and Boundary Values to Frequency-Domain Waves
 
-> **One-line description:** Maps a per-sample medium coefficient field and constant Dirichlet boundary value to a frequency-domain Helmholtz solution.
+**Description:** Maps a per-sample medium coefficient field and constant Dirichlet boundary value to a frequency-domain Helmholtz solution. This task varies both the PDE coefficient $a(x,y)$ and the boundary parameter $b$, while frequency is fixed. It is a representative steady wave-coefficient operator in PDEgym.
 
-## Longer description
-
-This task varies both the PDE coefficient $a(x,y)$ and the boundary parameter $b$, while frequency is fixed. It is a representative steady wave-coefficient operator in PDEgym.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** Finite-difference method similar to DeVITO; $128^2$.
 
 ## Identity
@@ -55,7 +51,6 @@ This task varies both the PDE coefficient $a(x,y)$ and the boundary parameter $b
 
 ## Equation
 
-
 $$
 -\Delta u-\omega^2a(x,y)u=0\quad\text{in }D,
 \qquad u=b\quad\text{on }\partial D,
@@ -68,7 +63,6 @@ $$
 \bar a(x,y)=-\sum_{i=1}^{n}A_i\exp\!\left[-\frac{(x-x_i)^2+(y-y_i)^2}{2\sigma_i^2}\right],
 $$
 then min–max normalize $a=(\bar a-\min\bar a)/(\max\bar a-\min\bar a)$.
-
 
 ### Physical quantities
 
@@ -162,19 +156,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: Helmholtz](https://huggingface.co/datasets/camlab-ethz/Helmholtz).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

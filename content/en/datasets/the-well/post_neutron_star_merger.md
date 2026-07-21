@@ -3,7 +3,7 @@ title: "Post-Neutron-Star-Merger Accretion Disk"
 parent_collection: "The Well"
 physical_family: "General-relativistic MHD + neutrino transport"
 spatial_dimension: 3D
-coordinate_system: "quasi-spherical $(\\\\log r,\\\\theta,\\\\phi)$"
+coordinate_system: "quasi-spherical $(\\log r,\\theta,\\phi)$"
 storage_format: "HDF5 / The Well unified schema / fp32 release arrays"
 dataset_license: CC-BY-4.0
 code_license: BSD-3-Clause
@@ -32,49 +32,47 @@ description: "These are general-relativistic magnetohydrodynamic simulations of 
 
 # Post-Neutron-Star-Merger Accretion Disk
 
-> **Parent collection:** The Well  
-> **Directory:** `post_neutron_star_merger`  
-> **Equation family:** General-relativistic MHD + neutrino transport  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Electron fraction Ye](/the-well/post_neutron_star_merger__Ye_good_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `post_neutron_star_merger`
+> **Equation family:** General-relativistic MHD + neutrino transport
 
 ## 1. Scope and physical overview
 
 These are general-relativistic magnetohydrodynamic simulations of a hot accretion disk and outflow after a binary-neutron-star merger. Ideal GRMHD is coupled to electron-fraction/lepton conservation and Monte Carlo neutrino transport, making this one of the most computationally expensive systems in The Well.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
 Using the notation of the paper,
 $$
-\partial_t(\sqrt g\,\rho_0u^t)+\partial_i(\sqrt g\,\rho_0u^i)=0,
+\partial_t(\sqrt{g}\,\rho_0 u^t)+\partial_i(\sqrt{g}\,\rho_0 u^i)=0,
 $$
 $$
-\partial_t\!\left[\sqrt g\,(T^t_{\ \nu}+\rho_0u^t\delta^t_{\nu})\right]
-+\partial_i\!\left[\sqrt g\,(T^i_{\ \nu}+\rho_0u^i\delta^t_{\nu})\right]
-=\sqrt g\,(T^\kappa_{\ \lambda}\Gamma^\lambda_{\nu\kappa}+G_\nu),
+\partial_t\big[\sqrt{g}\,(T^t{}_{\nu}+\rho_0 u^t\delta^t{}_{\nu})\big]
++\partial_i\big[\sqrt{g}\,(T^i{}_{\nu}+\rho_0 u^i\delta^t{}_{\nu})\big]
+=\sqrt{g}\,(T^\kappa{}_{\lambda}\Gamma^\lambda{}_{\nu\kappa}+G_\nu),
 $$
 $$
-\partial_t(\sqrt g\,B^i)
-+\partial_j\!\left[\sqrt g\,(b^ju^i-b^iu^j)\right]=0,
+\partial_t(\sqrt{g}\,B^i)
++\partial_j\big[\sqrt{g}\,(b^j u^i-b^i u^j)\big]=0,
 $$
 $$
-\partial_t(\sqrt g\,\rho_0Y_eu^t)
-+\partial_i(\sqrt g\,\rho_0Y_eu^i)=\sqrt g\,G_{Y_e},
+\partial_t(\sqrt{g}\,\rho_0 Y_e u^t)
++\partial_i(\sqrt{g}\,\rho_0 Y_e u^i)=\sqrt{g}\,G_{Y_e},
 $$
 and neutrino intensity satisfies a relativistic transfer equation along null geodesics,
 $$
-\frac{D}{d\lambda}\left(\frac{h^3 I_{\nu,f}}{\epsilon^3}\right)
-=
-\frac{h^2\eta_{\nu,f}}{\epsilon^2}
--\frac{\epsilon\chi_{\nu,f}}{h}
-\left(\frac{h^3 I_{\nu,f}}{\epsilon^3}\right).
+\frac{D}{d\lambda}\Bigl(\frac{h^3 I_{\nu,f}}{\epsilon^3}\Bigr)=\frac{h^2\eta_{\nu,f}}{\epsilon^2}-\frac{\epsilon\chi_{\nu,f}}{h}\Bigl(\frac{h^3 I_{\nu,f}}{\epsilon^3}\Bigr).
 $$
 
 ### Variables and physical fields
 
-- \(\rho_0,u^\mu,T^\mu_{\ \nu}\): rest-mass density, fluid four-velocity and stress-energy tensor.
-- \(g,\Gamma^\lambda_{\mu\nu}\): metric determinant and Christoffel symbols.
+- \(\rho_0,u^\mu,T^\mu{}_{\nu}\): rest-mass density, fluid four-velocity and stress-energy tensor.
+- \(\sqrt{g}\): square root of the absolute value of the spacetime metric determinant (volume factor); \(\Gamma^\lambda{}_{\mu\nu}\): Christoffel symbols.
 - \(B^i,b^\mu\): magnetic-field three-/four-vectors.
 - \(Y_e\): electron fraction.
 - \(G_\nu,G_{Y_e}\): radiation four-force and lepton-exchange source.
@@ -216,7 +214,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -228,13 +225,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citations: the \(\nu\)bhlight paper and the post-merger simulation series [153–156] listed in The Well appendix.
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

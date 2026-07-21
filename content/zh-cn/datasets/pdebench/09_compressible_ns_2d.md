@@ -133,30 +133,55 @@ Q(\mathbf{x},t=0)=(Q_L,Q_R),\qquad Q=(\rho,\mathbf{v},p),
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### 发布文件配置
+
+**与论文差异：** 汇总表常写二维均为 $512\times512$，实际近无粘为 `_512_`、较大黏性为 `_128_`。  
+KH / shock / OTVortex 属于**额外测试集**（相对主训练 random/turbulence 扫描的经典或特定流动），**参数写在文件名或 YAML 里**，不是空白。
+
+| 数据文件 | initial field | boundary | $(\eta,\zeta,M)$ 或其他 | $N_s$ | 每轨迹随机 | 备注 |
+|---|---|---|---|---:|---|---|
+| `2D_CFD_Rand_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},0.1)$ | $512$ | 随机场 | 主训练 |
+| `2D_CFD_Rand_M0.1_Eta0.01_Zeta0.01_periodic_128_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},0.1)$ | $128$ | 同上 | 主训练 |
+| `2D_CFD_Rand_M0.1_Eta0.1_Zeta0.1_periodic_128_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},0.1)$ | $128$ | 同上 | 主训练 |
+| `2D_CFD_Rand_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},1.0)$ | $512$ | 同上 | 主训练 |
+| `2D_CFD_Rand_M1.0_Eta0.01_Zeta0.01_periodic_128_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},1.0)$ | $128$ | 同上 | 主训练 |
+| `2D_CFD_Rand_M1.0_Eta0.1_Zeta0.1_periodic_128_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},1.0)$ | $128$ | 同上 | 主训练 |
+| `2D_CFD_Turb_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.1)$ | $512$ | 湍流 seed | 主训练 |
+| `2D_CFD_Turb_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$ | $512$ | 同上 | 主训练 |
+| `2D_shock.hdf5` | 2D shock tube | outgoing (`trans`) | $(10^{-8},10^{-8},1.0)$ | $1024$ | 否 | 额外测试集（YAML） |
+| `KH_M01_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | $\eta=10^{-3},\zeta=10^{-8},M=0.1,\mathrm{dk}=1$ | $1024$ | 否 | 额外测试集（YAML；$\mathrm{Re}=10^3$ 见路径） |
+| `KH_M1_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=1$，$\mathrm{dk}=1$ | $1024$ | 否 | 额外测试集 |
+| `KH_M01_dk2_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=0.1$，$\mathrm{dk}=2$ | $1024$ | 否 | 额外测试集 |
+| `KH_M01_dk5_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=0.1$，$\mathrm{dk}=5$ | $1024$ | 否 | 额外测试集 |
+| `KH_M01_dk10_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=0.1$，$\mathrm{dk}=10$ | $1024$ | 否 | 额外测试集 |
+| `KH_M02_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=0.2$，$\mathrm{dk}=1$ | $1024$ | 否 | 额外测试集 |
+| `KH_M04_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | 同上族，$M=0.4$，$\mathrm{dk}=1$ | $1024$ | 否 | 额外测试集 |
+| `OTVortex.hdf5` | Orszag–Tang | periodic | $(10^{-8},10^{-8},1.0)$ | $1024$ | 否 | 额外测试集（YAML） |
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| Mach 数 $M$ | 不同 HDF5 配置文件不同 | $M\in\{0.1,1.0\}$ |
-| $(\eta,\zeta)$ | 不同 HDF5 配置文件不同 | $(10^{-8},10^{-8})$、$(10^{-2},10^{-2})$、$(10^{-1},10^{-1})$；$\eta=\zeta$ |
-| 初值族 | 不同 HDF5 配置文件不同 | random / turbulence（另有 shock、KH、OTVortex 测试文件） |
-| 场 realization | 每轨迹随机 | 随机正弦 / 湍流初值 seed |
-| $\Gamma$、周期边界、数值格式 | 固定 | $\Gamma=5/3$；periodic（训练主配置） |
-
-发布主训练八配置：
-
-| # | 初值 | $M$ | $(\eta,\zeta)$ |
-|---:|---|---:|---|
-| 1 | random | 0.1 | $(10^{-8},10^{-8})$ |
-| 2 | random | 0.1 | $(10^{-2},10^{-2})$ |
-| 3 | random | 0.1 | $(10^{-1},10^{-1})$ |
-| 4 | random | 1.0 | $(10^{-8},10^{-8})$ |
-| 5 | random | 1.0 | $(10^{-2},10^{-2})$ |
-| 6 | random | 1.0 | $(10^{-1},10^{-1})$ |
-| 7 | turbulence | 0.1 | $(10^{-8},10^{-8})$ |
-| 8 | turbulence | 1.0 | $(10^{-8},10^{-8})$ |
-
-## 论文配置
-
-8 个主训练配置。当前清单还包含 2D shock、Kelvin–Helmholtz 与 `OTVortex` 等测试文件，这些应单列为 OOD/经典测试。
+| $\eta,\zeta$ | 任意非负；常用三档同上 | 主训练覆盖；分辨率随黏性变化 |
+| $M$ | 任意正实数；主训练 $\{0.1,1.0\}$ | 主训练是；KH 测试另有 $0.2,0.4$ 等 |
+| 初值族 | random / turbulence / shock / KH / OT … | 主训练 + 额外测试均有 |
+| KH 的 $\mathrm{dk},\mathrm{Re}$ | YAML 可改；仓库还有未进清单的 KH 配置（如更高 $M$） | 部分（上表 7 个 KH 文件） |
+| 网格 $N_s$、时间窗 | 可改 | 发布随配置为 $128$ 或 $512$，$N_t=21$ |
 
 ## 数据文件
 

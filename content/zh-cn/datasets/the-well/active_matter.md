@@ -32,16 +32,18 @@ description: '该数据使用连续介质动理学模型描述浸没在黏性 St
 
 # 活性物质
 
-> **所属数据集：** The Well  
-> **数据目录：** `active_matter`  
-> **方程族：** 活性流体动理学  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![浓度场](/the-well/active_matter__concentration_notnormalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `active_matter`
+> **方程族：** 活性流体动理学
 
 ## 1. 所属集合与物理概览
 
 该数据使用连续介质动理学模型描述浸没在黏性 Stokes 流体中的细长活性粒子。求解器演化高维取向分布 \(\Psi(\mathbf x,\mathbf p,t)\)，而发布数据保存浓度、取向、速度和应变等低阶矩。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -76,13 +78,13 @@ angle\)：二阶取向矩；发布的取向张量按生成器约定归一化。
 - \(S=\langle\mathbf p\mathbf p\mathbf p\mathbf p
 angle\)：四阶取向矩。
 - \(\mathbf u,P,E\)：流体速度、压强与应变率张量。
-- \(lpha\)：活性偶极强度；\(eta\)：密度/刚性参数；\(\zeta\)：空间位阻取向强度；\(d_T,d_R\)：扩散系数。
+- \(\alpha\)：活性偶极强度；\(\beta\)：密度/刚性参数；\(\zeta\)：空间位阻取向强度；\(d_T,d_R\)：扩散系数。
 
 ## 3. 参数审计
 
 | 类别 | 本发布版中的含义 |
 |---|---|
-| 理论上可调 | 活性强度 \(lpha\)、取向耦合 \(\zeta\)、密度参数 \(eta\)、平移/转动扩散 \(d_T,d_R\)、区域大小、空间/取向模态数、初始分布与外部驱动。 |
+| 理论上可调 | 活性强度 \(\alpha\)、取向耦合 \(\zeta\)、密度参数 \(\beta\)、平移/转动扩散 \(d_T,d_R\)、区域大小、空间/取向模态数、初始分布与外部驱动。 |
 | 数据中实际变化 | 发布参数网格为 \(\alpha\in\{-1,-2,-3,-4,-5\}\)、\(\zeta\in\{1,3,5,7,9,11,13,15,17\}\)，并对每个参数对使用多个初态。当前文档与参数笛卡尔积表明每对 5 个初态，因此共有 \(5\times9\times5=225\) 条轨迹。 |
 | 数据中保持固定 | \(\beta=0.8\)；周期正方形 \(L=10\)；空间与取向分辨率；生成器中的平移/转动扩散及积分配置；81 个存储快照。 |
 
@@ -141,7 +143,7 @@ angle\)：四阶取向矩。
 
 ## 7. 推荐机器学习任务与诊断
 
-矩闭合学习、活性湍流长期预测、对 \(lpha,\zeta\) 的参数内插/外推，以及在不显式解析完整取向分布的情况下学习稳定低阶动力学。
+矩闭合学习、活性湍流长期预测、对 \(\alpha,\zeta\) 的参数内插/外推，以及在不显式解析完整取向分布的情况下学习稳定低阶动力学。
 
 评估时不宜只报告整体 RMSE；在条件允许时，应同时报告逐物理场误差、长期 rollout 稳定性、守恒/平衡诊断，以及湍流或波动问题的分频段误差。
 
@@ -214,7 +216,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -226,13 +227,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐引用：Maddu、Weady 与 Shelley，*Learning fast, accurate, and stable closures of a kinetic theory of an active fluid*（2024）。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

@@ -32,16 +32,18 @@ description: "A point source radiates above an infinite periodic sound-hard stai
 
 # Helmholtz Staircase
 
-> **Parent collection:** The Well  
-> **Directory:** `helmholtz_staircase`  
-> **Equation family:** Wave / Helmholtz scattering  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Pressure field](/the-well/helmholtz_staircase__pressure_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `helmholtz_staircase`
+> **Equation family:** Wave / Helmholtz scattering
 
 ## 1. Scope and physical overview
 
 A point source radiates above an infinite periodic sound-hard staircase. The simulation is solved in the frequency domain and analytically sampled through one oscillation period. Trapped surface modes coexist with outgoing waves, creating two spatial scales whose temporal evolution must be disentangled.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -71,11 +73,7 @@ together with outgoing-radiation conditions. Time samples are reconstructed as t
 | Category | Released-data interpretation |
 |---|---|
 | Theoretically adjustable | Source frequency and position, staircase period/geometry, sound speed/density, boundary type, output-window extent, spatial discretization, Floquet–Bloch quadrature and phase sampling. |
-| Actually varied in this release | Source frequency takes 16 values:
-\[
-0.062,0.251,0.439,0.626,0.813,0.998,1.182,1.363,1.541,1.715,1.882,2.042,2.191,2.323,2.433,2.511.
-\]
-The source position takes 32 configured values, producing \(16\times32=512\) parameter combinations. Each combination is sampled at 50 phases over one period. |
+| Actually varied in this release | Source frequency takes 16 values: \(0.062,0.251,0.439,0.626,0.813,0.998,1.182,1.363,1.541,1.715,1.882,2.042,2.191,2.323,2.433,2.511\). The source position takes 32 configured values, producing \(16\times32=512\) parameter combinations. Each combination is sampled at 50 phases over one period. |
 | Fixed in this release | Staircase geometry and period, sound-hard Neumann boundary, constant-density gas and normalized sound speed \(c=1\), low-frequency/trapped-mode regime, output-grid resolution and 50 phase samples. |
 
 ## 4. Initial and boundary conditions
@@ -206,7 +204,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -218,13 +215,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Agocs and Barnett, *Trapped acoustic waves and raindrops: high-order accurate integral equation method for localized excitation of a periodic staircase*.
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

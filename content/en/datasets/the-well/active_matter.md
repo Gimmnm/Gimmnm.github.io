@@ -32,16 +32,18 @@ description: 'A continuum kinetic model describes active elongated particles sus
 
 # Active Matter
 
-> **Parent collection:** The Well  
-> **Directory:** `active_matter`  
-> **Equation family:** Active-fluid kinetic theory  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Concentration field](/the-well/active_matter__concentration_notnormalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `active_matter`
+> **Equation family:** Active-fluid kinetic theory
 
 ## 1. Scope and physical overview
 
 A continuum kinetic model describes active elongated particles suspended in a viscous Stokes fluid. The high-dimensional orientational distribution \(\Psi(\mathbf x,\mathbf p,t)\) is evolved, while low-order moments—concentration, orientation, velocity and strain—are stored for machine learning.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -76,13 +78,13 @@ angle\): second orientation moment; the released orientation tensor is normalize
 - \(S=\langle\mathbf p\mathbf p\mathbf p\mathbf p
 angle\): fourth moment.
 - \(\mathbf u,P,E\): fluid velocity, pressure and rate-of-strain tensor.
-- \(lpha\): active dipole strength; \(eta\): density/rigidity parameter; \(\zeta\): steric-alignment strength; \(d_T,d_R\): diffusivities.
+- \(\alpha\): active dipole strength; \(\beta\): density/rigidity parameter; \(\zeta\): steric-alignment strength; \(d_T,d_R\): diffusivities.
 
 ## 3. Parameter audit
 
 | Category | Released-data interpretation |
 |---|---|
-| Theoretically adjustable | Active strength \(lpha\), alignment \(\zeta\), density parameter \(eta\), translational/rotational diffusion \(d_T,d_R\), domain size, spatial/orientational modes, initial distribution and forcing. |
+| Theoretically adjustable | Active strength \(\alpha\), alignment \(\zeta\), density parameter \(\beta\), translational/rotational diffusion \(d_T,d_R\), domain size, spatial/orientational modes, initial distribution and forcing. |
 | Actually varied in this release | The released parameter grid uses \(\alpha\in\{-1,-2,-3,-4,-5\}\) and \(\zeta\in\{1,3,5,7,9,11,13,15,17\}\), with repeated initial conditions. Current documentation/parameter arithmetic indicates 5 initial realizations per pair, giving \(5\times9\times5=225\) trajectories. |
 | Fixed in this release | \(\beta=0.8\); periodic square \(L=10\); spatial and orientation resolutions; the generator's translational/rotational diffusion and integration configuration; 81 stored snapshots. |
 
@@ -141,7 +143,7 @@ Fourier pseudo-spectral differentiation is used in physical space and orientatio
 
 ## 7. Recommended ML tasks and diagnostics
 
-Moment-closure learning, long-horizon forecasting of active turbulence, parameter interpolation/extrapolation over \(lpha,\zeta\), and learning stable low-order dynamics without resolving the full orientation distribution.
+Moment-closure learning, long-horizon forecasting of active turbulence, parameter interpolation/extrapolation over \(\alpha,\zeta\), and learning stable low-order dynamics without resolving the full orientation distribution.
 
 Useful evaluation should go beyond aggregate RMSE when possible: report per-field errors, long-rollout stability, conservation or balance diagnostics, and spectral/scale-resolved error for turbulent or wave systems.
 
@@ -214,7 +216,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -226,13 +227,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Maddu, Weady and Shelley, *Learning fast, accurate, and stable closures of a kinetic theory of an active fluid* (2024).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

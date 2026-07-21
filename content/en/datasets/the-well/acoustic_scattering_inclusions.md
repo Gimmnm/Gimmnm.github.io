@@ -32,16 +32,18 @@ description: "These datasets solve a first-order variable-coefficient acoustic s
 
 # Acoustic Scattering — Inclusions
 
-> **Parent collection:** The Well  
-> **Directory:** `acoustic_scattering_inclusions`  
-> **Equation family:** Variable-coefficient acoustics  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Density field / inclusions](/the-well/acoustic_scattering_inclusions__inclusions_density.png)
+
+
+> **Parent collection:** The Well
+> **Directory:** `acoustic_scattering_inclusions`
+> **Equation family:** Variable-coefficient acoustics
 
 ## 1. Scope and physical overview
 
 These datasets solve a first-order variable-coefficient acoustic system. A pressure disturbance travels through materials whose density changes sharply in space. The three releases share the same PDE and solver but use different families of coefficient fields: a single discontinuous interface, randomly placed inclusions, or a maze-like high-contrast medium.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -62,8 +64,7 @@ The local acoustic speed is \(c(x,y)=\sqrt{K(x,y)/\rho(x,y)}\).
 
 - \(p(x,y,t)\): acoustic pressure.
 - \(u(x,y,t),v(x,y,t)\): Cartesian velocity components.
-- \(
-ho(x,y)\): time-independent material density.
+- \(\rho(x,y)\): time-independent material density.
 - \(K(x,y)\): bulk modulus.
 - \(c(x,y)\): derived, time-independent speed of sound.
 
@@ -71,8 +72,7 @@ ho(x,y)\): time-independent material density.
 
 | Category | Released-data interpretation |
 |---|---|
-| Theoretically adjustable | Material density \(
-ho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
+| Theoretically adjustable | Material density \(\rho(x,y)\), bulk modulus \(K(x,y)\), source count/position/radius/amplitude, coefficient geometry, interface contrast, boundary conditions, spatial and temporal resolution. |
 | Actually varied in this release | A single-discontinuity background is generated as above, then 1–15 possibly overlapping ellipsoidal inclusions are added. Centers are uniform over the domain, height/width are uniform in \([0.05,0.6]\), rotation is uniform over \([-45^\circ,45^\circ]\), and inclusion log-density follows \(\ln\rho\sim\mathcal U(-1,10)\). Pressure-ring realizations also vary. |
 | Fixed in this release | Bulk modulus \(K=4\); \(256^2\) grid; domain, boundaries, CFL rule and two-unit trajectory duration. |
 
@@ -204,7 +204,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -216,13 +215,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended simulation citation: Mandli et al., *Clawpack: building an open source ecosystem for solving hyperbolic PDEs* (2016).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

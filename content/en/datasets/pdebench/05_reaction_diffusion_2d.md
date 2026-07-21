@@ -102,15 +102,29 @@ Finite-volume spatial discretization. The paper describes a fourth-order Rungeâ€
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_tu=D_u(\partial_{xx}u+\partial_{yy}u)+R_u(u,v),\qquad
+\partial_tv=D_v(\partial_{xx}v+\partial_{yy}v)+R_v(u,v),
+\]
+\[
+R_u=u-u^3-k-v,\qquad R_v=u-v.
+\]
+
+### Released file configs
+
+| Data file | $(D_u,D_v,k)$ | Boundary | Per trajectory | Fixed |
+|---|---|---|---|---|
+| `2D_diff-react_NA_NA.h5` | $(10^{-3},\,5\times10^{-3},\,5\times10^{-3})$ | Neumann | $u(0)\sim\mathcal N(0,1)$ | domain $(-1,1)^2$; training often $128\times128$, $N_t=101$ |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $D_u,D_v,k$ | fixed | $D_u=10^{-3}$, $D_v=5\times10^{-3}$, $k=5\times10^{-3}$; filename `NA_NA` |
-| IC noise seed | per trajectory | activator $u(0)\sim\mathcal N(0,1)$ |
-| BC, domain, grid, time | fixed | Neumann; $(-1,1)^2$; train $128^2$ |
-
-## Released configurations
-
-One main released file, `2D_diff-react_NA_NA.h5`, with 1,000 two-channel trajectories.
+| $D_u,D_v,k$ | editable in YAML | no (one fixed tuple) |
+| IC noise law | editable | no (default $\mathcal N(0,1)$) |
+| resolution / $N_t$ | editable (raw often finer) | release uses training downsample |
 
 ## Data files
 

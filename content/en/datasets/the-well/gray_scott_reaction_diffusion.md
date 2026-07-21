@@ -32,16 +32,18 @@ description: "The Gray–Scott model is a two-species reaction–diffusion syste
 
 # Gray–Scott Reaction–Diffusion
 
-> **Parent collection:** The Well  
-> **Directory:** `gray_scott_reaction_diffusion`  
-> **Equation family:** Reaction–diffusion  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Concentration A](/the-well/gray_scott_reaction_diffusion__concentration_A_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `gray_scott_reaction_diffusion`
+> **Equation family:** Reaction–diffusion
 
 ## 1. Scope and physical overview
 
 The Gray–Scott model is a two-species reaction–diffusion system. A small set of feed/kill-rate pairs produces qualitatively different pattern families, including gliders, bubbles, mazes, worms, spirals and spots.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -197,7 +199,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -209,13 +210,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-The Well paper does not require an additional dataset-specific citation; the original Gray–Scott model and numerical-method references are listed in its appendix.
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

@@ -28,13 +28,9 @@ description: "Gaussian initial wave sources propagate through vertically layered
 
 # Wave-Layer: Waves in Random Layered Media
 
-> **One-line description:** Gaussian initial wave sources propagate through vertically layered media with random curved interfaces and piecewise-constant wave speeds.
+**Description:** Gaussian initial wave sources propagate through vertically layered media with random curved interfaces and piecewise-constant wave speeds. Compared with the smooth coefficient in Wave-Gauss, this task contains coefficient discontinuities and random layer interfaces, resembling layered subsurface media.
 
-## Longer description
-
-Compared with the smooth coefficient in Wave-Gauss, this task contains coefficient discontinuities and random layer interfaces, resembling layered subsurface media.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** Finite-difference method; $128^2$.
 
 ## Identity
@@ -63,7 +59,6 @@ For the operator-learning formulation this can be augmented to first order as
 $$
 u_t=v,\qquad v_t=c^2\Delta u,\qquad c_t=0,$$
 but the released Wave-Gauss and Wave-Layer files explicitly store only the displacement trajectory $u$ and the static coefficient field $c$.
-
 
 Initial Gaussian-source rules are the same as Wave-Gauss. The speed $c(x,y)$ is constant within each randomly curved layer; interfaces are built from ten sine modes and rescaled to prevent crossings.
 
@@ -165,19 +160,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: Wave-Layer](https://huggingface.co/datasets/camlab-ethz/Wave-Layer).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

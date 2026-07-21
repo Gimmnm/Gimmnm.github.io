@@ -32,16 +32,18 @@ description: "这组三个数据目录求解一阶变系数声学系统。初始
 
 # 声学散射——随机夹杂物
 
-> **所属数据集：** The Well  
-> **数据目录：** `acoustic_scattering_inclusions`  
-> **方程族：** 变系数声学  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![密度场 / 夹杂物](/the-well/acoustic_scattering_inclusions__inclusions_density.png)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `acoustic_scattering_inclusions`
+> **方程族：** 变系数声学
 
 ## 1. 所属集合与物理概览
 
 这组三个数据目录求解一阶变系数声学系统。初始声压扰动在材料密度具有空间突变的介质中传播。三个目录共用同一组 PDE 和数值求解器，仅静态系数场的生成族不同：单一不连续界面、随机夹杂物以及高反差迷宫介质。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -62,18 +64,15 @@ $$
 
 - \(p(x,y,t)\)：声压。
 - \(u(x,y,t),v(x,y,t)\)：Cartesian 速度分量。
-- \(
-ho(x,y)\)：不随时间变化的材料密度。
+- \(\rho(x,y)\)：不随时间变化的材料密度。
 - \(K(x,y)\)：体积模量。
-- \(c(x,y)\)：由 \(K,
-ho\) 导出的静态声速。
+- \(c(x,y)\)：由 \(K, \rho\) 导出的静态声速。
 
 ## 3. 参数审计
 
 | 类别 | 本发布版中的含义 |
 |---|---|
-| 理论上可调 | 材料密度 \(
-ho(x,y)\)、体积模量 \(K(x,y)\)、声源数量/位置/半径/强度、系数场几何、界面反差、边界条件、空间与时间分辨率。 |
+| 理论上可调 | 材料密度 \(\rho(x,y)\)、体积模量 \(K(x,y)\)、声源数量/位置/半径/强度、系数场几何、界面反差、边界条件、空间与时间分辨率。 |
 | 数据中实际变化 | 先按 single-discontinuity 规则生成背景，再加入 1–15 个可相互重叠的椭圆夹杂物。中心在区域内均匀采样，高/宽在 \([0.05,0.6]\) 均匀采样，旋转角在 \([-45^\circ,45^\circ]\) 均匀采样，夹杂物满足 \(\ln\rho\sim\mathcal U(-1,10)\)。初始声压环也随轨迹变化。 |
 | 数据中保持固定 | 体积模量 \(K=4\)；\(256^2\) 网格；区域、边界、CFL 规则和长度为 2 的轨迹时长。 |
 
@@ -205,7 +204,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -217,13 +215,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐同时引用：Mandli 等，*Clawpack: building an open source ecosystem for solving hyperbolic PDEs*（2016）。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

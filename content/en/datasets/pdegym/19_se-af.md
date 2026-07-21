@@ -28,13 +28,9 @@ description: "Maps the shape mask of a randomly Hicks–Henne-perturbed airfoil 
 
 # SE-AF: Airfoil Geometry to Steady Euler Density
 
-> **One-line description:** Maps the shape mask of a randomly Hicks–Henne-perturbed airfoil to the steady compressible-Euler density field.
+**Description:** Maps the shape mask of a randomly Hicks–Henne-perturbed airfoil to the steady compressible-Euler density field. This is not trajectory prediction but a steady geometry-to-field operator. The original solve uses a body-fitted elliptic mesh and is then interpolated to a Cartesian grid.
 
-## Longer description
-
-This is not trajectory prediction but a steady geometry-to-field operator. The original solve uses a body-fitted elliptic mesh and is then interpolated to a Cartesian grid.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** NEWTUN/NUWTUN steady Euler solver; body-fitted $243\times43$ mesh interpolated to $128^2$.
 
 ## Identity
@@ -72,7 +68,6 @@ $$
 y^{L/U}(\xi)=y_{ref}^{L/U}(\xi)+\sum_{i=1}^{15}a_i^{L/U}B_i(\xi),\qquad B_i(\xi)=\sin^3(\pi\xi^{q_i}).
 $$
 The input is the airfoil indicator $f=\chi_S$ and the output is steady density $\rho$.
-
 
 ### Physical quantities
 
@@ -167,19 +162,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: SE-AF](https://huggingface.co/datasets/camlab-ethz/SE-AF).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

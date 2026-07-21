@@ -1,7 +1,7 @@
 ---
-title: "PDEBench docs"
+title: "PDEBench"
 linkTitle: PDEBench
-weight: 40
+weight: 10
 draft: false
 ShowToc: true
 hidemeta: true
@@ -55,6 +55,7 @@ Start with [Data format](./00_data_format/) (HDF5 conventions); each equation ca
 ## Shared conventions
 
 - The paper describes 11 PDE/tasks and 35 baseline parameterizations; this is not the number of HDF5 files in the current manifest.
+- Each equation page’s Parameters section has two parts: **Released file configs** (one row per `pdebench_data_urls.csv` file) and **Generator-tunable ranges** (what YAML can change, even if the download does not sweep it). When filenames disagree with paper summaries, trust the released files.
 - The general HDF5 array convention is $(b,t,x_1,\ldots,x_d,v)$; compressible-NS variables may be stored as separate datasets. Details: [Data format](./00_data_format/).
 - Darcy Flow is a static $a\mapsto u$ operator task; the other main tasks are temporal.
 - The current advertised sizes of the eleven one-click categories sum to approximately **3.46 TB** using decimal GB/TB arithmetic.

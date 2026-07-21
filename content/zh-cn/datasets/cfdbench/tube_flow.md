@@ -32,15 +32,14 @@ description: "水从左侧进入初始充满空气的二维圆管轴向截面，
 
 # CFDBench — 圆管水--空气两相流（Tube Flow）
 
-**一句话描述：** 水从左侧进入初始充满空气的二维圆管轴向截面，形成近壁面黏性边界层和移动两相界面；数据分别改变入口速度、工作流体物性和管道几何。
+![Tube Flow 示意与参数范围](./tube-flow.png)
 
-**较长描述：** 该问题用于检验模型能否同时表达入口发展流、无滑移壁面导致的速度剖面、压力出口和水--空气界面。论文把它称为 circular tube flow，但发布给二维模型的是管道轴向截面上的二维场。Fluent 使用 VOF 两相模型，官方插值压缩包则统一提供 $u,v$，没有把体积分数作为标准学习通道发布。
+**描述：** 水从左侧进入初始充满空气的二维圆管轴向截面，形成近壁面黏性边界层和移动两相界面；数据分别改变入口速度、工作流体物性和管道几何。 该问题用于检验模型能否同时表达入口发展流、无滑移壁面导致的速度剖面、压力出口和水--空气界面。论文把它称为 circular tube flow，但发布给二维模型的是管道轴向截面上的二维场。Fluent 使用 VOF 两相模型，官方插值压缩包则统一提供 $u,v$，没有把体积分数作为标准学习通道发布。
 
 - 所属数据集： **CFDBench**
 - 数据集作者：Yining Luo、Yingfa Chen、Zhen Zhang
 - 生成软件：ANSYS Fluent 2021R1，VOF 两相模型
 - 官方 loader：[`src/dataset/tube.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/tube.py)
-
 
 ## 控制方程
 
@@ -84,8 +83,7 @@ $$
 \right)+g_y.
 $$
 
-> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数，因此本文档不会把这些未明示的方程伪装成数据集论文的原始公式。
-
+> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数。
 
 ### 两相辅助变量
 
@@ -135,7 +133,7 @@ $$
 | 总帧数 | 39,553 |
 | 平均帧数 | 226.02，仅为平均值 |
 | 时间间隔 | 论文：$0.01\,\mathrm s$；当前 loader 中存在 `data_delta_time=0.1`，见注意事项 |
-| 统一 $t_\max$ | 未给出；从每条轨迹和采用的时间元数据计算 |
+| 统一 $t_{\mathrm{max}}$ | 未给出；从每条轨迹和采用的时间元数据计算 |
 | 论文每帧原始量 | 约 4.8 MB |
 | 论文生成时间 | 约 1.08 s/帧 |
 | 当前压缩包 | `tube.zip`，约 213 MB（2026-07-21） |
@@ -160,18 +158,17 @@ $$
 
 其中 `height/width` 对应插值域的物理高、宽；与论文的 $d,l$ 命名需通过 `case.json` 核对。
 
-## 参数扫描：改变了什么，固定了什么
+## 参数
 
-| 子集 | case 数 | 实际扫描参数 | 固定条件 |
+数据按互斥子集分别生成：每个子集只改变一类工况，其余固定为上一节的基准工况。取值来自论文表 3。
+
+| 子集 | cases | 扫描参数与取值 | 固定（基准） |
 |---|---:|---|---|
-| BC | 50 | $u_\mathrm{{in}}=0.1,0.2,\ldots,5.0\,\mathrm{{m/s}}$ | $\rho=100$，$\mu=0.1$，$d=0.1$，$l=1$；相模型、初始空气填充和边界类型固定 |
-| PROP | 100 | $\rho=\{{10,120,230,340,450,560,670,780,890,1000\}}\,\mathrm{{kg/m^3}}$；$\mu=\{{0.01,0.12,0.23,0.34,0.45,0.56,0.67,0.78,0.89,1.00\}}\,\mathrm{{Pa\,s}}$；$10\times10$ 组合 | $u_\mathrm{{in}}=1$，$d=0.1$，$l=1$；边界和初始相分布固定 |
-| GEO | 25 | 正文称从 $\{{0.01,0.05,0.1,0.3,0.5\}}\,\mathrm m$ 取五个管径，并为每个管径选五种径长关系，使 $0.1\le l\le10$ | $u_\mathrm{{in}}=1$，$\rho=100$，$\mu=0.1$；入口、出口、壁面和两相设置固定 |
+| BC | 50 | $u_{\mathrm{in}}=u_{\mathcal{B}}\in\{0.1,0.2,0.3,\ldots,5\}\,\mathrm{m/s}$（步长 $0.1$） | $\rho=100\,\mathrm{kg\,m^{-3}}$，$\mu=0.1\,\mathrm{Pa\cdot s}$，$d=0.1\,\mathrm{m}$，$l=1\,\mathrm{m}$ |
+| PROP | 100 | $\rho\in\{10,120,230,\ldots,1000\}\,\mathrm{kg\,m^{-3}}$（步长 $110$，10 个）；$\mu\in\{0.01,0.12,0.23,\ldots,1\}\,\mathrm{Pa\cdot s}$（步长 $0.11$，10 个）；$10\times10=100$ | $u_{\mathrm{in}}=1\,\mathrm{m/s}$，$d=0.1\,\mathrm{m}$，$l=1\,\mathrm{m}$ |
+| GEO | 25 | 表 3：$l\in\{0.01,0.05,0.1,0.3,0.5\}\,\mathrm{m}$，$d/l\in\{1,2,5,7.5,10,15,20,50,75,100\}$；正文另写直径取 $\{0.01,0.05,0.1,0.3,0.5\}$，并约束 $0.1\le l\le10$，最终 25 个几何 | $u_{\mathrm{in}}=1\,\mathrm{m/s}$，$\rho=100\,\mathrm{kg\,m^{-3}}$，$\mu=0.1\,\mathrm{Pa\cdot s}$ |
 
-> **Tube GEO 原文歧义。** 正文说最终有 25 个几何；表 3 同时列出五个尺寸值和十个 $d/l$ 候选，如果做全组合会得到 50 个。论文没有给出完整的 25 对 $(d,l)$ case 表。不要自行构造组合，应以下载后的逐 case `case.json` 为准。
-
-**可调但未扫描：** 出口压力、空气相物性、接触角/表面张力、初始相界面、重力等在更一般的两相问题中可调，但 CFDBench 的公开参数扫描主要是入口速度、给定流体 $\rho/\mu$ 和有限几何集合。
-
+> GEO 不是表中集合的全笛卡尔积；实际 25 个几何应以 `case.json` / 发布目录为准。
 
 ## 数值生成设置
 
@@ -185,8 +182,6 @@ $$
 - 收敛：论文给出的全局残差收敛阈值为 $10^{-9}$；最终速度残差至少达到约 $10^{-6}$ 量级。
 - 生成硬件：AMD Ryzen Threadripper 3990X，30 个 solver processes。
 - 数值精度：论文未明确说明单精度或双精度；不要仅根据 NumPy 文件 dtype 反推 Fluent 求解精度。
-
-
 
 ## 学习任务、输入与输出
 
@@ -213,8 +208,6 @@ $$
 
 论文对每个基础子集按 case 进行 8:1:1 的训练/验证/测试划分。同一条轨迹的帧不会跨 split，从而保证测试工况在训练时不可见。若要严格复现，需固定代码版本、随机种子以及最终生成的 case 列表。
 
-
-
 ## 下载与目录组织
 
 ### 官方链接
@@ -224,7 +217,6 @@ $$
 - 插值数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - 原始 Fluent 数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - 百度网盘原始数据：[https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4)，提取码 `cfd4`
-- 文档版式参考：[https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 官方仓库把插值数据描述为约 13.4 GB；Hugging Face 页面在 **2026-07-21** 显示总文件大小为约 14.4 GB。原始库在仓库 README 中被描述为约 460 GB，而 Hugging Face 原始页当前显示约 205 GB，并注明 Cylinder 部分仍在上传。对可复现工作，应记录具体下载日期和仓库 revision。
 
@@ -274,7 +266,6 @@ data/
 └── cylinder/
 ```
 
-
 ### 只下载本问题
 
 ```bash
@@ -297,17 +288,6 @@ unzip ./downloads/CFDBench/tube.zip -d ./data
 - **padding 冲突：** 论文附录举例得到 $66\times64$，当前 loader 还增加左侧入口列，可能得到 $66\times65$。务必打印实际 tensor shape。
 - **GEO 组合不完备：** 只能从真实 case 元数据恢复 25 个几何。
 - 压力和水相 VOF 不是插值压缩包的统一标签通道。
-
-## 引用
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## 原始出处定位
 

@@ -28,13 +28,9 @@ description: "沿随机正弦曲线分布并经平滑核正则化的涡片初值
 
 # NS-SVS：正弦涡片初值
 
-> **一句话描述：** 沿随机正弦曲线分布并经平滑核正则化的涡片初值。
+**描述：** 沿随机正弦曲线分布并经平滑核正则化的涡片初值。 涡片是近奇异、强剪切的经典流体基准。小幅随机扰动会触发复杂卷起，对分辨率和数值耗散非常敏感。
 
-## 更长描述
-
-涡片是近奇异、强剪切的经典流体基准。小幅随机扰动会触发复杂卷起，对分辨率和数值耗散非常敏感。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** AZEBAN；$128^2$。
 
 ## 基本信息
@@ -69,7 +65,6 @@ $$
 \Gamma=\left\{(x,y):y=\frac12+0.2\sin(2\pi x)+\sum_{i=1}^{10}\alpha_i\sin(2\pi(x+\beta_i))\right\}.
 $$
 $\omega_0$ 是集中在 $\Gamma$ 上并减去空间平均的涡片分布，$\psi_{\rho_s}$ 是平滑核。
-
 
 ### 物理量
 
@@ -167,19 +162,3 @@ python assemble_data.py --input_dir . --output_file NS-SVS.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: NS-SVS](https://huggingface.co/datasets/camlab-ethz/NS-SVS)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

@@ -133,27 +133,53 @@ Q(x,t=0)=(Q_L,Q_R),\qquad Q=(\rho,v,p),
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### 发布文件配置
+
+前 5 行为主训练扫描；`Sod*` 是**额外测试/经典激波管**（不在主训练的初值随机扫描里），但**同样有参数**：YAML 中 `init_mode=shocktube1…7`，`bc=trans`，$(\eta,\zeta)=(10^{-8},10^{-8})$，$\Gamma=5/3$。一维主训练不扫 Mach，故 $M$ 记为 —。
+
+> **“额外测试集”是什么：** 相对主训练分布（随机场 / 随机 Riemann）的**固定经典算例**，用来做泛化评测；英文文献常称 OOD（out-of-distribution）测试。不是“没有参数”。
+
+| 数据文件 | initial field | boundary | $(\eta,\zeta,M)$ | 每轨迹随机 | 备注 |
+|---|---|---|---|---|---|
+| `1D_CFD_Rand_Eta1.e-8_Zeta1.e-8_periodic_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},\text{—})$ | 随机场 realization | 主训练 |
+| `1D_CFD_Rand_Eta0.01_Zeta0.01_periodic_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},\text{—})$ | 同上 | 主训练 |
+| `1D_CFD_Rand_Eta0.1_Zeta0.1_periodic_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},\text{—})$ | 同上 | 主训练 |
+| `1D_CFD_Rand_Eta1.e-8_Zeta1.e-8_trans_Train.hdf5` | random field | outgoing (`trans`) | $(10^{-8},10^{-8},\text{—})$ | 同上 | 主训练 |
+| `1D_CFD_Shock_Eta1.e-8_Zeta1.e-8_trans_Train.hdf5` | shock-tube（随机 Riemann） | outgoing (`trans`) | $(10^{-8},10^{-8},\text{—})$ | 左右态与间断位置随机 | 主训练 |
+| `Sod1.hdf5` | `shocktube1`（固定经典） | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否（初值固定） | 额外测试集 |
+| `Sod2.hdf5` | `shocktube2` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集 |
+| `Sod3.hdf5` | `shocktube3` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集 |
+| `Sod4.hdf5` | `shocktube4` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集 |
+| `Sod5.hdf5` | `shocktube5` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集 |
+| `Sod6.hdf5` | `shocktube6` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集（清单在 Train/ShockTube） |
+| `Sod7.hdf5` | `shocktube7` | outgoing | $(10^{-8},10^{-8},\text{—})$ | 否 | 额外测试集 |
+
+各 `Sod*` 的左右常状态数值以对应 YAML / HDF5 attributes 为准（`fin_time` 等也可能不同）。
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| $(\eta,\zeta)$ | 不同 HDF5 配置文件不同 | $(10^{-8},10^{-8})$、$(10^{-2},10^{-2})$、$(10^{-1},10^{-1})$；始终 $\eta=\zeta$ |
-| 初值族 | 不同 HDF5 配置文件不同 | random field / shock tube |
-| 边界类型 | 不同 HDF5 配置文件不同 | periodic / outgoing |
-| 初值 realization | 每轨迹随机 | 随机场或 Riemann 左右态抽样 |
-| $\Gamma$、网格、数值格式 | 固定 | $\Gamma=5/3$；$N_x=1024$；HLLC+MUSCL 等 |
-
-发布主训练五配置：
-
-| # | 初值 | 边界 | $(\eta,\zeta)$ |
-|---:|---|---|---|
-| 1 | random | periodic | $(10^{-8},10^{-8})$ |
-| 2 | random | periodic | $(10^{-2},10^{-2})$ |
-| 3 | random | periodic | $(10^{-1},10^{-1})$ |
-| 4 | random | outgoing | $(10^{-8},10^{-8})$ |
-| 5 | shock tube | outgoing | $(10^{-8},10^{-8})$ |
-
-## 论文配置
-
-5 个主要训练配置，当前下载类别还包含多个 Sod 标准激波管文件。后者是额外测试/经典算例，不应与 5 个随机训练配置简单合并计数。
+| $\eta,\zeta$（常取 $\eta=\zeta$） | 任意非负；常用 $\{10^{-8},10^{-2},10^{-1}\}$ | 主训练覆盖这三档 |
+| 边界 | `periodic` / `trans`（outgoing）等 | 是 |
+| 初值族 | random / shock-tube（随机）/ `shocktube1…7`（固定）等 | 是（含随机与经典） |
+| Mach $M$ | YAML 有 `M0`；一维主训练通常不扫 | 一维发布主训练未扫 $M$ |
+| $\Gamma$、网格、CFL、时间窗 | 可改 | 发布主训练大致固定 |
 
 ## 数据文件
 

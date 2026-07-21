@@ -27,14 +27,10 @@ description: "A moving top face drives incompressible flow in a cubic cavity con
 
 # 3-D complex-geometry lid-driven cavity (LDC–NS–3D)
 
-**One-line description:** A moving top face drives incompressible flow in a cubic cavity containing a stationary 3-D object, and the steady solution is released on a uniform $128^3$ grid.
+**Description:** A moving top face drives incompressible flow in a cubic cavity containing a stationary 3-D object, and the steady solution is released on a uniform $128^3$ grid. This subset extends the lid-driven cavity to three dimensions with adaptive octree refinement near the embedded object. The paper release contained 500 ellipsoid/torus cases; the current official repository has been updated to 1000 samples and lists ellipsoids, toroids, boxes, and cylinders.
 
-**Longer description:** This subset extends the lid-driven cavity to three dimensions with adaptive octree refinement near the embedded object. The paper release contained 500 ellipsoid/torus cases; the current official repository has been updated to 1000 samples and lists ellipsoids, toroids, boxes, and cylinders.
-
-**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.  
-**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.  
-
-
+**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.
+**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.
 
 ## Parent dataset and links
 
@@ -49,7 +45,6 @@ description: "A moving top face drives incompressible flow in a cubic cavity con
 | Project website | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | License | **CC-BY-NC-4.0** |
 | Storage format | NumPy compressed archives (`.npz`) |
-
 
 ## Equation
 
@@ -206,7 +201,6 @@ where $C$ is not a local PDE state. Inspect the current hosted file to determine
 - target resolution of roughly twice the Kolmogorov scale;
 - final uniform resampling to $128^3$.
 
-
 ## Numerical generation and post-processing
 
 - massively parallel quadtree/octree finite-element CFD and multiphysics framework;
@@ -218,7 +212,6 @@ where $C$ is not a local PDE state. Inspect the current hosted file to determine
 - the paper reports approximately 65K node-hours of total compute.
 
 The lower-resolution releases are post-processed from fully resolved simulations rather than independently rerun coarse CFD simulations, which makes the data useful for multi-resolution and super-resolution studies.
-
 
 ## What is interesting and challenging
 
@@ -236,7 +229,6 @@ The lower-resolution releases are post-processed from fully resolved simulations
 4. Older code may append a fifth $C_D/C_L$ auxiliary channel.
 5. Incomplete/old default values such as `num_geometry=25` and `num_Reynolds=10` in the script must not be treated as the composition of the current 1000-sample release.
 6. Reserve additional local space beyond the hosted 33.4 GB for caches and training tensors.
-
 
 ## Download
 
@@ -277,28 +269,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 The tensor formulas in the paper describe **semantic axis order**. Always inspect the actual key, shape, channel order, mask values, and SDF sign before training.
 
-
-
-## Citation
-
-Please cite the FlowBench paper when using this data:
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-The dataset and official tools are released under **CC-BY-NC-4.0**. Consult the full license text before commercial use.
-
-
-
 ## Sources and evidence policy
 
 This document cross-checks the following official sources, in descending priority:
@@ -309,5 +279,5 @@ This document cross-checks the following official sources, in descending priorit
 4. [official Geometry Matters training/evaluation repository](https://github.com/baskargroup/GeometryMatters);
 5. [FlowBench project website](https://baskargroup.bitbucket.io/FlowBench/).
 
-The paper, the older preparation scripts, and the current data repository do not represent exactly the same release. This document therefore distinguishes the **paper specification**, the **preparation-code convention**, and the **current hosted release**.  
+The paper, the older preparation scripts, and the current data repository do not represent exactly the same release.
 Last verified: **2026-07-21**.

@@ -28,13 +28,9 @@ description: "Compressible Euler with gravitational forcing, modeling a random R
 
 # GCE-RT: Rayleigh–Taylor Instability in Euler Flow with Gravity
 
-> **One-line description:** Compressible Euler with gravitational forcing, modeling a random Rayleigh–Taylor instability in a polytropic neutron-star configuration.
+**Description:** Compressible Euler with gravitational forcing, modeling a random Rayleigh–Taylor instability in a polytropic neutron-star configuration. This is one of the PDEgym tasks that genuinely varies physical parameters per sample: central density, central pressure, and Atwood number change, while gravitational potential is supplied as a static field.
 
-## Longer description
-
-This is one of the PDEgym tasks that genuinely varies physical parameters per sample: central density, central pressure, and Atwood number change, while gravitational potential is supplied as a static field.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** Second-order well-balanced finite-volume method; generated at $256^2$ and downsampled to $128^2$.
 
 ## Identity
@@ -54,7 +50,6 @@ This is one of the PDEgym tasks that genuinely varies physical parameters per sa
 | License | CC BY-NC 4.0 (as stated on the official Hugging Face dataset repositories) |
 
 ## Equation
-
 
 $$
 \partial_t\mathbf U+\nabla\cdot\mathbf F(\mathbf U)=\mathbf S(\rho,\mathbf v,\nabla\phi),
@@ -91,7 +86,6 @@ $$
 \rho_0=1+0.2c,\qquad p_0=1+0.2d,\qquad A=0.05(1+0.2e),
 \qquad c,d,e\sim\mathcal U[-1,1].
 $$
-
 
 ### Physical quantities
 
@@ -193,19 +187,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: GCE-RT](https://huggingface.co/datasets/camlab-ethz/GCE-RT).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

@@ -100,15 +100,32 @@ The paper obtains the steady state by integrating a transient diffusion equation
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+-\nabla\!\cdot\!\bigl(a(\mathbf x)\nabla u(\mathbf x)\bigr)=f(\mathbf x),\qquad \mathbf x\in(0,1)^2,
+\]
+\[
+u(\mathbf x)=0\quad\text{on }\partial(0,1)^2,\qquad f(\mathbf x)=\beta.
+\]
+
+### Released file configs
+
+| Data file | $\beta$ ($f=\beta$) | Boundary | Per sample | Fixed |
+|---|---:|---|---|---|
+| `2D_DarcyFlow_beta0.01_Train.hdf5` | $0.01$ | Dirichlet $u=0$ | coefficient field $a(x,y)$ | $(0,1)^2$, $128\times128$, 10,000 pairs |
+| `2D_DarcyFlow_beta0.1_Train.hdf5` | $0.1$ | Dirichlet $u=0$ | same | same |
+| `2D_DarcyFlow_beta1.0_Train.hdf5` | $1.0$ | Dirichlet $u=0$ | same | same |
+| `2D_DarcyFlow_beta10.0_Train.hdf5` | $10$ | Dirichlet $u=0$ | same | same |
+| `2D_DarcyFlow_beta100.0_Train.hdf5` | $100$ | Dirichlet $u=0$ | same | same |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $\beta$ (constant force $f=\beta$) | differs across HDF5 files | $\beta\in\{0.01,0.1,1,10,100\}$ (5 files) |
-| coefficient field $a(x,y)$ | per sample | spatially varying diffusivity realizations |
-| BC, domain, resolution, steady setup | fixed | $u=0$ Dirichlet; $(0,1)^2$; $128^2$ |
-
-## Released configurations
-
-Five `2D_DarcyFlow_beta*_Train.hdf5` parameter files, each containing 10,000 coefficient-field/solution pairs.
+| $\beta$ (constant forcing) | any positive scalar | yes: $\{0.01,0.1,1,10,100\}$ |
+| coefficient-field law for $a$ | editable | no (default random-field family) |
+| BC, domain, resolution | editable | release fixed |
 
 ## Data files
 

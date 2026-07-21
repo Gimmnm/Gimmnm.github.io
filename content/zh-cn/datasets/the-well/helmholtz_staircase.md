@@ -32,16 +32,18 @@ description: "点声源位于无限周期、声硬阶梯表面上方。问题在
 
 # 周期阶梯 Helmholtz 声散射
 
-> **所属数据集：** The Well  
-> **数据目录：** `helmholtz_staircase`  
-> **方程族：** 波动/Helmholtz 散射  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![压力场](/the-well/helmholtz_staircase__pressure_normalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `helmholtz_staircase`
+> **方程族：** 波动/Helmholtz 散射
 
 ## 1. 所属集合与物理概览
 
 点声源位于无限周期、声硬阶梯表面上方。问题在频域中求解，再解析采样一个振荡周期。沿表面传播的俘获模与向外辐射波同时存在，形成两种空间尺度，模型必须辨别真正控制时间相位的源频率。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -71,11 +73,7 @@ $$
 | 类别 | 本发布版中的含义 |
 |---|---|
 | 理论上可调 | 声源频率与位置、阶梯周期/几何、声速与密度、边界类型、输出窗口范围、空间离散、Floquet–Bloch 求积和相位采样。 |
-| 数据中实际变化 | 声源频率取 16 个值：
-\[
-0.062,0.251,0.439,0.626,0.813,0.998,1.182,1.363,1.541,1.715,1.882,2.042,2.191,2.323,2.433,2.511.
-\]
-声源位置使用 32 个配置，因此共有 \(16\times32=512\) 个参数组合；每个组合在一个周期内采样 50 个相位。 |
+| 数据中实际变化 | 声源频率取 16 个值：\(0.062,0.251,0.439,0.626,0.813,0.998,1.182,1.363,1.541,1.715,1.882,2.042,2.191,2.323,2.433,2.511\)。声源位置使用 32 个配置，因此共有 \(16\times32=512\) 个参数组合；每个组合在一个周期内采样 50 个相位。 |
 | 数据中保持固定 | 阶梯几何与周期、声硬 Neumann 边界、常密度气体与归一化声速 \(c=1\)、低频/俘获模区域、输出网格分辨率及 50 个相位样本。 |
 
 ## 4. 初始条件与边界条件
@@ -206,7 +204,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -218,13 +215,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐引用：Agocs 与 Barnett，*Trapped acoustic waves and raindrops: high-order accurate integral equation method for localized excitation of a periodic staircase*。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

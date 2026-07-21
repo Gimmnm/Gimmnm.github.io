@@ -110,17 +110,31 @@ PyClaw finite-volume solver. Current YAML: `T_end=1.0, n_time_steps=100, xdim=yd
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_th+\partial_x(hu)+\partial_y(hv)=0,
+\]
+\[
+\partial_t(hu)+\partial_x\!\left(u^2h+\tfrac12g_rh^2\right)+\partial_y(uvh)=-g_rh\,\partial_xb,
+\]
+\[
+\partial_t(hv)+\partial_y\!\left(v^2h+\tfrac12g_rh^2\right)+\partial_x(uvh)=-g_rh\,\partial_yb.
+\]
+
+### Released file configs
+
+| Data file | Boundary | Per trajectory | Fixed (this file) |
+|---|---|---|---|
+| `2D_rdb_NA_NA.h5` | Neumann | dam-break radius $r\sim\mathcal U(0.3,0.7)$ | center fixed; inner $h=2$, outer $h=1$; $g_r=1$; domain $[-2.5,2.5]^2$, $128\times128$, $N_t=101$, 1,000 traj. |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| dam-break radius $r$ | per trajectory (only varying physical quantity in release) | $r\sim\mathcal U(0.3,0.7)$; filename `NA_NA` |
-| dam center | fixed | domain center |
-| inner / outer water height | fixed | inner $h=2$, outer $h=1$ |
-| gravity $g_r$, bathymetry $b$ | fixed | $g_r=1.0$; $b$ fixed |
-| BC, domain, grid, time | fixed | Neumann; $[-2.5,2.5]^2$; $128^2$; $t\in[0,1]$ |
-
-## Released configurations
-
-Released file `2D_rdb_NA_NA.h5` with 1,000 trajectories. The generator default cap may be larger — do not confuse it with the released size.
+| dam-break radius $r$ | sampling interval editable | yes: per-traj. $\mathcal U(0.3,0.7)$ |
+| inner/outer depth, center, $g_r$, bathymetry $b$ | editable | no (release fixed) |
+| BC, domain, grid, time | editable | release fixed |
 
 ## Data files
 

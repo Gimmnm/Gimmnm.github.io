@@ -28,13 +28,9 @@ description: "高斯初始波源在随机弯曲、分片常波速的垂向分层
 
 # Wave-Layer：随机分层介质中的波动方程
 
-> **一句话描述：** 高斯初始波源在随机弯曲、分片常波速的垂向分层介质中传播。
+**描述：** 高斯初始波源在随机弯曲、分片常波速的垂向分层介质中传播。 与 Wave-Gauss 的光滑波速场相比，本任务含系数间断和随机层界面，更接近分层地下介质。
 
-## 更长描述
-
-与 Wave-Gauss 的光滑波速场相比，本任务含系数间断和随机层界面，更接近分层地下介质。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** 有限差分法；$128^2$。
 
 ## 基本信息
@@ -164,19 +160,3 @@ python assemble_data.py --input_dir . --output_file Wave-Layer.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: Wave-Layer](https://huggingface.co/datasets/camlab-ethz/Wave-Layer)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

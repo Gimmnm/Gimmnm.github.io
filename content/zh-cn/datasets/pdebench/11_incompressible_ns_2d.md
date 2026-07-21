@@ -101,15 +101,32 @@ Dirichlet no-slip：边界速度固定为零。当前配置 `velocity_extrapolat
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\nabla\cdot\mathbf v=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\mathbf f(\mathbf x).
+\]
+
+### 发布文件配置
+
+274 个分片为**同一物理配置**。文件名含 `512`，实际网格以论文 / YAML 为准为 **$256\times256$**。
+
+| 数据文件（模式） | $\nu$ | 边界 | 每轨迹随机 | 固定 |
+|---|---:|---|---|---|
+| `ns_incom_inhom_2d_512-{0…274\setminus49}.h5` | $0.01$ | no-slip Dirichlet | 初速度 GRF、外力 GRF | 域 $[0,1]^2$，$256^2$，$N_t=1000$ |
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| 初速度 GRF / 外力 GRF | 每轨迹随机 | 论文：$\tau_{v_0}=-3,\sigma_{v_0}=0.15$；$\tau_f=-1,\sigma_f=0.4$ |
-| $\nu$（黏性） | 固定 | $\nu=0.01$ |
-| GRF 超参数、边界、域 | 固定 | 无滑移 Dirichlet；$[0,1]^2$；$256^2$ |
-
-## 论文配置
-
-一个物理配置的数据被拆成大量 `ns_incom_inhom_2d_512-*.h5` 分片。论文形状和当前 YAML 均指向 $256^2$，因此文件名中的 `512` 不可直接当成实际网格。
+| $\nu$（`NU`） | 任意正实数 | 否（固定 $0.01$） |
+| GRF：`smoothness, scale, force_smoothness, force_scale` | 可改 | 否（发布用 YAML 默认） |
+| `grid_size`, `DT`, `n_steps`, `frame_int` | 可改 | 否（发布对应 $256^2$、$N_t=1000$） |
+| 边界外推方式 | 可改 | 否（`ZERO` no-slip） |
 
 ## 数据文件
 

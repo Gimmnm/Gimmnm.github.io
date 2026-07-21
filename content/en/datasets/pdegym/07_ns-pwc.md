@@ -28,13 +28,9 @@ description: 'The initial vorticity is piecewise constant on a $10\times10$ grid
 
 # NS-PwC: Piecewise-Constant Vorticity Initial Conditions
 
-> **One-line description:** The initial vorticity is piecewise constant on a $10\times10$ grid, after which the velocity is recovered and evolved.
+**Description:** The initial vorticity is piecewise constant on a $10\times10$ grid, after which the velocity is recovered and evolved. This task resembles many simultaneous Riemann discontinuities in vorticity and tests transfer to rough, out-of-pretraining initial data.
 
-## Longer description
-
-This task resembles many simultaneous Riemann discontinuities in vorticity and tests transfer to rough, out-of-pretraining initial data.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** AZEBAN; $128^2$.
 
 ## Identity
@@ -162,19 +158,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: NS-PwC](https://huggingface.co/datasets/camlab-ethz/NS-PwC).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

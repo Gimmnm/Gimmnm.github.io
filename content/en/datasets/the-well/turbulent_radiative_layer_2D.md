@@ -32,16 +32,18 @@ description: "A cold dense phase and a hot diffuse phase shear past each other. 
 
 # Turbulent Radiative Mixing Layer — 2D
 
-> **Parent collection:** The Well  
-> **Directory:** `turbulent_radiative_layer_2D`  
-> **Equation family:** Compressible hydrodynamics + radiative cooling  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Density evolution](/the-well/turbulent_radiative_layer_2D__density_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `turbulent_radiative_layer_2D`
+> **Equation family:** Compressible hydrodynamics + radiative cooling
 
 ## 1. Scope and physical overview
 
 A cold dense phase and a hot diffuse phase shear past each other. Turbulent mixing creates intermediate-temperature gas that can radiatively cool and join the cold phase. The 2D and 3D releases share the same physical parameter sweep and support transfer across dimensionality.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -209,7 +211,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -221,13 +222,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citation: Fielding et al., *Multiphase Gas and the Fractal Nature of Radiative Turbulent Mixing Layers* (2020).
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

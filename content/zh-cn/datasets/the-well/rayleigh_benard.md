@@ -32,16 +32,18 @@ description: "水平周期流体层下热上冷。浮力克服黏性与热扩散
 
 # Rayleigh–Bénard 热对流——原生网格
 
-> **所属数据集：** The Well  
-> **数据目录：** `rayleigh_benard`  
-> **方程族：** Boussinesq 热对流  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![浮力场](/the-well/rayleigh_benard__buoyancy_good_normalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `rayleigh_benard`
+> **方程族：** Boussinesq 热对流
 
 ## 1. 所属集合与物理概览
 
 水平周期流体层下热上冷。浮力克服黏性与热扩散驱动对流，形成 Bénard 对流胞；对流胞的位置和后续湍流演化对微小初始扰动高度敏感。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -206,7 +208,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -218,13 +219,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐引用 Dedalus；物理设置还应参考 The Well 附录列出的 Rayleigh–Bénard 文献。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

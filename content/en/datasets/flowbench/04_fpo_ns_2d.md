@@ -27,14 +27,10 @@ description: "Incompressible flow passes a stationary complex bluff body, produc
 
 # 2-D flow past complex objects (FPO–NS–2D)
 
-**One-line description:** Incompressible flow passes a stationary complex bluff body, producing high-resolution velocity and pressure trajectories with vortex shedding.
+**Description:** Incompressible flow passes a stationary complex bluff body, producing high-resolution velocity and pressure trajectories with vortex shedding. FPO is the only publicly released transient FlowBench family. A complex object is placed upstream in a long channel and generates periodic or aperiodic wakes. The data can be used for past-to-future sequence prediction or augmented with Reynolds number, mask, and SDF for geometry-conditioned trajectory modeling.
 
-**Longer description:** FPO is the only publicly released transient FlowBench family. A complex object is placed upstream in a long channel and generates periodic or aperiodic wakes. The data can be used for past-to-future sequence prediction or augmented with Reynolds number, mask, and SDF for geometry-conditioned trajectory modeling.
-
-**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.  
-**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.  
-
-
+**Dataset team:** FlowBench / Baskar Group, with collaborators from Iowa State University and New York University.
+**Generation software:** Dendro/Dendro-KT finite-element framework with SBM.
 
 ## Parent dataset and links
 
@@ -49,7 +45,6 @@ description: "Incompressible flow passes a stationary complex bluff body, produc
 | Project website | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | License | **CC-BY-NC-4.0** |
 | Storage format | NumPy compressed archives (`.npz`) |
-
 
 ## Equation
 
@@ -99,7 +94,6 @@ $$
 - object surface: stationary no-slip boundary.
 
 The paper states that a region with physical span approximately $[0,16]\times[0,4]$ is cropped for release. Treat this as the reported cropped span; verify the array origin and orientation from the files or downsampling script.
-
 
 ## Geometry conditioning
 
@@ -169,7 +163,6 @@ s(\mathbf x)=
 $$
 
 **File-level caveat:** some older DataPrep code uses a `0/255` mask and derives it with `SDF > 0`. This is not identical to the semantic convention in the paper. Always plot the downloaded mask and SDF to verify sign and scale.
-
 
 ## About the data
 
@@ -267,7 +260,6 @@ The appendix describes five circular refinement regions around $(6,8)$ with radi
 - approximately 353,934 velocity/pressure degrees of freedom;
 - an equivalent finest-level uniform mesh would require about 201M degrees of freedom.
 
-
 ## Numerical generation and post-processing
 
 - massively parallel quadtree/octree finite-element CFD and multiphysics framework;
@@ -279,7 +271,6 @@ The appendix describes five circular refinement regions around $(6,8)$ with radi
 - the paper reports approximately 65K node-hours of total compute.
 
 The lower-resolution releases are post-processed from fully resolved simulations rather than independently rerun coarse CFD simulations, which makes the data useful for multi-resolution and super-resolution studies.
-
 
 ## What is interesting and challenging
 
@@ -326,27 +317,6 @@ allow_patterns=["FPO_NS_2D_1024x256/nurbs/*"]
 
 Inspect every `Re_*.npz` key and shape after download.
 
-
-## Citation
-
-Please cite the FlowBench paper when using this data:
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-The dataset and official tools are released under **CC-BY-NC-4.0**. Consult the full license text before commercial use.
-
-
-
 ## Sources and evidence policy
 
 This document cross-checks the following official sources, in descending priority:
@@ -357,5 +327,5 @@ This document cross-checks the following official sources, in descending priorit
 4. [official Geometry Matters training/evaluation repository](https://github.com/baskargroup/GeometryMatters);
 5. [FlowBench project website](https://baskargroup.bitbucket.io/FlowBench/).
 
-The paper, the older preparation scripts, and the current data repository do not represent exactly the same release. This document therefore distinguishes the **paper specification**, the **preparation-code convention**, and the **current hosted release**.  
+The paper, the older preparation scripts, and the current data repository do not represent exactly the same release.
 Last verified: **2026-07-21**.

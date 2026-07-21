@@ -32,16 +32,18 @@ description: '该数据模拟受大尺度随机驱动的等温、无自引力磁
 
 # 磁流体湍流——$64^3$
 
-> **所属数据集：** The Well  
-> **数据目录：** `MHD_64`  
-> **方程族：** 理想等温磁流体动力学  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![密度演化](/the-well/MHD_64__density_unnormalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `MHD_64`
+> **方程族：** 理想等温磁流体动力学
 
 ## 1. 所属集合与物理概览
 
 该数据模拟受大尺度随机驱动的等温、无自引力磁流体湍流，具有尺度自由性质。声速马赫数和 Alfvén 马赫数覆盖亚声速/超声速以及强磁场/弱磁场区域。配对的 \(256^3\) 与抗混叠 \(64^3\) 数据同时支持动力学预测和超分辨率研究。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -207,7 +209,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -219,13 +220,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐同时引用 The Well 附录中列出的 MHD 模拟与 CATS 数据库文献。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

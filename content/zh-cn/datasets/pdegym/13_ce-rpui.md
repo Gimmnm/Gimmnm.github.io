@@ -28,13 +28,9 @@ description: "高强度随机状态和高频小幅弯曲界面共同定义的四
 
 # CE-RPUI：不确定界面的强 Riemann 问题
 
-> **一句话描述：** 高强度随机状态和高频小幅弯曲界面共同定义的四象限 Riemann 问题。
+**描述：** 高强度随机状态和高频小幅弯曲界面共同定义的四象限 Riemann 问题。 该任务是 CE-RP 的困难分布外变体：不仅状态跳跃更强，界面位置和形状也随机，导致激波与小尺度涡卷起并存。
 
-## 更长描述
-
-该任务是 CE-RP 的困难分布外变体：不仅状态跳跃更强，界面位置和形状也随机，导致激波与小尺度涡卷起并存。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** ALSVINN；$512^2\to128^2$。
 
 ## 基本信息
@@ -75,7 +71,6 @@ $$
 \sigma_y=\sum_{i,j=1}^{p}\alpha_{y,ij}\sin\!\left(2\pi(i+2p^2)x+(j+2p^2)y+\beta_{y,ij}\right),
 $$
 随后在弯曲分区中赋随机常状态。
-
 
 ### 物理量
 
@@ -175,19 +170,3 @@ python assemble_data.py --input_dir . --output_file CE-RPUI.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: CE-RPUI](https://huggingface.co/datasets/camlab-ethz/CE-RPUI)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

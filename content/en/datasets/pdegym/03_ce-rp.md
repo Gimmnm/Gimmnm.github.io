@@ -28,13 +28,9 @@ description: "Random four-quadrant Riemann problems for the 2-D compressible Eul
 
 # CE-RP: Four-Quadrant Random Riemann Problems
 
-> **One-line description:** Random four-quadrant Riemann problems for the 2-D compressible Euler equations, producing shocks, contact discontinuities, and rarefactions.
+**Description:** Random four-quadrant Riemann problems for the 2-D compressible Euler equations, producing shocks, contact discontinuities, and rarefactions. This is a stochastic two-dimensional generalization of Sod-type shock-tube problems. Each quadrant has an independently sampled constant state, requiring the model to learn interacting multidirectional discontinuities.
 
-## Longer description
-
-This is a stochastic two-dimensional generalization of Sod-type shock-tube problems. Each quadrant has an independently sampled constant state, requiring the model to learn interacting multidirectional discontinuities.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** ALSVINN high-resolution finite-volume solver with quadratic WENO reconstruction and HLLC Riemann solver; generated at $512^2$ and downsampled to $128^2$.
 
 ## Identity
@@ -66,7 +62,6 @@ $$
 $$
 
 Here $\rho$ is density, $\mathbf v=(v_x,v_y)$ is velocity, $p$ is pressure, and $E$ is total energy. Unless stated otherwise, the PDEgym compressible-Euler datasets use the ideal-gas value $\gamma=1.4$.
-
 
 The unit square is split into $2\times2$ subdomains $D_{ij}$, each initialized with a constant state $(\rho_{ij},v_{x,ij},v_{y,ij},p_{ij})$.
 
@@ -166,19 +161,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: CE-RP](https://huggingface.co/datasets/camlab-ethz/CE-RP).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

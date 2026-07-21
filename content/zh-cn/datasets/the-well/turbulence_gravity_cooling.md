@@ -32,16 +32,18 @@ description: "自引力湍流气体云在可压缩流体动力学、辐射加热
 
 # 湍流—自引力—冷却星际介质
 
-> **所属数据集：** The Well  
-> **数据目录：** `turbulence_gravity_cooling`  
-> **方程族：** 自引力可压缩流体  
-> **文档类型：** 依据官方数据页、论文附录与当前仓库元数据重写的结构化中文文档。
+![温度演化](/the-well/turbulence_gravity_cooling__temperature_normalized.gif)
+
+
+> **所属数据集：** The Well
+> **数据目录：** `turbulence_gravity_cooling`
+> **方程族：** 自引力可压缩流体
 
 ## 1. 所属集合与物理概览
 
 自引力湍流气体云在可压缩流体动力学、辐射加热/冷却与引力共同作用下演化。初始温度、密度、金属丰度及湍流随机实现覆盖类似银河系、矮星系和原初/绝热环境。
 
-The Well 把每个可下载目录组织为自描述 HDF5 数据集。本文始终区分三类信息：方程/生成器理论上可以调整的参数、发布数据中实际扫描的参数，以及该发布版保持固定的参数。
+The Well 把每个可下载目录组织为自描述 HDF5 数据集。
 
 ## 2. 控制方程
 
@@ -204,7 +206,6 @@ trainset = WellDataset(
 
 论文还说明数据由 Flatiron Institute 直接托管并提供 Globus endpoint。端点信息可能变化，因此应遵循当前仓库的下载文档，不要把旧 endpoint 写死在脚本中。
 
-
 ## 9. 链接
 
 | 资源 | URL |
@@ -216,13 +217,3 @@ trainset = WellDataset(
 | 论文 | <https://arxiv.org/abs/2412.00568> |
 | 统一数据格式 | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face 集合 | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. 引用与来源说明
-
-推荐引用：Hirashima 等工作，以及 The Well 附录中的 ASURA-FDPS/CLOUDY 文献。
-
-同时引用 The Well 总论文：
-
-> Ohana 等，**The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**，NeurIPS 2024 Datasets and Benchmarks。
-
-本文不是官网逐字镜像，而是依据官方数据页、论文附录和当前仓库元数据做的结构化整理、翻译与校勘。英文配套文档是忠实于来源的重新组织版本；中文文档加入了参数层次、通道和输入输出形状等便于多数据集统一管理的信息。

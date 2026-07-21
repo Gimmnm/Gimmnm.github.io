@@ -100,16 +100,67 @@ u(0,x)=u_0(x).
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+\partial_tu-\nu\partial_{xx}u-\rho u(1-u)=0,
+\qquad x\in(0,1),\quad t\in(0,1],
+\]
+\[
+u(0,x)=u_0(x).
+\]
+
+### 发布文件配置
+
+Test 的 `react_*` **同样带 $(\nu,\rho)$**（写在文件名里）；另含 $\nu=10$ 点，不在 Train 的 $4\times4$ 网格内。论文 Table 1 写 $N_t=200$，实际多为 **201**。
+
+| 数据文件 | 划分 | $\nu$ | $\rho$ | 边界 | 每轨迹随机 | 固定 |
+|---|---|---:|---:|---|---|---|
+| `ReacDiff_Nu0.5_Rho1.0.hdf5` | Train | $0.5$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu0.5_Rho2.0.hdf5` | Train | $0.5$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu0.5_Rho5.0.hdf5` | Train | $0.5$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu0.5_Rho10.0.hdf5` | Train | $0.5$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu1.0_Rho1.0.hdf5` | Train | $1$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu1.0_Rho2.0.hdf5` | Train | $1$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu1.0_Rho5.0.hdf5` | Train | $1$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu1.0_Rho10.0.hdf5` | Train | $1$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu2.0_Rho1.0.hdf5` | Train | $2$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu2.0_Rho2.0.hdf5` | Train | $2$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu2.0_Rho5.0.hdf5` | Train | $2$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu2.0_Rho10.0.hdf5` | Train | $2$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu5.0_Rho1.0.hdf5` | Train | $5$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu5.0_Rho2.0.hdf5` | Train | $5$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu5.0_Rho5.0.hdf5` | Train | $5$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_Nu5.0_Rho10.0.hdf5` | Train | $5$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho1.0.hdf5` | Test | $0.5$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho2.0.hdf5` | Test | $0.5$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho5.0.hdf5` | Test | $0.5$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu0.5_Rho10.0.hdf5` | Test | $0.5$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho1.0.hdf5` | Test | $1$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho2.0.hdf5` | Test | $1$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho5.0.hdf5` | Test | $1$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu1.0_Rho10.0.hdf5` | Test | $1$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho1.0.hdf5` | Test | $2$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho2.0.hdf5` | Test | $2$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho5.0.hdf5` | Test | $2$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu2.0_Rho10.0.hdf5` | Test | $2$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho1.0.hdf5` | Test | $5$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho2.0.hdf5` | Test | $5$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho5.0.hdf5` | Test | $5$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu5.0_Rho10.0.hdf5` | Test | $5$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho1.0.hdf5` | Test | $10$ | $1$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho2.0.hdf5` | Test | $10$ | $2$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho5.0.hdf5` | Test | $10$ | $5$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+| `ReacDiff_react_Nu10.0_Rho10.0.hdf5` | Test | $10$ | $10$ | periodic | 初值频谱/振幅/相位 | $N_x=1024$，$N_t=201$ |
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| $\nu$（扩散） | 不同 HDF5 文件不同 | $\nu\in\{0.5,1,2,5\}$ |
-| $\rho$（反应率） | 不同 HDF5 文件不同 | $\rho\in\{1,2,5,10\}$ → 共 $4\times4=16$ 训练文件 |
-| 初值频谱 / 振幅 / 相位 | 每轨迹随机 | 正弦叠加后取绝对值并归一化 |
-| 边界、网格、时间、数值格式 | 固定 | 周期；$N_x=1024$；$t\in[0,1]$ |
-
-## 论文配置
-
-16 个论文训练文件形成 $4\times4$ 参数网格，每文件 10,000 条轨迹；当前下载类别还包含额外反应测试文件。
+| $\nu$（扩散） | 任意正实数；`multi/` 含至 $\nu=10$ | Train：$\{0.5,1,2,5\}$；Test 另有 $10$ |
+| $\rho$（反应率） | 任意正实数 | 是：$\{1,2,5,10\}$ |
+| 初值构造 | 可改 | 否（默认：正弦叠加后取绝对值并归一化） |
+| 边界、网格、时间 | 可改 | 发布固定周期 / $1024$ / $[0,1]$ |
 
 ## 数据文件
 

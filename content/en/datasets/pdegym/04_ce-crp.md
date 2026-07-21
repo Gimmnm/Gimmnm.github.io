@@ -28,13 +28,9 @@ description: "Compressible Euler trajectories whose initial discontinuities lie 
 
 # CE-CRP: Curved Multi-Partition Riemann Problems
 
-> **One-line description:** Compressible Euler trajectories whose initial discontinuities lie on randomly curved multi-partition interfaces.
+**Description:** Compressible Euler trajectories whose initial discontinuities lie on randomly curved multi-partition interfaces. CE-CRP randomizes both discontinuity geometry and the fluid state in each partition, producing shocks and vortex roll-up across multiple scales. It is one of the novel POSEIDON pretraining constructions.
 
-## Longer description
-
-CE-CRP randomizes both discontinuity geometry and the fluid state in each partition, producing shocks and vortex roll-up across multiple scales. It is one of the novel POSEIDON pretraining constructions.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** ALSVINN; $512^2\to128^2$.
 
 ## Identity
@@ -73,7 +69,6 @@ $$
 \sigma_y=\sum_{i,j=1}^{p}\alpha_{y,ij}\sin(2\pi i x+j y+\beta_{y,ij}).
 $$
 The fractional coordinates $\{x+\sigma_x+1\}$ and $\{y+\sigma_y+1\}$ define curved subdomains, each assigned a random constant state.
-
 
 ### Physical quantities
 
@@ -173,19 +168,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: CE-CRP](https://huggingface.co/datasets/camlab-ethz/CE-CRP).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

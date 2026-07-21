@@ -28,13 +28,9 @@ description: "With fixed background density and pressure, the initial velocity i
 
 # CE-Gauss: Compressible Euler from Gaussian-Vorticity Velocity Fields
 
-> **One-line description:** With fixed background density and pressure, the initial velocity is recovered from 100 random Gaussian vorticity blobs and evolved by compressible Euler.
+**Description:** With fixed background density and pressure, the initial velocity is recovered from 100 random Gaussian vorticity blobs and evolved by compressible Euler. This operator combines localized vortical initial conditions with compressible dynamics, contributing local vortex structure, acoustic coupling, and density/pressure response to pretraining.
 
-## Longer description
-
-This operator combines localized vortical initial conditions with compressible dynamics, contributing local vortex structure, acoustic coupling, and density/pressure response to pretraining.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** ALSVINN; $512^2\to128^2$.
 
 ## Identity
@@ -66,7 +62,6 @@ $$
 $$
 
 Here $\rho$ is density, $\mathbf v=(v_x,v_y)$ is velocity, $p$ is pressure, and $E$ is total energy. Unless stated otherwise, the PDEgym compressible-Euler datasets use the ideal-gas value $\gamma=1.4$.
-
 
 The initial velocity vorticity uses the same 100-Gaussian superposition as NS-Gauss and the velocity is recovered using the incompressibility relation. Background values are fixed at $\rho^0=0.1$ and $p^0=2.5$.
 
@@ -168,19 +163,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: CE-Gauss](https://huggingface.co/datasets/camlab-ethz/CE-Gauss).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

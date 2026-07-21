@@ -28,13 +28,9 @@ description: "Vortex-sheet initial data supported on a randomly perturbed sinuso
 
 # NS-SVS: Sinusoidal Vortex-Sheet Initial Conditions
 
-> **One-line description:** Vortex-sheet initial data supported on a randomly perturbed sinusoidal curve and regularized by a smoothing kernel.
+**Description:** Vortex-sheet initial data supported on a randomly perturbed sinusoidal curve and regularized by a smoothing kernel. Vortex sheets are classical near-singular, high-shear benchmarks. Tiny random perturbations trigger complex roll-up and make the dynamics sensitive to resolution and numerical dissipation.
 
-## Longer description
-
-Vortex sheets are classical near-singular, high-shear benchmarks. Tiny random perturbations trigger complex roll-up and make the dynamics sensitive to resolution and numerical dissipation.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** AZEBAN; $128^2$.
 
 ## Identity
@@ -69,7 +65,6 @@ $$
 \Gamma=\left\{(x,y):y=\frac12+0.2\sin(2\pi x)+\sum_{i=1}^{10}\alpha_i\sin(2\pi(x+\beta_i))\right\}.
 $$
 $\omega_0$ is a mean-corrected vortex-sheet distribution concentrated on $\Gamma$, and $\psi_{\rho_s}$ is a smoothing kernel.
-
 
 ### Physical quantities
 
@@ -167,19 +162,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: NS-SVS](https://huggingface.co/datasets/camlab-ethz/NS-SVS).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

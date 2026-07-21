@@ -1,7 +1,7 @@
 ---
-title: "PDEBench docs"
+title: "PDEBench"
 linkTitle: PDEBench
-weight: 40
+weight: 10
 draft: false
 ShowToc: true
 hidemeta: true
@@ -55,6 +55,7 @@ PDE 的解是一个向量值函数 $\mathbf{v} : \mathcal{T} \times \mathcal{S} 
 ## 统一口径
 
 - PDEBench 论文称 11 个 PDE/任务、不同参数化形成 35 个基线配置；这不等于当前下载清单中的 HDF5 文件数。
+- 各方程页「参数」分两块：**发布文件配置**（按 `pdebench_data_urls.csv` 逐文件）与 **生成器可调范围**（YAML 能改什么/范围，即使下载未扫全）。文件名与论文摘要冲突时以实际文件为准。
 - HDF5 通用数组约定为 $(b,t,x_1,\ldots,x_d,v)$；compressible NS 的物理变量可能分别存为独立 datasets。细节见 [数据格式](./00_data_format/)。
 - Darcy Flow 是静态 $a\mapsto u$ 算子任务；其余主要为时序任务。
 - 当前 11 类一键下载标称体积合计约 **3.46 TB**（按十进制 GB/TB 直接相加，未考虑文件系统单位差异）。

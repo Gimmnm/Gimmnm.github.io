@@ -133,30 +133,55 @@ The inviscid part of the conservation laws is advanced with a temporally and spa
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### Released file configs
+
+**Paper vs release:** summaries often list all 2D cases as $512\times512$; filenames use `_512_` for near-inviscid and `_128_` for higher viscosity.  
+KH / shock / OTVortex are an **extra test set** (classic / specialized flows outside the main random/turbulence sweep). Parameters are in the **filename or YAML**, not missing.
+
+| Data file | initial field | boundary | $(\eta,\zeta,M)$ or other | $N_s$ | Per trajectory | Note |
+|---|---|---|---|---:|---|---|
+| `2D_CFD_Rand_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},0.1)$ | $512$ | random field | main train |
+| `2D_CFD_Rand_M0.1_Eta0.01_Zeta0.01_periodic_128_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},0.1)$ | $128$ | same | main train |
+| `2D_CFD_Rand_M0.1_Eta0.1_Zeta0.1_periodic_128_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},0.1)$ | $128$ | same | main train |
+| `2D_CFD_Rand_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},1.0)$ | $512$ | same | main train |
+| `2D_CFD_Rand_M1.0_Eta0.01_Zeta0.01_periodic_128_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},1.0)$ | $128$ | same | main train |
+| `2D_CFD_Rand_M1.0_Eta0.1_Zeta0.1_periodic_128_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},1.0)$ | $128$ | same | main train |
+| `2D_CFD_Turb_M0.1_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.1)$ | $512$ | turb. seed | main train |
+| `2D_CFD_Turb_M1.0_Eta1e-08_Zeta1e-08_periodic_512_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$ | $512$ | same | main train |
+| `2D_shock.hdf5` | 2D shock tube | outgoing (`trans`) | $(10^{-8},10^{-8},1.0)$ | $1024$ | no | extra test (YAML) |
+| `KH_M01_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | $\eta=10^{-3},\zeta=10^{-8},M=0.1,\mathrm{dk}=1$ | $1024$ | no | extra test (YAML; $\mathrm{Re}=10^3$ in path) |
+| `KH_M1_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=1$, $\mathrm{dk}=1$ | $1024$ | no | extra test |
+| `KH_M01_dk2_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=0.1$, $\mathrm{dk}=2$ | $1024$ | no | extra test |
+| `KH_M01_dk5_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=0.1$, $\mathrm{dk}=5$ | $1024$ | no | extra test |
+| `KH_M01_dk10_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=0.1$, $\mathrm{dk}=10$ | $1024$ | no | extra test |
+| `KH_M02_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=0.2$, $\mathrm{dk}=1$ | $1024$ | no | extra test |
+| `KH_M04_dk1_Re1e3.hdf5` | Kelvin–Helmholtz | `KHI` | same family, $M=0.4$, $\mathrm{dk}=1$ | $1024$ | no | extra test |
+| `OTVortex.hdf5` | Orszag–Tang | periodic | $(10^{-8},10^{-8},1.0)$ | $1024$ | no | extra test (YAML) |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| Mach number $M$ | differs across HDF5 config files | $M\in\{0.1,1.0\}$ |
-| $(\eta,\zeta)$ | differs across HDF5 config files | $(10^{-8},10^{-8})$, $(10^{-2},10^{-2})$, $(10^{-1},10^{-1})$; $\eta=\zeta$ |
-| IC family | differs across HDF5 config files | random / turbulence (plus shock, KH, OTVortex test files) |
-| field realization | per trajectory | random Fourier / turbulence seeds |
-| $\Gamma$, periodic BC, scheme | fixed | $\Gamma=5/3$; periodic (main training configs) |
-
-Eight main released training configs:
-
-| # | IC | $M$ | $(\eta,\zeta)$ |
-|---:|---|---:|---|
-| 1 | random | 0.1 | $(10^{-8},10^{-8})$ |
-| 2 | random | 0.1 | $(10^{-2},10^{-2})$ |
-| 3 | random | 0.1 | $(10^{-1},10^{-1})$ |
-| 4 | random | 1.0 | $(10^{-8},10^{-8})$ |
-| 5 | random | 1.0 | $(10^{-2},10^{-2})$ |
-| 6 | random | 1.0 | $(10^{-1},10^{-1})$ |
-| 7 | turbulence | 0.1 | $(10^{-8},10^{-8})$ |
-| 8 | turbulence | 1.0 | $(10^{-8},10^{-8})$ |
-
-## Released configurations
-
-Eight main training configurations. The current manifest also includes 2D shock, Kelvin–Helmholtz and `OTVortex` files, which should be labeled separately as OOD/classical tests.
+| $\eta,\zeta$ | any nonnegative; common three levels above | main train yes; $N_s$ follows viscosity |
+| $M$ | any positive; main train $\{0.1,1.0\}$ | main train yes; KH tests add $0.2,0.4$, … |
+| IC family | random / turbulence / shock / KH / OT … | main + extra tests |
+| KH $\mathrm{dk},\mathrm{Re}$ | editable; repo has more KH YAMLs than the download list | partial (7 KH files above) |
+| grid $N_s$, time window | editable | release $128$ or $512$, $N_t=21$ |
 
 ## Data files
 

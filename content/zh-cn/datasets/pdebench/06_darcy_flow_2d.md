@@ -100,15 +100,32 @@ u(\mathbf x)=0\quad\text{on }\partial(0,1)^2,\qquad f(\mathbf x)=\beta.
 
 ## 参数
 
-| 参数 | 变化方式 | 取值 |
+对照公式：
+
+\[
+-\nabla\!\cdot\!\bigl(a(\mathbf x)\nabla u(\mathbf x)\bigr)=f(\mathbf x),\qquad \mathbf x\in(0,1)^2,
+\]
+\[
+u(\mathbf x)=0\quad\text{on }\partial(0,1)^2,\qquad f(\mathbf x)=\beta.
+\]
+
+### 发布文件配置
+
+| 数据文件 | $\beta$（$f=\beta$） | 边界 | 每样本随机 | 固定 |
+|---|---:|---|---|---|
+| `2D_DarcyFlow_beta0.01_Train.hdf5` | $0.01$ | Dirichlet $u=0$ | 系数场 $a(x,y)$ | $(0,1)^2$，$128\times128$，10,000 对 |
+| `2D_DarcyFlow_beta0.1_Train.hdf5` | $0.1$ | Dirichlet $u=0$ | 同上 | 同上 |
+| `2D_DarcyFlow_beta1.0_Train.hdf5` | $1.0$ | Dirichlet $u=0$ | 同上 | 同上 |
+| `2D_DarcyFlow_beta10.0_Train.hdf5` | $10$ | Dirichlet $u=0$ | 同上 | 同上 |
+| `2D_DarcyFlow_beta100.0_Train.hdf5` | $100$ | Dirichlet $u=0$ | 同上 | 同上 |
+
+### 生成器可调范围
+
+| 参数 | 可调范围 / 选项 | 发布数据是否覆盖 |
 |---|---|---|
-| $\beta$（常值外力 $f=\beta$） | 不同 HDF5 文件不同 | $\beta\in\{0.01,0.1,1,10,100\}$（5 文件） |
-| 系数场 $a(x,y)$ | 每样本随机 | 空间变化扩散系数 realization |
-| 边界、域、分辨率、稳态设定 | 固定 | $u=0$ Dirichlet；$(0,1)^2$；$128^2$ |
-
-## 论文配置
-
-5 个 `2D_DarcyFlow_beta*_Train.hdf5` 参数文件，每文件 10,000 个系数场—解对。
+| $\beta$（常值外力） | 任意正实数 | 是：$\{0.01,0.1,1,10,100\}$ |
+| 系数场 $a$ 的生成分布 | 可改 | 否（发布用默认随机场族） |
+| 边界、域、分辨率 | 可改 | 发布固定 |
 
 ## 数据文件
 

@@ -31,15 +31,14 @@ description: "Fluid enters a two-dimensional channel containing a fixed circular
 
 # CFDBench — Cylinder flow and Kármán vortex street
 
-**One-line description:** Fluid enters a two-dimensional channel containing a fixed circular cylinder, producing boundary-layer separation and periodic vortex shedding at suitable Reynolds numbers; inlet speed, density/viscosity, and cylinder/domain geometry are varied separately.
+![Cylinder flow schematic and parameter ranges](./cylinder-flow.png)
 
-**Longer description:** Flow around a cylinder is a classical problem for bluff-body wakes, separation, and Kármán vortex streets. CFDBench filters physical-property combinations to the paper's stated range $20\le\mathrm{{Re}}\le1000$, covering relatively steady wakes through strong periodic shedding. With 205,620 frames—about 68.2% of the complete benchmark—this is the largest configuration and is particularly useful for evaluating long-horizon autoregressive error accumulation and periodic-structure learning.
+**Description:** Fluid enters a two-dimensional channel containing a fixed circular cylinder, producing boundary-layer separation and periodic vortex shedding at suitable Reynolds numbers; inlet speed, density/viscosity, and cylinder/domain geometry are varied separately. Flow around a cylinder is a classical problem for bluff-body wakes, separation, and Kármán vortex streets. CFDBench filters physical-property combinations to the paper's stated range $20\le\mathrm{{Re}}\le1000$, covering relatively steady wakes through strong periodic shedding. With 205,620 frames—about 68.2% of the complete benchmark—this is the largest configuration and is particularly useful for evaluating long-horizon autoregressive error accumulation and periodic-structure learning.
 
 - Parent dataset: **CFDBench**
 - Dataset authors: Yining Luo, Yingfa Chen, and Zhen Zhang
 - Generator: ANSYS Fluent 2021R1; SST $k$--$\omega$ closure when required
 - Official loader: [`src/dataset/cylinder.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/cylinder.py)
-
 
 ## Governing equations
 
@@ -83,8 +82,7 @@ $$
 \right)+g_y.
 $$
 
-> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants, so they are not presented here as if they were explicitly documented target equations.
-
+> **Scope of the written equations.** The incompressible Navier--Stokes system above is the mathematical system explicitly written in the paper. The Fluent setups for Tube and Dam additionally use a VOF multiphase model, and some Cylinder cases use an SST $k$--$\omega$ turbulence closure. The paper does not provide the complete auxiliary VOF/SST equations and constants.
 
 The paper does not list the complete SST $k$--$\omega$ transport equations and constants, and $k,\omega$ are not target channels in the interpolated release.
 
@@ -124,7 +122,7 @@ and $\mathbf u=\mathbf0$ on the top/bottom walls and the cylinder surface.
 | Total frames | 205,620 |
 | Mean frames per case | 1,111.46; not a fixed length |
 | Time interval | Paper and autoregressive loader: $0.001\,\mathrm s$; non-autoregressive class contains $0.1\,\mathrm s$ metadata |
-| Common $t_\max$ | Not reliably uniform; recover it from case arrays and resolved time metadata |
+| Common $t_{\mathrm{max}}$ | Not reliably uniform; recover it from case arrays and resolved time metadata |
 | Raw size per frame in paper | Approximately 4.4 MB |
 | Generation time in paper | Approximately 1.18 s/frame |
 | Current archives | `cylinder/` approximately 12 GB: BC 2.94 GB, GEO 2.41 GB, PROP 6.67 GB (2026-07-21) |
@@ -154,18 +152,17 @@ $$
 
 and retains cases in $[20,1000]$.
 
-## Parameter sweep: varied versus fixed
+## Parameters
 
-| Subset | Cases | Parameters actually varied | Conditions held fixed |
+Cases are generated in mutually exclusive subsets: each subset varies one operating-condition family while the others stay at the baseline above. Values follow paper Table 5.
+
+| Subset | Cases | Varied parameters and values | Held fixed (baseline) |
 |---|---:|---|---|
-| BC | 50 | $u_\mathrm{{in}}=0.1,0.2,\ldots,5.0\,\mathrm{{m/s}}$ | $\rho=10$, $\mu=10^{{-3}}$, $d=0.02$, $x_1=y_1=y_2=0.06$, $x_2=0.16$; boundary types and initialization fixed |
-| PROP | 115 | Candidate $\rho\in\{{0.1,0.2,\ldots,1\}}\cup\{{1.5,2.5,3.5,4.5,5\}}\cup\{{6,7,8,9,10\}}\cup\{{20,30,\ldots,250\}}\cup\{{300,400,500\}}\,\mathrm{{kg/m^3}}$ and $\mu\in\{{10^{{-4}},5\times10^{{-4}},10^{{-3}},5\times10^{{-3}},10^{{-2}}\}}\,\mathrm{{Pa\,s}}$; only 115 pairs satisfying $20\le\mathrm{{Re}}\le1000$ are retained | $u_\mathrm{{in}}=1$; cylinder and outer geometry fixed |
-| GEO | 20 | Candidates: $d\in\{{0.01,0.02,0.03,0.04,0.05\}}$; $x_1,y_1,y_2\in\{{0.02,0.04,0.06,0.08,0.10\}}$; $x_2\in\{{0.12,0.14,0.16,0.18,0.20\}}$; only 20 geometries are selected | $u_\mathrm{{in}}=1$, $\rho=10$, $\mu=10^{{-3}}$; boundary types fixed |
+| BC | 50 | $u_{\mathrm{in}}=u_{\mathcal{B}}\in\{0.1,0.2,0.3,\ldots,5\}\,\mathrm{m/s}$ (step $0.1$) | $\rho=10\,\mathrm{kg\,m^{-3}}$, $\mu=10^{-3}\,\mathrm{Pa\cdot s}$, $d=0.02\,\mathrm{m}$, $x_1=y_1=y_2=0.06\,\mathrm{m}$, $x_2=0.16\,\mathrm{m}$ |
+| PROP | 115 | $\rho\in\{0.1,0.2,\ldots,1\}\cup\{1.5,2.5,\ldots,4.5,5\}\cup\{6,7,\ldots,10\}\cup\{20,30,\ldots,250\}\cup\{300,400,500\}\,\mathrm{kg\,m^{-3}}$; $\mu\in\{10^{-4},5\times10^{-4},10^{-3},5\times10^{-3},10^{-2}\}\,\mathrm{Pa\cdot s}$; keep only combinations with $\mathrm{Re}\in[20,1000]$ (not a full grid) | $u_{\mathrm{in}}=1\,\mathrm{m/s}$, $d=0.02\,\mathrm{m}$, $x_1=y_1=y_2=0.06\,\mathrm{m}$, $x_2=0.16\,\mathrm{m}$ |
+| GEO | 20 | $d\in\{0.01,0.02,0.03,0.04,0.05\}\,\mathrm{m}$; $x_1,y_1,y_2\in\{0.02,0.04,0.06,0.08,0.1\}\,\mathrm{m}$; $x_2\in\{0.12,0.14,0.16,0.18,0.2\}\,\mathrm{m}$ (text also mixes $d$/radius naming for the cylinder scale) | $u_{\mathrm{in}}=1\,\mathrm{m/s}$, $\rho=10\,\mathrm{kg\,m^{-3}}$, $\mu=10^{-3}\,\mathrm{Pa\cdot s}$ |
 
-> **Critical ambiguity: `d` versus `radius`.**The paper text calls $d$ the cylinder diameter. Current code stores a `radius` key and directly uses `radius**2` when constructing the mask. Users must inspect each downloaded `case.json` and coordinate range; the paper's $d$ and code's `radius` must not be assumed numerically identical without verification.
-
-**Adjustable but fixed/not fully swept:** center location, all outer-domain offsets, and cylinder size are represented by only 20 selected GEO combinations. Outlet pressure, wall types, inflow direction, and turbulence-model constants are not public sweep dimensions.
-
+> GEO and PROP are not full Cartesian products; resolve $d$ versus radius from `case.json` and the mask geometry.
 
 ## Numerical generation setup
 
@@ -179,8 +176,6 @@ and retains cases in $[20,1000]$.
 - Convergence: the paper sets the global residual criterion to $10^{-9}$; final velocity residuals reach at least approximately the $10^{-6}$ level.
 - Generation hardware: AMD Ryzen Threadripper 3990X with 30 solver processes.
 - Numerical precision: the paper does not state single versus double precision; the dtype of the released NumPy arrays should not be used to infer Fluent solver precision.
-
-
 
 ## Learning tasks, inputs, and outputs
 
@@ -207,8 +202,6 @@ A typical input consists of the current two-component velocity field, a case-par
 
 Each base subset is divided into train/validation/test at an 8:1:1 ratio by case. Frames from one trajectory are not distributed across different splits, ensuring that test operating conditions remain unseen during training. Exact reproduction requires a fixed code revision, random seed, and resolved case list.
 
-
-
 ## Download and directory layout
 
 ### Official links
@@ -218,7 +211,6 @@ Each base subset is divided into train/validation/test at an 8:1:1 ratio by case
 - Interpolated data: [https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - Raw Fluent data: [https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - Baidu Drive mirror for raw data: [https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4), extraction code `cfd4`
-- Documentation style reference: [https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 The repository README describes the interpolated release as approximately 13.4 GB; the Hugging Face page reported approximately 14.4 GB on **2026-07-21**. The README describes the complete raw data as approximately 460 GB, while the current raw Hugging Face page reports about 205 GB and notes that parts of Cylinder are still being uploaded. Reproducible work should record the download date and repository revision.
 
@@ -268,7 +260,6 @@ data/
 └── cylinder/
 ```
 
-
 ### Download only this problem
 
 ```bash
@@ -297,17 +288,6 @@ unzip ./downloads/CFDBench/cylinder/prop.zip -d ./data/cylinder
 - **Loader code drift:** `cylinder.py` retains multiple loader versions. The current class calls `load_case_data_fix`, but other utilities may assume the older padded shape. Pin a commit and run shape tests.
 - **Diameter/radius conflict:** trust actual `case.json` values and the reconstructed mask geometry.
 - Raw Fluent exports can include pressure and velocity magnitude; interpolated targets are standardized as $u,v$.
-
-## Citation
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## Source locations
 

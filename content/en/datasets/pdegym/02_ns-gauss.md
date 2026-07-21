@@ -28,13 +28,9 @@ description: "The initial vorticity is a superposition of 100 random Gaussian vo
 
 # NS-Gauss: Incompressible Flow from Gaussian Vorticity
 
-> **One-line description:** The initial vorticity is a superposition of 100 random Gaussian vortices, from which the velocity is recovered.
+**Description:** The initial vorticity is a superposition of 100 random Gaussian vortices, from which the velocity is recovered. Unlike the global Fourier modes in NS-Sines, this distribution provides localized vortices at multiple scales and their merger, deformation, and transport dynamics. It is a POSEIDON pretraining operator.
 
-## Longer description
-
-Unlike the global Fourier modes in NS-Sines, this distribution provides localized vortices at multiple scales and their merger, deformation, and transport dynamics. It is a POSEIDON pretraining operator.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** AZEBAN spectral-hyperviscosity solver; $128^2$.
 
 ## Identity
@@ -61,7 +57,6 @@ $$
 $$
 
 where $\mathbf u=(u_x,u_y)$ is the Cartesian velocity field and $p$ is pressure. In the released PDEgym incompressible-flow simulations, spectral hyperviscosity is used only on sufficiently high Fourier modes. With $N=128$, $m_N=\sqrt N$, and $\varepsilon_N=0.05/N$, the effective viscosity scale is approximately $\nu\simeq4\times10^{-4}$. This is a stabilization choice intended to approximate the inviscid limit; it is not a viscosity sweep in the published data.
-
 
 Initial vorticity
 $$
@@ -166,19 +161,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: NS-Gauss](https://huggingface.co/datasets/camlab-ethz/NS-Gauss).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

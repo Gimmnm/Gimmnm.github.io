@@ -32,16 +32,18 @@ description: "A supernova deposits energy into a turbulent, radiatively cooling 
 
 # Supernova Explosion — $128^3$
 
-> **Parent collection:** The Well  
-> **Directory:** `supernova_explosion_128`  
-> **Equation family:** Compressible SPH hydrodynamics + cooling  
-> **Documentation type:** source-faithful structured rewrite of the official dataset page, paper appendix and current repository metadata.
+![Temperature evolution](/the-well/supernova_explosion_128__temperature_normalized.gif)
+
+
+> **Parent collection:** The Well
+> **Directory:** `supernova_explosion_128`
+> **Equation family:** Compressible SPH hydrodynamics + cooling
 
 ## 1. Scope and physical overview
 
 A supernova deposits energy into a turbulent, radiatively cooling interstellar medium. The resulting blast wave expands anisotropically through dense filaments. The release provides two spatial resolutions, but the trajectory counts differ, so they should not be assumed to form a complete one-to-one paired set.
 
-The Well treats each downloadable directory as a self-documenting HDF5 dataset. This page separates three notions that are often conflated: parameters that are theoretically adjustable in the equations/generator, parameters actually varied in the released ensemble, and parameters fixed in this release.
+The Well treats each downloadable directory as a self-documenting HDF5 dataset.
 
 ## 2. Governing equations
 
@@ -211,7 +213,6 @@ For large training runs, local download is normally faster and more reproducible
 
 The paper also describes direct Flatiron-hosted distribution and a Globus endpoint. Endpoint details can change, so use the current repository/download documentation rather than hard-coding an old endpoint.
 
-
 ## 9. Links
 
 | Resource | URL |
@@ -223,13 +224,3 @@ The paper also describes direct Flatiron-hosted distribution and a Globus endpoi
 | Paper | <https://arxiv.org/abs/2412.00568> |
 | Data-format documentation | <https://polymathic-ai.org/the_well/data_format/> |
 | Hugging Face collection | <https://huggingface.co/collections/polymathic-ai/the-well> |
-
-## 10. Citation and provenance
-
-Recommended citations: Hirashima et al. supernova-surrogate papers and ASURA-FDPS/DISPH references listed by The Well.
-
-Also cite the collection paper:
-
-> Ohana et al., **The Well: a Large-Scale Collection of Diverse Physics Simulations for Machine Learning**, NeurIPS 2024 Datasets and Benchmarks.
-
-This English page is a structured, source-faithful synthesis, not a byte-for-byte mirror of the website. Equations and numerical values are reconciled from the official dataset documentation, the paper appendix and current repository metadata. The paired Chinese document is an annotated translation and reorganization.

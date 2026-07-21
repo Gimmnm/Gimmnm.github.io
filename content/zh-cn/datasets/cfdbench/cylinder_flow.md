@@ -31,15 +31,14 @@ description: "流体从左侧进入含固定圆柱障碍物的二维通道，在
 
 # CFDBench — 圆柱绕流与 Kármán 涡街（Cylinder Flow）
 
-**一句话描述：** 流体从左侧进入含固定圆柱障碍物的二维通道，在适当 Reynolds 数下发生边界层分离和周期涡脱落；数据分别改变入口速度、密度/黏度和圆柱/外域几何。
+![Cylinder Flow 示意与参数范围](./cylinder-flow.png)
 
-**较长描述：** 圆柱绕流是研究钝体尾迹、边界层分离和 Kármán 涡街的经典问题。CFDBench 将物性组合筛选到论文所述 $20\le\mathrm{{Re}}\le1000$，覆盖从较平稳尾迹到显著周期涡脱落的状态。该问题拥有 205,620 帧，占整个 CFDBench 约 68.2%，也是最适合评估长时自回归误差累积和周期结构学习的一类。
+**描述：** 流体从左侧进入含固定圆柱障碍物的二维通道，在适当 Reynolds 数下发生边界层分离和周期涡脱落；数据分别改变入口速度、密度/黏度和圆柱/外域几何。 圆柱绕流是研究钝体尾迹、边界层分离和 Kármán 涡街的经典问题。CFDBench 将物性组合筛选到论文所述 $20\le\mathrm{{Re}}\le1000$，覆盖从较平稳尾迹到显著周期涡脱落的状态。该问题拥有 205,620 帧，占整个 CFDBench 约 68.2%，也是最适合评估长时自回归误差累积和周期结构学习的一类。
 
 - 所属数据集： **CFDBench**
 - 数据集作者：Yining Luo、Yingfa Chen、Zhen Zhang
 - 生成软件：ANSYS Fluent 2021R1；需要时使用 SST $k$--$\omega$ 湍流闭合
 - 官方 loader：[`src/dataset/cylinder.py`](https://github.com/luo-yining/CFDBench/blob/main/src/dataset/cylinder.py)
-
 
 ## 控制方程
 
@@ -83,8 +82,7 @@ $$
 \right)+g_y.
 $$
 
-> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数，因此本文档不会把这些未明示的方程伪装成数据集论文的原始公式。
-
+> **方程范围说明。** 论文正文逐式写出的数学系统是上述不可压缩 Navier--Stokes 方程。Tube 和 Dam 的 Fluent 配置还使用 VOF 两相模型；Cylinder 的部分工况使用 SST $k$--$\omega$ 湍流闭合。论文没有完整列出 VOF 或 SST 的附加输运方程及模型常数。
 
 论文没有列出 SST $k$--$\omega$ 的完整附加输运方程和常数；$k,\omega$ 也不是官方插值数据的标签通道。
 
@@ -124,7 +122,7 @@ $$
 | 总帧数 | 205,620 |
 | 平均帧数 | 1,111.46，仅为平均值 |
 | 时间间隔 | 论文和自回归 loader：$0.001\,\mathrm s$；非自回归类中存在 $0.1\,\mathrm s$ 元数据 |
-| 统一 $t_\max$ | 未可靠统一；从 case 数组和正确的时间元数据恢复 |
+| 统一 $t_{\mathrm{max}}$ | 未可靠统一；从 case 数组和正确的时间元数据恢复 |
 | 论文每帧原始量 | 约 4.4 MB |
 | 论文生成时间 | 约 1.18 s/帧 |
 | 当前压缩包 | `cylinder/` 约 12 GB：BC 2.94 GB、GEO 2.41 GB、PROP 6.67 GB（2026-07-21） |
@@ -154,18 +152,17 @@ $$
 
 筛选 PROP 工况，使其落在 $[20,1000]$。
 
-## 参数扫描：改变了什么，固定了什么
+## 参数
 
-| 子集 | case 数 | 实际扫描参数 | 固定条件 |
+数据按互斥子集分别生成：每个子集只改变一类工况，其余固定为上一节的基准工况。取值来自论文表 5。
+
+| 子集 | cases | 扫描参数与取值 | 固定（基准） |
 |---|---:|---|---|
-| BC | 50 | $u_\mathrm{{in}}=0.1,0.2,\ldots,5.0\,\mathrm{{m/s}}$ | $\rho=10$，$\mu=10^{{-3}}$，$d=0.02$，$x_1=y_1=y_2=0.06$，$x_2=0.16$；边界和初始化固定 |
-| PROP | 115 | 候选 $\rho\in\{{0.1,0.2,\ldots,1\}}\cup\{{1.5,2.5,3.5,4.5,5\}}\cup\{{6,7,8,9,10\}}\cup\{{20,30,\ldots,250\}}\cup\{{300,400,500\}}\,\mathrm{{kg/m^3}}$；$\mu\in\{{10^{{-4}},5\times10^{{-4}},10^{{-3}},5\times10^{{-3}},10^{{-2}}\}}\,\mathrm{{Pa\,s}}$；只保留 $20\le\mathrm{{Re}}\le1000$ 的 115 对 | $u_\mathrm{{in}}=1$，圆柱和外域几何固定 |
-| GEO | 20 | 候选 $d\in\{{0.01,0.02,0.03,0.04,0.05\}}$；$x_1,y_1,y_2\in\{{0.02,0.04,0.06,0.08,0.10\}}$；$x_2\in\{{0.12,0.14,0.16,0.18,0.20\}}$，但最终只选 20 个几何 | $u_\mathrm{{in}}=1$，$\rho=10$，$\mu=10^{{-3}}$，边界类型固定 |
+| BC | 50 | $u_{\mathrm{in}}=u_{\mathcal{B}}\in\{0.1,0.2,0.3,\ldots,5\}\,\mathrm{m/s}$（步长 $0.1$） | $\rho=10\,\mathrm{kg\,m^{-3}}$，$\mu=10^{-3}\,\mathrm{Pa\cdot s}$，$d=0.02\,\mathrm{m}$，$x_1=y_1=y_2=0.06\,\mathrm{m}$，$x_2=0.16\,\mathrm{m}$ |
+| PROP | 115 | $\rho\in\{0.1,0.2,\ldots,1\}\cup\{1.5,2.5,\ldots,4.5,5\}\cup\{6,7,\ldots,10\}\cup\{20,30,\ldots,250\}\cup\{300,400,500\}\,\mathrm{kg\,m^{-3}}$；$\mu\in\{10^{-4},5\times10^{-4},10^{-3},5\times10^{-3},10^{-2}\}\,\mathrm{Pa\cdot s}$；仅保留 $\mathrm{Re}\in[20,1000]$ 的组合（非整网格） | $u_{\mathrm{in}}=1\,\mathrm{m/s}$，$d=0.02\,\mathrm{m}$，$x_1=y_1=y_2=0.06\,\mathrm{m}$，$x_2=0.16\,\mathrm{m}$ |
+| GEO | 20 | $d\in\{0.01,0.02,0.03,0.04,0.05\}\,\mathrm{m}$；$x_1,y_1,y_2\in\{0.02,0.04,0.06,0.08,0.1\}\,\mathrm{m}$；$x_2\in\{0.12,0.14,0.16,0.18,0.2\}\,\mathrm{m}$（正文另写圆柱尺度集合，并混用 $d$/radius 命名） | $u_{\mathrm{in}}=1\,\mathrm{m/s}$，$\rho=10\,\mathrm{kg\,m^{-3}}$，$\mu=10^{-3}\,\mathrm{Pa\cdot s}$ |
 
-> **`d` 与 `radius` 的关键歧义。** 论文文字称 $d$ 是圆柱直径；当前代码的元数据键为 `radius`，并在 mask 中直接使用 `radius**2` 判定圆内网格点。实际使用时必须核查下载后的 `case.json` 和坐标范围，不能把论文的 $d$ 与代码 `radius` 无条件视为同一数值。
-
-**可调但固定/未全扫描：** 圆柱中心、所有外域边距和圆柱尺寸在 GEO 中只取 20 个选定组合；出口压力、壁面类型、来流方向、湍流模型常数等未作为公开扫描维度。
-
+> GEO 与 PROP 均非整笛卡尔积；直径/半径命名冲突以 `case.json` 与 mask 几何为准。
 
 ## 数值生成设置
 
@@ -179,8 +176,6 @@ $$
 - 收敛：论文给出的全局残差收敛阈值为 $10^{-9}$；最终速度残差至少达到约 $10^{-6}$ 量级。
 - 生成硬件：AMD Ryzen Threadripper 3990X，30 个 solver processes。
 - 数值精度：论文未明确说明单精度或双精度；不要仅根据 NumPy 文件 dtype 反推 Fluent 求解精度。
-
-
 
 ## 学习任务、输入与输出
 
@@ -207,8 +202,6 @@ $$
 
 论文对每个基础子集按 case 进行 8:1:1 的训练/验证/测试划分。同一条轨迹的帧不会跨 split，从而保证测试工况在训练时不可见。若要严格复现，需固定代码版本、随机种子以及最终生成的 case 列表。
 
-
-
 ## 下载与目录组织
 
 ### 官方链接
@@ -218,7 +211,6 @@ $$
 - 插值数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench](https://huggingface.co/datasets/chen-yingfa/CFDBench)
 - 原始 Fluent 数据：[https://huggingface.co/datasets/chen-yingfa/CFDBench-raw](https://huggingface.co/datasets/chen-yingfa/CFDBench-raw)
 - 百度网盘原始数据：[https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4](https://pan.baidu.com/s/1p0q60cv2hFZ7UcIf3XKSaw?pwd=cfd4)，提取码 `cfd4`
-- 文档版式参考：[https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)
 
 官方仓库把插值数据描述为约 13.4 GB；Hugging Face 页面在 **2026-07-21** 显示总文件大小为约 14.4 GB。原始库在仓库 README 中被描述为约 460 GB，而 Hugging Face 原始页当前显示约 205 GB，并注明 Cylinder 部分仍在上传。对可复现工作，应记录具体下载日期和仓库 revision。
 
@@ -268,7 +260,6 @@ data/
 └── cylinder/
 ```
 
-
 ### 只下载本问题
 
 ```bash
@@ -297,17 +288,6 @@ unzip ./downloads/CFDBench/cylinder/prop.zip -d ./data/cylinder
 - **loader 代码漂移：** `cylinder.py` 中保留多版加载函数；当前类调用 `load_case_data_fix`，但其他工具可能仍假定旧 padding 尺寸。建议固定 commit 并运行 shape 单元测试。
 - **直径/半径命名冲突：** 以真实 `case.json` 和 mask 几何为准。
 - 原始 Fluent 可含压力和速度模；插值标签仍统一为 $u,v$。
-
-## 引用
-
-```bibtex
-@article{CFDBench,
-  title  = {CFDBench: A Large-Scale Benchmark for Machine Learning Methods in Fluid Dynamics},
-  author = {Luo, Yining and Chen, Yingfa and Zhang, Zhen},
-  year   = {2023},
-  url    = {https://arxiv.org/abs/2310.05963}
-}
-```
 
 ## 原始出处定位
 

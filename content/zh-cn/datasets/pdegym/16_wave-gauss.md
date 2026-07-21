@@ -28,13 +28,9 @@ description: "多个高斯初始波源在随机平滑高斯波速介质中传播
 
 # Wave-Gauss：高斯介质中的变系数波动方程
 
-> **一句话描述：** 多个高斯初始波源在随机平滑高斯波速介质中传播。
+**描述：** 多个高斯初始波源在随机平滑高斯波速介质中传播。 该任务把空间波速 $c(x,y)$ 作为逐样本变化的 PDE 系数输入，模拟地震源在非均匀介质中的声波传播。
 
-## 更长描述
-
-该任务把空间波速 $c(x,y)$ 作为逐样本变化的 PDE 系数输入，模拟地震源在非均匀介质中的声波传播。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** 类似 DeVITO 的有限差分法；$128^2$。
 
 ## 基本信息
@@ -69,7 +65,6 @@ $$
 u_0(x,y)=\sum_{i=1}^{n}\exp\!\left[-\frac{(x-x_{c,i})^2+(y-y_{c,i})^2}{2s_i^2}\right].$$
 介质波速
 $$c(x,y)=c_0+\sum_{i=1}^{4}v_i\exp\!\left[-\frac{(x-x_i-dx_i)^2+(y-y_i-dy_i)^2}{2\sigma_i^2}\right].$$
-
 
 ### 物理量
 
@@ -172,19 +167,3 @@ python assemble_data.py --input_dir . --output_file Wave-Gauss.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: Wave-Gauss](https://huggingface.co/datasets/camlab-ethz/Wave-Gauss)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

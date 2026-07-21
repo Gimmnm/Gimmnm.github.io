@@ -27,14 +27,10 @@ description: "在含三维静止物体的立方腔中，以移动顶面驱动不
 
 # 三维复杂几何顶盖驱动立方腔（LDC–NS–3D）
 
-**一句话描述：** 在含三维静止物体的立方腔中，以移动顶面驱动不可压缩流动，并发布规则 $128^3$ 稳态张量。
+**描述：** 在含三维静止物体的立方腔中，以移动顶面驱动不可压缩流动，并发布规则 $128^3$ 稳态张量。 该子集把二维 LDC 扩展到三维，几何附近采用自适应 octree 加密。论文原始版本为 500 条 ellipsoid/torus 数据；当前官方仓库已更新为 1000 条，并列出 ellipsoid、toroid、box 和 cylinder。
 
-**较长描述：** 该子集把二维 LDC 扩展到三维，几何附近采用自适应 octree 加密。论文原始版本为 500 条 ellipsoid/torus 数据；当前官方仓库已更新为 1000 条，并列出 ellipsoid、toroid、box 和 cylinder。
-
-**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。  
-**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。  
-
-
+**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。
+**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。
 
 ## 所属数据集与链接
 
@@ -49,7 +45,6 @@ description: "在含三维静止物体的立方腔中，以移动顶面驱动不
 | 项目主页 | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | 许可证 | **CC-BY-NC-4.0** |
 | 数据格式 | NumPy compressed archives (`.npz`) |
-
 
 ## 方程
 
@@ -214,7 +209,6 @@ $$
 - 三维求解目标约为两倍 Kolmogorov 尺度；
 - 最终全部重采样到 uniform $128^3$。
 
-
 ## 数值生成与后处理
 
 - 求解框架：大规模并行、基于 quadtree/octree 的有限元 CFD/多物理代码；
@@ -226,7 +220,6 @@ $$
 - 论文报告总计算成本约为 65K node-hours。
 
 发布的低分辨率数据不是独立的低分辨率 CFD 重算，而是从 fully resolved 解后处理得到，因此可用于多分辨率学习与 super-resolution。
-
 
 ## 有趣且具有挑战性的地方
 
@@ -244,7 +237,6 @@ $$
 4. 旧代码还打包第五个 $C_D/C_L$ 辅助通道；
 5. 旧脚本默认设置中曾出现 `num_geometry=25`、`num_Reynolds=10` 等未完成/旧配置，不应据此推断当前 1000 条的准确组成；
 6. 当前文件约 33.4 GB，下载前应预留额外解压和训练缓存空间。
-
 
 ## 下载方式
 
@@ -285,28 +277,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 论文中的张量公式描述的是**语义轴顺序**。实际使用前仍应检查文件的 key、shape、channel 顺序、mask 数值和 SDF 符号。
 
-
-
-## 引用
-
-使用该数据时应引用 FlowBench 论文：
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-数据和官方工具代码标注为 **CC-BY-NC-4.0**；商业使用前应核对许可证原文。
-
-
-
 ## 资料来源与可信度说明
 
 本文档按以下优先级交叉核对：
@@ -317,5 +287,5 @@ with np.load(path, allow_pickle=False) as archive:
 4. [官方训练与评测代码 Geometry Matters](https://github.com/baskargroup/GeometryMatters)；
 5. [FlowBench 项目主页](https://baskargroup.bitbucket.io/FlowBench/)。
 
-论文、代码和当前数据仓库并非完全同一版本。本文档会把“论文定义”“旧版数据整理脚本”和“当前仓库状态”分开写明。  
+论文、代码和当前数据仓库并非完全同一版本。
 核对日期： **2026-07-21**。

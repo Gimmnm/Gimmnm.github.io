@@ -28,13 +28,9 @@ description: "Steady mapping from a random superposition of Gaussian sources to 
 
 # Poisson-Gauss: Gaussian Sources to Steady Poisson Solutions
 
-> **One-line description:** Steady mapping from a random superposition of Gaussian sources to the homogeneous-Dirichlet Poisson solution.
+**Description:** Steady mapping from a random superposition of Gaussian sources to the homogeneous-Dirichlet Poisson solution. This elliptic diffusion/smoothing operator is very different from fluid pretraining and tests transfer from a source field to a steady solution.
 
-## Longer description
-
-This elliptic diffusion/smoothing operator is very different from fluid pretraining and tests transfer from a source field to a steady solution.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** FEniCS finite-element method; released as $128^2$ fields.
 
 ## Identity
@@ -55,14 +51,12 @@ This elliptic diffusion/smoothing operator is very different from fluid pretrain
 
 ## Equation
 
-
 $$
 -\Delta u=f\quad\text{in }(0,1)^2,\qquad u=0\quad\text{on }\partial D,
 $$
 $$
 f(x,y)=\sum_{i=1}^{N_g}\exp\!\left[-\frac{(x-\mu_{x,i})^2+(y-\mu_{y,i})^2}{2\sigma_i^2}\right].
 $$
-
 
 ### Physical quantities
 
@@ -156,19 +150,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: Poisson-Gauss](https://huggingface.co/datasets/camlab-ethz/Poisson-Gauss).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

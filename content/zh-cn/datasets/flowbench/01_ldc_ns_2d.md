@@ -27,14 +27,10 @@ description: "在带有内部复杂静止物体的二维方腔中，以移动顶
 
 # 二维复杂几何顶盖驱动方腔（LDC–NS–2D）
 
-**一句话描述：** 在带有内部复杂静止物体的二维方腔中，以移动顶盖驱动不可压缩流动，并输出稳态速度和压力场。
+**描述：** 在带有内部复杂静止物体的二维方腔中，以移动顶盖驱动不可压缩流动，并输出稳态速度和压力场。 该子集研究同一不可压缩 Navier–Stokes 方程在不同 Reynolds 数和不同复杂物体边界下的稳态解。它是 FlowBench 最标准的 geometry-to-field 子集，也是官方 Geometry Matters 工作主要使用的部分。
 
-**较长描述：** 该子集研究同一不可压缩 Navier–Stokes 方程在不同 Reynolds 数和不同复杂物体边界下的稳态解。它是 FlowBench 最标准的 geometry-to-field 子集，也是官方 Geometry Matters 工作主要使用的部分。
-
-**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。  
-**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。  
-
-
+**数据集团队：** FlowBench / Baskar Group（Iowa State University 等合作单位）。
+**生成软件：** Dendro/Dendro-KT finite-element framework with SBM。
 
 ## 所属数据集与链接
 
@@ -49,7 +45,6 @@ description: "在带有内部复杂静止物体的二维方腔中，以移动顶
 | 项目主页 | [FlowBench website](https://baskargroup.bitbucket.io/FlowBench/) |
 | 许可证 | **CC-BY-NC-4.0** |
 | 数据格式 | NumPy compressed archives (`.npz`) |
-
 
 ## 方程
 
@@ -112,7 +107,6 @@ $$
 $$
 
 即顶壁以单位速度沿 $x$ 方向移动，其余外壁和物体表面均为无滑移壁面。论文未在数据章节明确给出压力 gauge 的具体实现。
-
 
 ## 几何条件
 
@@ -183,7 +177,6 @@ $$
 
 **文件级注意事项：** 部分旧版 DataPrep 代码把 mask 写成 `0/255`，并通过 `SDF > 0` 构造 mask；这与论文文字中的符号/数值约定不完全一致。下载后必须画出 mask 与 SDF，确认实际文件的正负号和缩放，而不要只依赖文字定义。
 
-
 ## 关于数据
 
 | 属性 | 内容 |
@@ -248,7 +241,6 @@ Y[3000][u, v, p, C][Nx][Ny]
 
 论文把该子集定义为稳态问题，没有把初始场或完整收敛过程作为数据发布。训练时不应把它当作 trajectory forecasting 数据；它更接近复杂几何条件下的稳态算子学习。
 
-
 ## 数值生成与后处理
 
 - 求解框架：大规模并行、基于 quadtree/octree 的有限元 CFD/多物理代码；
@@ -260,7 +252,6 @@ Y[3000][u, v, p, C][Nx][Ny]
 - 论文报告总计算成本约为 65K node-hours。
 
 发布的低分辨率数据不是独立的低分辨率 CFD 重算，而是从 fully resolved 解后处理得到，因此可用于多分辨率学习与 super-resolution。
-
 
 ## 有趣且具有挑战性的地方
 
@@ -277,7 +268,6 @@ Y[3000][u, v, p, C][Nx][Ny]
 3. SDF 正负号应从实际样本验证；
 4. `.npz` 文件按几何 family 和分辨率分别存放，不一定是一个包含全部 3000 条的单文件；
 5. 官方推荐 80/20 随机划分，但若研究几何泛化，应按几何实例或几何 family 划分，避免同一形状的不同 Reynolds 条件泄漏到训练与测试两侧。
-
 
 ## 下载方式
 
@@ -318,28 +308,6 @@ with np.load(path, allow_pickle=False) as archive:
 
 论文中的张量公式描述的是**语义轴顺序**。实际使用前仍应检查文件的 key、shape、channel 顺序、mask 数值和 SDF 符号。
 
-
-
-## 引用
-
-使用该数据时应引用 FlowBench 论文：
-
-```bibtex
-@article{tali2024flowbench,
-  title   = {FlowBench: A Large Scale Benchmark for Flow Simulation over Complex Geometries},
-  author  = {Tali, Ronak and Rabeh, Ali and Yang, Cheng-Hau and Shadkhah, Mehdi
-             and Karki, Samundra and Upadhyaya, Abhisek and Dhakshinamoorthy, Suriya
-             and Saadati, Marjan and Sarkar, Soumik and Krishnamurthy, Adarsh
-             and Hegde, Chinmay and Balu, Aditya and Ganapathysubramanian, Baskar},
-  journal = {arXiv preprint arXiv:2409.18032},
-  year    = {2024}
-}
-```
-
-数据和官方工具代码标注为 **CC-BY-NC-4.0**；商业使用前应核对许可证原文。
-
-
-
 ## 资料来源与可信度说明
 
 本文档按以下优先级交叉核对：
@@ -350,5 +318,5 @@ with np.load(path, allow_pickle=False) as archive:
 4. [官方训练与评测代码 Geometry Matters](https://github.com/baskargroup/GeometryMatters)；
 5. [FlowBench 项目主页](https://baskargroup.bitbucket.io/FlowBench/)。
 
-论文、代码和当前数据仓库并非完全同一版本。本文档会把“论文定义”“旧版数据整理脚本”和“当前仓库状态”分开写明。  
+论文、代码和当前数据仓库并非完全同一版本。
 核对日期： **2026-07-21**。

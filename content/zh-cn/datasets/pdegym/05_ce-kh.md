@@ -28,13 +28,9 @@ description: "随机扰动双界面的可压缩 Kelvin–Helmholtz 剪切层。"
 
 # CE-KH：Kelvin–Helmholtz 剪切层不稳定性
 
-> **一句话描述：** 随机扰动双界面的可压缩 Kelvin–Helmholtz 剪切层。
+**描述：** 随机扰动双界面的可压缩 Kelvin–Helmholtz 剪切层。 两层流体具有不同密度和相反的水平速度，小幅随机界面扰动触发卷起与混合。该算子向预训练集提供典型的剪切不稳定性。
 
-## 更长描述
-
-两层流体具有不同密度和相反的水平速度，小幅随机界面扰动触发卷起与混合。该算子向预训练集提供典型的剪切不稳定性。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** ALSVINN；$512^2\to128^2$。
 
 ## 基本信息
@@ -77,7 +73,6 @@ $$
 $$
 \sigma_i(x)=\varepsilon\frac{\sum_{j=1}^{p}\alpha_{ij}\cos(2\pi j(x+\beta_{ij}))}{\sum_{j=1}^{p}\alpha_{ij}},\qquad \varepsilon=0.05.
 $$
-
 
 ### 物理量
 
@@ -177,19 +172,3 @@ python assemble_data.py --input_dir . --output_file CE-KH.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: CE-KH](https://huggingface.co/datasets/camlab-ethz/CE-KH)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

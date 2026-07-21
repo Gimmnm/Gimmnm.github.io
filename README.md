@@ -1,6 +1,6 @@
 # PDE Dataset Docs
 
-Bilingual (中文 / English) documentation for scientific ML / CFD benchmarks, structured like [The Well](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/).
+Bilingual (中文 / English) documentation for scientific ML / CFD benchmarks.
 
 **Datasets:** The Well · CFDBench · FlowBench · PDEArena · PDEBench · PDEgym
 

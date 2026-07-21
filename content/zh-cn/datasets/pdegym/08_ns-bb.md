@@ -28,13 +28,9 @@ description: "在 Fourier 空间生成 Brownian bridge 随机场，先从 $t=-0.
 
 # NS-BB：Brownian Bridge 粗糙随机初值
 
-> **一句话描述：** 在 Fourier 空间生成 Brownian bridge 随机场，先从 $t=-0.5$ 预演化到 0，再作为正式初值。
+**描述：** 在 Fourier 空间生成 Brownian bridge 随机场，先从 $t=-0.5$ 预演化到 0，再作为正式初值。 该构造提供比光滑 Fourier 初值更粗糙的湍流型随机场，用来研究统计流体解与模型对低正则初值的鲁棒性。
 
-## 更长描述
-
-该构造提供比光滑 Fourier 初值更粗糙的湍流型随机场，用来研究统计流体解与模型对低正则初值的鲁棒性。
-
-**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。  
+**数据集作者/维护者：** POSEIDON 作者团队，ETH Zurich Computational and Applied Mathematics Laboratory。
 **生成代码或软件：** AZEBAN；$128^2$。
 
 ## 基本信息
@@ -63,7 +59,6 @@ $$
 其中 $\mathbf u=(u_x,u_y)$ 是笛卡尔速度场，$p$ 是压力。PDEgym 发布的不可压流模拟只在足够高的 Fourier 模态上施加谱超黏性；取 $N=128$、$m_N=\sqrt N$、$\varepsilon_N=0.05/N$，对应有效黏性尺度约 $\nu\simeq4\times10^{-4}$。它是用于逼近无黏极限的数值稳定化设置，并不是发布数据中的黏度参数扫描。
 
 Brownian bridge 在 Fourier 空间中带有 $\lVert k\rVert_2^{-3/2}$ 衰减，并由正弦/余弦基的随机组合构成。随机场通过离散 NS 从 $t=-0.5$ 预演化到 $t=0$；预演化后的速度作为数据轨迹初值。
-
 
 ### 物理量
 
@@ -160,19 +155,3 @@ python assemble_data.py --input_dir . --output_file NS-BB.nc
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon)，数据标识与加载器位于 [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems)。
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651)。
 4. [Official dataset repository: NS-BB](https://huggingface.co/datasets/camlab-ethz/NS-BB)。
-5. 文档结构参考 [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/)，但字段内容来自 PDEgym 原始论文、代码和数据卡。
-
-## 引用
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```

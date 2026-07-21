@@ -131,15 +131,45 @@ The inviscid part of the conservation laws is advanced with a temporally and spa
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### Released file configs
+
+**Paper vs release:** paper tables also list 3D $(\eta,\zeta)=(10^{-2},10^{-2})$, but downloadable training files are only near-inviscid $(10^{-8},10^{-8})$.  
+`BlastWave` / `Turb_M*` are an **extra test set**; parameters come from filenames and YAML (e.g. `M0`).
+
+| Data file | initial field | boundary | $(\eta,\zeta,M)$ | Per trajectory | Note |
+|---|---|---|---|---|---|
+| `3D_CFD_Rand_M1.0_Eta1e-08_Zeta1e-08_periodic_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},1.0)$ | random field | main train |
+| `3D_CFD_Turb_M1.0_Eta1e-08_Zeta1e-08_periodic_Train.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$ | turb. seed | main train |
+| `BlastWave.hdf5` | blast wave | outgoing (`trans`) | $(10^{-8},10^{-8},1.0)$; $256^3$ | no | extra test (YAML) |
+| `Turb_M01.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.1)$; $256^3$ | no (`numbers=4`) | extra test (YAML) |
+| `Turb_M05.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},0.5)$; $256^3$ | no (few samples) | extra test |
+| `Turb_M1.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},1.0)$; $256^3$ | no (few samples) | extra test |
+| `Turb_M2.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},2.0)$; $256^3$ | no (few samples) | extra test |
+| `Turb_M4.hdf5` | turbulence | periodic | $(10^{-8},10^{-8},4.0)$; $256^3$ | no (few samples) | extra test |
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| IC family / $M$ / $(\eta,\zeta)$ | differs across HDF5 config files (2 main) | common reading: (1) random, $M=1$, near-inviscid; (2) turbulence, $M=1$, near-inviscid — trust filenames + HDF5 attributes |
-| field realization | per trajectory | seed |
-| $\Gamma$, grid, scheme | fixed | $\Gamma=5/3$; $128^3$; 21 frames |
-
-## Released configurations
-
-The released main set is typically two configurations with 100 trajectories each: inviscid random and inviscid turbulence; extra test files are not part of these 200.
+| $\eta,\zeta$ | any nonnegative; paper also lists $10^{-2}$ | training release only $10^{-8}$; re-generate to sweep more |
+| $M$ | any positive | training $M=1$; tests add $0.1,0.5,2,4$ |
+| IC family | random / turbulence / blast … | yes |
+| grid (YAML tests may use $256^3$) | editable | main train advertised $128^3$ |
 
 ## Data files
 

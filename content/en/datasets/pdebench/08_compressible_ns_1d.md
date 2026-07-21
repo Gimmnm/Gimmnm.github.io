@@ -133,27 +133,53 @@ The inviscid part of the conservation laws is advanced with a temporally and spa
 
 ## Parameters
 
-| Parameter | How it varies | Values |
+Equation:
+
+\[
+\partial_t\rho+\nabla\cdot(\rho\mathbf v)=0,
+\]
+\[
+\rho(\partial_t\mathbf v+\mathbf v\cdot\nabla\mathbf v)
+=-\nabla p+\eta\Delta\mathbf v+\left(\zeta+\frac{\eta}{3}\right)\nabla(\nabla\cdot\mathbf v),
+\]
+\[
+\partial_t\!\left(\epsilon+\frac{\rho|\mathbf v|^2}{2}\right)
++\nabla\cdot\!\left[\left(\epsilon+p+\frac{\rho|\mathbf v|^2}{2}\right)\mathbf v-\mathbf v\cdot\boldsymbol\sigma'\right]=0,
+\qquad \epsilon=\frac{p}{\Gamma-1},\quad \Gamma=\frac53.
+\]
+
+### Released file configs
+
+The first five rows are the main training sweep. `Sod*` are **extra classic shock-tube tests** (not the random training IC family), but they **do have parameters**: YAML sets `init_mode=shocktube1…7`, `bc=trans`, $(\eta,\zeta)=(10^{-8},10^{-8})$, $\Gamma=5/3$. 1D main training does not sweep Mach, so $M$ is —.
+
+> **What “extra test set” means:** fixed classic cases outside the main training distribution (random field / random Riemann), used for generalization checks — often called OOD (out-of-distribution) in the literature. It does **not** mean “no parameters”.
+
+| Data file | initial field | boundary | $(\eta,\zeta,M)$ | Per trajectory | Note |
+|---|---|---|---|---|---|
+| `1D_CFD_Rand_Eta1.e-8_Zeta1.e-8_periodic_Train.hdf5` | random field | periodic | $(10^{-8},10^{-8},\text{—})$ | random-field realization | main train |
+| `1D_CFD_Rand_Eta0.01_Zeta0.01_periodic_Train.hdf5` | random field | periodic | $(10^{-2},10^{-2},\text{—})$ | same | main train |
+| `1D_CFD_Rand_Eta0.1_Zeta0.1_periodic_Train.hdf5` | random field | periodic | $(10^{-1},10^{-1},\text{—})$ | same | main train |
+| `1D_CFD_Rand_Eta1.e-8_Zeta1.e-8_trans_Train.hdf5` | random field | outgoing (`trans`) | $(10^{-8},10^{-8},\text{—})$ | same | main train |
+| `1D_CFD_Shock_Eta1.e-8_Zeta1.e-8_trans_Train.hdf5` | shock-tube (random Riemann) | outgoing (`trans`) | $(10^{-8},10^{-8},\text{—})$ | random L/R states & discontinuity | main train |
+| `Sod1.hdf5` | `shocktube1` (fixed classic) | outgoing | $(10^{-8},10^{-8},\text{—})$ | no (fixed IC) | extra test |
+| `Sod2.hdf5` | `shocktube2` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test |
+| `Sod3.hdf5` | `shocktube3` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test |
+| `Sod4.hdf5` | `shocktube4` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test |
+| `Sod5.hdf5` | `shocktube5` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test |
+| `Sod6.hdf5` | `shocktube6` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test (listed under Train/ShockTube) |
+| `Sod7.hdf5` | `shocktube7` | outgoing | $(10^{-8},10^{-8},\text{—})$ | no | extra test |
+
+Exact Sod L/R states follow the matching YAML / HDF5 attributes (`fin_time` may also differ).
+
+### Generator-tunable ranges
+
+| Parameter | Tunable range / options | Covered by release? |
 |---|---|---|
-| $(\eta,\zeta)$ | differs across HDF5 config files | $(10^{-8},10^{-8})$, $(10^{-2},10^{-2})$, $(10^{-1},10^{-1})$; always $\eta=\zeta$ |
-| IC family | differs across HDF5 config files | random field / shock tube |
-| boundary type | differs across HDF5 config files | periodic / outgoing |
-| IC realization | per trajectory | random-field or Riemann left/right draws |
-| $\Gamma$, grid, scheme | fixed | $\Gamma=5/3$; $N_x=1024$; HLLC+MUSCL etc. |
-
-Five main released training configs:
-
-| # | IC | BC | $(\eta,\zeta)$ |
-|---:|---|---|---|
-| 1 | random | periodic | $(10^{-8},10^{-8})$ |
-| 2 | random | periodic | $(10^{-2},10^{-2})$ |
-| 3 | random | periodic | $(10^{-1},10^{-1})$ |
-| 4 | random | outgoing | $(10^{-8},10^{-8})$ |
-| 5 | shock tube | outgoing | $(10^{-8},10^{-8})$ |
-
-## Released configurations
-
-Five main training configurations. The current download category additionally contains several Sod shock-tube files; these are extra/classical tests and should not be conflated with the five randomized training configurations.
+| $\eta,\zeta$ (usually $\eta=\zeta$) | any nonnegative; common $\{10^{-8},10^{-2},10^{-1}\}$ | main train covers these three |
+| boundary | `periodic` / `trans` (outgoing), … | yes |
+| IC family | random / random shock-tube / `shocktube1…7`, … | yes |
+| Mach $M$ | YAML has `M0`; 1D main train usually does not sweep it | not swept in 1D main train |
+| $\Gamma$, grid, CFL, time window | editable | mostly fixed in release |
 
 ## Data files
 

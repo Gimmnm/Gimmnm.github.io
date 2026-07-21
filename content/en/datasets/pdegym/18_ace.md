@@ -28,13 +28,9 @@ description: "Nonlinear Allen–Cahn phase-transition trajectories on a two-dime
 
 # ACE: Allen–Cahn Reaction–Diffusion Phase Field
 
-> **One-line description:** Nonlinear Allen–Cahn phase-transition trajectories on a two-dimensional periodic domain.
+**Description:** Nonlinear Allen–Cahn phase-transition trajectories on a two-dimensional periodic domain. This task differs strongly from the convection-dominated pretraining fluids: diffusion, bistable reaction, and interface motion dominate the dynamics.
 
-## Longer description
-
-This task differs strongly from the convection-dominated pretraining fluids: diffusion, bistable reaction, and interface motion dominate the dynamics.
-
-**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.  
+**Dataset authors/maintainers:** The POSEIDON authors, Computational and Applied Mathematics Laboratory, ETH Zurich.
 **Code or software used to generate the data:** Finite-difference method; $128^2$.
 
 ## Identity
@@ -55,7 +51,6 @@ This task differs strongly from the convection-dominated pretraining fluids: dif
 
 ## Equation
 
-
 $$
 \partial_tu=\Delta u-\epsilon^2u(u^2-1).
 $$
@@ -63,7 +58,6 @@ Initial condition
 $$
 u_0(x,y)=\frac1{K^2}\sum_{i,j=1}^{K}a_{ij}(i^2+j^2)^{-r}\sin(\pi ix)\sin(\pi jy).
 $$
-
 
 ### Physical quantities
 
@@ -161,19 +155,3 @@ The assembled path can be passed to the official training/inference scripts thro
 2. [Official POSEIDON code](https://github.com/camlab-ethz/poseidon); identifiers and loaders are under [`scOT/problems`](https://github.com/camlab-ethz/poseidon/tree/main/scOT/problems).
 3. [Official PDEgym collection](https://huggingface.co/collections/camlab-ethz/pdegym-665472c2b1181f7d10b40651).
 4. [Official dataset repository: ACE](https://huggingface.co/datasets/camlab-ethz/ACE).
-5. The page structure is inspired by [The Well dataset documentation](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), while the content is grounded in the PDEgym paper, code, and data cards.
-
-## Citation
-
-```bibtex
-@misc{herde2024poseidon,
-  title        = {POSEIDON: Efficient Foundation Models for PDEs},
-  author       = {Maximilian Herde and Bogdan Raoni\'{c} and Tobias Rohner and
-                  Roger K\"appeli and Roberto Molinaro and Emmanuel de B\'{e}zenac
-                  and Siddhartha Mishra},
-  year         = {2024},
-  eprint       = {2405.19101},
-  archivePrefix= {arXiv},
-  primaryClass = {cs.LG}
-}
-```
