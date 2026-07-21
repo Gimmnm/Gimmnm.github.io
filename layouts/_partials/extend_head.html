@@ -80,8 +80,9 @@
 </style>
 <script>
 (function () {
-  var HASH = {{ site.Params.siteGate.passwordHash | jsonify }};
-  var KEY = {{ site.Params.siteGate.storageKey | default "pde-docs-gate-v1" | jsonify }};
+  // Plain string embed — do not jsonify (it double-quoted the hash and broke unlock).
+  var HASH = "{{ site.Params.siteGate.passwordHash }}";
+  var KEY = "{{ site.Params.siteGate.storageKey | default "pde-docs-gate-v1" }}";
 
   function toHex(buffer) {
     return Array.from(new Uint8Array(buffer))
