@@ -1,10 +1,11 @@
 /* Gzh' Blog — Lil'Log clarity + Terence Tao academic tone */
 
 :root {
-    --main-width: 760px;
-    --nav-width: 960px;
-    --gap: 28px;
-    --content-gap: 22px;
+    --main-width: 920px;
+    --nav-width: 1280px;
+    --docs-width: 1480px;
+    --gap: 24px;
+    --content-gap: 16px;
     --font-serif: "Source Serif 4", "Noto Serif SC", Georgia, "Times New Roman", serif;
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
     --link: #1a5fb4;
@@ -48,34 +49,41 @@ details.toc,
     letter-spacing: -0.02em;
 }
 
-/* Tao: serif prose, generous leading */
+/* Serif prose: a bit larger type, tighter leading */
 .post-content,
 .home-info .entry-content {
-    font-size: 1.0625rem;
-    line-height: 1.78;
+    font-size: 1.125rem;
+    line-height: 1.58;
     color: var(--content);
 }
 
 .post-content p,
 .post-content li {
-    margin-bottom: 1.05em;
+    margin-bottom: 0.7em;
+}
+
+.post-content ul,
+.post-content ol {
+    margin-top: 0.35em;
+    margin-bottom: 0.85em;
 }
 
 .post-content h2 {
     font-family: var(--font-sans);
-    font-size: 1.45rem;
+    font-size: 1.38rem;
     font-weight: 600;
-    margin-top: 2.2em;
-    margin-bottom: 0.75em;
-    padding-bottom: 0.25em;
+    margin-top: 1.55em;
+    margin-bottom: 0.5em;
+    padding-bottom: 0.2em;
     border-bottom: 1px solid var(--border);
 }
 
 .post-content h3 {
     font-family: var(--font-sans);
-    font-size: 1.15rem;
+    font-size: 1.12rem;
     font-weight: 600;
-    margin-top: 1.6em;
+    margin-top: 1.15em;
+    margin-bottom: 0.4em;
 }
 
 /* Tao-style links in body */
@@ -103,8 +111,8 @@ details.toc,
 }
 
 .post-content .math-block {
-    margin: 1.4em 0;
-    padding: 0.6em 0;
+    margin: 0.9em 0;
+    padding: 0.35em 0;
     overflow-x: auto;
     text-align: center;
 }
@@ -114,8 +122,8 @@ details.toc,
 }
 
 .post-content .katex-display {
-    margin: 1.4em 0;
-    padding: 0.6em 0;
+    margin: 0.9em 0;
+    padding: 0.35em 0;
     overflow-x: auto;
     overflow-y: hidden;
 }
@@ -205,11 +213,30 @@ details.toc,
     color: var(--secondary);
 }
 
-/* Single post: slightly narrower feel for long formulas */
+/* Single post reading width (non-docs) */
 @media (min-width: 768px) {
     .post-single {
         max-width: var(--main-width);
     }
+}
+
+/* Docs pages: lift PaperMod .main cap so sidebar + body can breathe */
+.main:has(.docs-layout),
+.main:has(.home-dataset-grid) {
+    max-width: calc(var(--docs-width) + var(--gap) * 2);
+    width: 100%;
+}
+
+.header-nav {
+    max-width: calc(var(--docs-width) + var(--gap) * 2);
+}
+
+.post-content strong,
+.post-content b,
+.md-content strong,
+.md-content b {
+    font-weight: 700;
+    color: var(--primary);
 }
 
 /* TOC — subtle academic sidebar feel */
@@ -230,4 +257,224 @@ details.toc {
 /* Hide noisy share row on mobile-first academic reading */
 .share-buttons {
     opacity: 0.7;
+}
+
+/* ===== Dataset docs (The Well–style) ===== */
+.docs-layout {
+    display: grid;
+    grid-template-columns: minmax(220px, 280px) minmax(0, 1fr);
+    gap: 1.5rem;
+    align-items: start;
+    max-width: var(--docs-width);
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 0.5rem 1.5rem;
+}
+
+.docs-main .post-content {
+    font-size: 1.125rem;
+    line-height: 1.55;
+}
+
+.docs-main .post-content table {
+    display: block;
+    width: 100%;
+    overflow-x: auto;
+    border-collapse: collapse;
+    margin: 0.65em 0 1em;
+    font-size: 0.96em;
+}
+
+.docs-main .post-content th,
+.docs-main .post-content td {
+    padding: 0.32rem 0.55rem;
+    vertical-align: top;
+}
+
+.docs-main .post-content pre {
+    margin: 0.65em 0 1em;
+}
+
+.docs-main .post-content img {
+    margin: 0.5em 0 0.85em;
+}
+
+.docs-main .page-header {
+    margin-bottom: 0.75rem;
+}
+
+.docs-main .post-title {
+    font-size: 1.75rem;
+    margin-bottom: 0.35rem;
+}
+
+.docs-sidebar {
+    position: sticky;
+    top: 5.5rem;
+    max-height: calc(100vh - 6.5rem);
+    overflow: auto;
+    font-family: var(--font-sans);
+    font-size: 0.9rem;
+    border-right: 1px solid var(--border);
+    padding-right: 1rem;
+}
+
+.docs-sidebar-title {
+    font-weight: 600;
+    margin: 0 0 0.75rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-size: 0.78rem;
+    color: var(--secondary);
+}
+
+.docs-sidebar-title a {
+    color: inherit;
+    text-decoration: none;
+}
+
+.docs-nav,
+.docs-nav-children {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.docs-nav-family {
+    margin-bottom: 0.65rem;
+}
+
+.docs-nav-family-link {
+    display: block;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+    padding: 0.2rem 0;
+}
+
+.docs-nav-children {
+    margin-top: 0.25rem;
+    margin-left: 0.65rem;
+    padding-left: 0.65rem;
+    border-left: 2px solid var(--border);
+    display: none;
+}
+
+.docs-nav-family.is-open > .docs-nav-children {
+    display: block;
+}
+
+.docs-nav-children a {
+    display: block;
+    padding: 0.22rem 0;
+    color: var(--secondary);
+    text-decoration: none;
+    line-height: 1.35;
+}
+
+.docs-nav-children a:hover,
+.docs-nav-family-link:hover,
+.docs-nav a.is-active {
+    color: var(--link);
+}
+
+.docs-nav a.is-active {
+    font-weight: 600;
+}
+
+.docs-main {
+    min-width: 0;
+}
+
+.docs-main .post-single,
+.docs-main .post-content {
+    max-width: none;
+}
+
+.docs-child-list {
+    margin-top: 2rem;
+    font-family: var(--font-sans);
+}
+
+.docs-child-list ul {
+    list-style: none;
+    padding: 0;
+}
+
+.docs-child-list li {
+    padding: 0.65rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.docs-child-summary {
+    color: var(--secondary);
+    font-size: 0.92rem;
+}
+
+.docs-family-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 1rem;
+    margin-top: 1.5rem;
+}
+
+.docs-family-card {
+    display: block;
+    padding: 1.1rem 1.2rem;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    text-decoration: none;
+    color: inherit;
+    background: var(--entry);
+    transition: border-color 0.15s ease;
+}
+
+.docs-family-card:hover {
+    border-color: var(--link);
+}
+
+.docs-family-card h2 {
+    font-family: var(--font-sans);
+    font-size: 1.15rem;
+    margin: 0 0 0.45rem;
+}
+
+.docs-family-card p {
+    margin: 0 0 0.75rem;
+    color: var(--secondary);
+    font-size: 0.92rem;
+    line-height: 1.45;
+}
+
+.docs-family-count {
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    color: var(--secondary);
+}
+
+@media (max-width: 900px) {
+    .docs-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .docs-sidebar {
+        position: static;
+        max-height: none;
+        border-right: none;
+        border-bottom: 1px solid var(--border);
+        padding-right: 0;
+        padding-bottom: 1rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .docs-nav-children {
+        display: block;
+    }
+}
+
+/* Home: hide empty post list when only docs are shown */
+/* Hide PaperMod home post list; dataset cards come from home_info */
+body.list:not(.datasets) .main > .post-entry,
+body.list:not(.datasets) .main > .page-footer {
+    display: none;
 }

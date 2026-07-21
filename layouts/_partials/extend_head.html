@@ -7,3 +7,151 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Serif+SC:wght@400;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&display=swap" rel="stylesheet">
+
+{{- if site.Params.siteGate.enabled }}
+<meta name="robots" content="noindex, nofollow">
+<style>
+  #site-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5rem;
+    background: color-mix(in srgb, var(--theme, #f6f5f1) 92%, #000 8%);
+    backdrop-filter: blur(8px);
+  }
+  #site-gate[hidden] { display: none !important; }
+  #site-gate .gate-card {
+    width: min(420px, 100%);
+    padding: 1.5rem 1.4rem 1.35rem;
+    border: 1px solid var(--border, #ddd);
+    border-radius: 8px;
+    background: var(--entry, #fff);
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    box-shadow: 0 8px 28px rgba(0,0,0,0.08);
+  }
+  #site-gate h1 {
+    margin: 0 0 0.35rem;
+    font-size: 1.25rem;
+    font-weight: 650;
+    letter-spacing: -0.02em;
+  }
+  #site-gate p {
+    margin: 0 0 1rem;
+    color: var(--secondary, #666);
+    font-size: 0.92rem;
+    line-height: 1.45;
+  }
+  #site-gate form {
+    display: flex;
+    gap: 0.5rem;
+  }
+  #site-gate input[type="password"] {
+    flex: 1;
+    min-width: 0;
+    padding: 0.55rem 0.7rem;
+    border: 1px solid var(--border, #ccc);
+    border-radius: 6px;
+    background: transparent;
+    color: inherit;
+    font-size: 0.95rem;
+  }
+  #site-gate button {
+    padding: 0.55rem 0.9rem;
+    border: 0;
+    border-radius: 6px;
+    background: #1a5fb4;
+    color: #fff;
+    font-size: 0.92rem;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  #site-gate .gate-error {
+    margin: 0.65rem 0 0;
+    min-height: 1.2em;
+    color: #b42318;
+    font-size: 0.85rem;
+  }
+  html.site-gate-locked body > *:not(#site-gate) {
+    visibility: hidden !important;
+  }
+</style>
+<script>
+(function () {
+  var HASH = {{ site.Params.siteGate.passwordHash | jsonify }};
+  var KEY = {{ site.Params.siteGate.storageKey | default "pde-docs-gate-v1" | jsonify }};
+
+  function toHex(buffer) {
+    return Array.from(new Uint8Array(buffer))
+      .map(function (b) { return b.toString(16).padStart(2, "0"); })
+      .join("");
+  }
+
+  async function sha256(text) {
+    var data = new TextEncoder().encode(text);
+    var digest = await crypto.subtle.digest("SHA-256", data);
+    return toHex(digest);
+  }
+
+  function unlock() {
+    document.documentElement.classList.remove("site-gate-locked");
+    var gate = document.getElementById("site-gate");
+    if (gate) gate.hidden = true;
+  }
+
+  function lock() {
+    document.documentElement.classList.add("site-gate-locked");
+  }
+
+  async function check(password) {
+    try {
+      return (await sha256(password)) === HASH;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  async function init() {
+    if (sessionStorage.getItem(KEY) === "1") {
+      unlock();
+      return;
+    }
+    lock();
+    document.addEventListener("DOMContentLoaded", function () {
+      var gate = document.createElement("div");
+      gate.id = "site-gate";
+      gate.innerHTML =
+        '<div class="gate-card">' +
+          "<h1>Private docs</h1>" +
+          "<p>Enter the site password to continue.</p>" +
+          '<form id="site-gate-form">' +
+            '<input type="password" id="site-gate-input" name="password" autocomplete="current-password" placeholder="Password" required>' +
+            "<button type=\"submit\">Enter</button>" +
+          "</form>" +
+          '<p class="gate-error" id="site-gate-error" aria-live="polite"></p>' +
+        "</div>";
+      document.body.appendChild(gate);
+      var form = document.getElementById("site-gate-form");
+      var input = document.getElementById("site-gate-input");
+      var err = document.getElementById("site-gate-error");
+      input.focus();
+      form.addEventListener("submit", async function (e) {
+        e.preventDefault();
+        err.textContent = "";
+        if (await check(input.value)) {
+          sessionStorage.setItem(KEY, "1");
+          unlock();
+        } else {
+          err.textContent = "Incorrect password.";
+          input.select();
+        }
+      });
+    });
+  }
+
+  init();
+})();
+</script>
+{{- end }}

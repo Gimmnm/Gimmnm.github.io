@@ -3,3 +3,12 @@
 .hugo_build.lock
 .DS_Store
 Thumbs.db
+
+# Local paper PDFs and draft markdown packages (not for GitHub Pages)
+*.pdf
+CFDBench_markdown_docs/
+FlowBench_markdown_docs/
+PDEArena_markdown_docs_bilingual/
+PDEBench_markdown_docs_bilingual/
+PDEgym_markdown_docs/
+the_well_markdown_docs/

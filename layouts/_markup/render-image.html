@@ -1,0 +1,35 @@
+{{- /*
+  PaperMod's default image hook only resolves page-bundle / assets resources.
+  Our dataset docs keep images as siblings of leaf .md files inside a branch
+  bundle (section), so they are section resources — resolve those too.
+*/ -}}
+{{- $u := urls.Parse .Destination -}}
+{{- $src := $u.String -}}
+{{- if not $u.IsAbs -}}
+  {{- $path := strings.TrimPrefix "./" $u.Path }}
+  {{- $res := false -}}
+  {{- with .PageInner.Resources.Get $path -}}{{- $res = . -}}{{- end -}}
+  {{- if not $res -}}
+    {{- with .Page.CurrentSection.Resources.Get $path -}}{{- $res = . -}}{{- end -}}
+  {{- end -}}
+  {{- if not $res -}}
+    {{- with resources.Get $path -}}{{- $res = . -}}{{- end -}}
+  {{- end -}}
+  {{- with $res -}}
+    {{- $src = .RelPermalink -}}
+    {{- with $u.RawQuery -}}
+      {{- $src = printf "%s?%s" $src . -}}
+    {{- end -}}
+    {{- with $u.Fragment -}}
+      {{- $src = printf "%s#%s" $src . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- $attributes := merge .Attributes (dict "alt" .Text "src" $src "title" (.Title | transform.HTMLEscape) "loading" "lazy") -}}
+<img
+  {{- range $k, $v := $attributes -}}
+    {{- if $v -}}
+      {{- printf " %s=%q" $k $v | safeHTMLAttr -}}
+    {{- end -}}
+  {{- end -}}>
+{{- /**/ -}}

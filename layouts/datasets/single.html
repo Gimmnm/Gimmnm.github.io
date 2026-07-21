@@ -1,0 +1,63 @@
+{{- define "main" }}
+{{- $section := .Site.GetPage "section" "datasets" }}
+{{- $isZh := eq .Language.Lang "zh-cn" }}
+<div class="docs-layout">
+  <aside class="docs-sidebar" aria-label="Dataset navigation">
+    <div class="docs-sidebar-inner">
+      <p class="docs-sidebar-title">
+        <a href="{{ with $section }}{{ .RelPermalink }}{{ else }}{{ "datasets/" | relLangURL }}{{ end }}">
+          {{- if $isZh }}数据集{{- else }}Datasets{{- end -}}
+        </a>
+      </p>
+      {{- with $section }}
+      <ul class="docs-nav">
+        {{- range .Sections.ByWeight }}
+        {{- $isActiveFamily := or (eq $.RelPermalink .RelPermalink) ($.IsDescendant .) }}
+        <li class="docs-nav-family{{ if $isActiveFamily }} is-open{{ end }}">
+          <a class="docs-nav-family-link{{ if eq $.RelPermalink .RelPermalink }} is-active{{ end }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+          {{- if .RegularPages }}
+          <ul class="docs-nav-children">
+            {{- range .RegularPages.ByWeight }}
+            <li>
+              <a class="{{ if eq $.RelPermalink .RelPermalink }}is-active{{ end }}" href="{{ .RelPermalink }}">{{ .LinkTitle }}</a>
+            </li>
+            {{- end }}
+          </ul>
+          {{- end }}
+        </li>
+        {{- end }}
+      </ul>
+      {{- end }}
+    </div>
+  </aside>
+
+  <div class="docs-main">
+    <article class="post-single">
+      <header class="post-header">
+        {{ partial "breadcrumbs.html" . }}
+        <h1 class="post-title">{{ .Title }}</h1>
+        {{- with .Params.dataset_family }}
+        <div class="post-description">
+          {{- if $isZh }}所属数据集：{{- else }}Parent dataset: {{- end -}}{{ . }}
+        </div>
+        {{- end }}
+      </header>
+      {{- if (.Param "ShowToc") }}
+      {{- partial "toc.html" . }}
+      {{- end }}
+      {{- if .Content }}
+      <div class="post-content md-content">
+        {{- if not (.Param "disableAnchoredHeadings") }}
+        {{- partial "anchored_headings.html" .Content -}}
+        {{- else }}{{ .Content }}{{ end }}
+      </div>
+      {{- end }}
+      <footer class="post-footer">
+        {{- if (.Param "ShowPostNavLinks") }}
+        {{- partial "post_nav_links.html" . }}
+        {{- end }}
+      </footer>
+    </article>
+  </div>
+</div>
+{{- end }}

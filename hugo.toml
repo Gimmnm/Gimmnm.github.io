@@ -1,8 +1,6 @@
 baseURL = "https://gimmnm.github.io/"
-title = "Gzh' Blog"
+title = "PDE Dataset Docs"
 theme = "PaperMod"
-locale = "en-us"
-defaultContentLanguage = "en"
 enableRobotsTXT = true
 buildDrafts = false
 buildFuture = false
@@ -10,13 +8,16 @@ buildExpired = false
 enableEmoji = true
 pygmentsUseClasses = true
 
+defaultContentLanguage = "zh-cn"
+defaultContentLanguageInSubdir = false
+
 [params]
 env = "production"
 author = "Gzh"
-description = "Learning notes on machine learning, mathematics, and related topics."
 defaultTheme = "auto"
-disableLangToggle = true
-ShowReadingTime = true
+disableLangToggle = false
+displayFullLangName = true
+ShowReadingTime = false
 ShowShareButtons = false
 ShowPostNavLinks = true
 ShowBreadCrumbs = true
@@ -24,55 +25,21 @@ ShowCodeCopyButtons = true
 disableSpecial1stPost = true
 disableScrollToTop = false
 comments = false
-hidemeta = false
+hidemeta = true
 hideSummary = false
 showtoc = true
 tocopen = false
 math = true
+mainSections = ["datasets"]
 
-[params.homeInfoParams]
-Title = "👋 Welcome to Gzh' Blog"
-Content = """
-Hi, this is Gzh. I document learning notes here — mostly machine learning, applied mathematics, and related topics.
+# Soft client-side gate for GitHub Pages (hash only; change by updating passwordHash).
+[params.siteGate]
+enabled = true
+passwordHash = "ba1b8fe98dd7785dbc3759fd30253a9374f632036c48a16df978f736cd9ab99b"
+storageKey = "pde-docs-gate-v1"
 
-Posts may be in **English** or **中文**, depending on the topic. No fixed pairing — just write in whichever language fits.
-"""
-
-[[menu.main]]
-identifier = "posts"
-name = "Posts"
-url = "posts/"
-weight = 10
-
-[[menu.main]]
-identifier = "archives"
-name = "Archive"
-url = "archives/"
-weight = 20
-
-[[menu.main]]
-identifier = "tags"
-name = "Tags"
-url = "tags/"
-weight = 30
-
-[[menu.main]]
-identifier = "search"
-name = "Search"
-url = "search/"
-weight = 40
-
-[[menu.main]]
-identifier = "about"
-name = "About"
-url = "about/"
-weight = 50
-
-[[menu.main]]
-identifier = "faq"
-name = "FAQ"
-url = "faq/"
-weight = 60
+[params.label]
+text = "PDE Dataset Docs"
 
 [params.assets]
 disableFingerprinting = true
@@ -101,6 +68,152 @@ inline = [['\(', '\)'], ['$', '$']]
 [markup.highlight]
 noClasses = false
 
-[services]
+[taxonomies]
+tag = ""
+category = ""
+
 [services.googleAnalytics]
 ID = ""
+
+########################
+# Languages
+########################
+
+[languages]
+[languages.zh-cn]
+locale = "zh-cn"
+label = "中文"
+weight = 1
+title = "PDE Dataset Docs"
+contentDir = "content/zh-cn"
+
+[languages.zh-cn.params]
+description = "科学机器学习 / CFD 基准数据集文档（中英双语）。"
+[languages.zh-cn.params.label]
+text = "PDE Dataset Docs"
+[languages.zh-cn.params.homeInfoParams]
+Title = "PDE Dataset Docs"
+Content = """
+按 [The Well](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/) 的单配置文档风格，整理 The Well、CFDBench、FlowBench、PDEArena、PDEBench、PDEgym 等基准数据介绍。
+
+每个页面包含一句话描述、控制方程、About the data、初边值条件、参数扫描、下载命令与引用信息。
+
+→ 从 [数据集总览](/datasets/) 开始浏览。右上角可切换 English。
+"""
+
+[[languages.zh-cn.menu.main]]
+identifier = "home"
+name = "首页"
+url = "/"
+weight = 10
+
+[[languages.zh-cn.menu.main]]
+identifier = "datasets"
+name = "数据集"
+url = "datasets/"
+weight = 20
+
+[[languages.zh-cn.menu.main]]
+identifier = "the-well"
+name = "The Well"
+url = "datasets/the-well/"
+weight = 30
+
+[[languages.zh-cn.menu.main]]
+identifier = "cfdbench"
+name = "CFDBench"
+url = "datasets/cfdbench/"
+weight = 40
+
+[[languages.zh-cn.menu.main]]
+identifier = "flowbench"
+name = "FlowBench"
+url = "datasets/flowbench/"
+weight = 50
+
+[[languages.zh-cn.menu.main]]
+identifier = "pdearena"
+name = "PDEArena"
+url = "datasets/pdearena/"
+weight = 60
+
+[[languages.zh-cn.menu.main]]
+identifier = "pdebench"
+name = "PDEBench"
+url = "datasets/pdebench/"
+weight = 70
+
+[[languages.zh-cn.menu.main]]
+identifier = "pdegym"
+name = "PDEgym"
+url = "datasets/pdegym/"
+weight = 80
+
+[languages.en]
+locale = "en"
+label = "English"
+weight = 2
+title = "PDE Dataset Docs"
+contentDir = "content/en"
+
+[languages.en.params]
+description = "Bilingual documentation for scientific ML / CFD benchmark datasets."
+[languages.en.params.label]
+text = "PDE Dataset Docs"
+[languages.en.params.homeInfoParams]
+Title = "PDE Dataset Docs"
+Content = """
+Dataset documentation styled after [The Well](https://polymathic-ai.org/the_well/datasets/acoustic_scattering_discontinuous/), covering The Well, CFDBench, FlowBench, PDEArena, PDEBench, and PDEgym.
+
+Each page includes a one-line description, governing equations, about-the-data fields, ICs/BCs, parameter sweeps, download commands, and citations.
+
+→ Start from the [Datasets overview](/en/datasets/). Use the language switch for 中文.
+"""
+
+[[languages.en.menu.main]]
+identifier = "home"
+name = "Home"
+url = "/"
+weight = 10
+
+[[languages.en.menu.main]]
+identifier = "datasets"
+name = "Datasets"
+url = "datasets/"
+weight = 20
+
+[[languages.en.menu.main]]
+identifier = "the-well"
+name = "The Well"
+url = "datasets/the-well/"
+weight = 30
+
+[[languages.en.menu.main]]
+identifier = "cfdbench"
+name = "CFDBench"
+url = "datasets/cfdbench/"
+weight = 40
+
+[[languages.en.menu.main]]
+identifier = "flowbench"
+name = "FlowBench"
+url = "datasets/flowbench/"
+weight = 50
+
+[[languages.en.menu.main]]
+identifier = "pdearena"
+name = "PDEArena"
+url = "datasets/pdearena/"
+weight = 60
+
+[[languages.en.menu.main]]
+identifier = "pdebench"
+name = "PDEBench"
+url = "datasets/pdebench/"
+weight = 70
+
+[[languages.en.menu.main]]
+identifier = "pdegym"
+name = "PDEgym"
+url = "datasets/pdegym/"
+weight = 80

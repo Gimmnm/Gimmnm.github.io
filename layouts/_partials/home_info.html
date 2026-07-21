@@ -1,4 +1,5 @@
 {{- with site.Params.homeInfoParams }}
+{{- $isZh := eq $.Language.Lang "zh-cn" }}
 <article class="first-entry home-info">
     <header class="entry-header">
         <h1>{{ .Title | markdownify }}</h1>
@@ -7,5 +8,20 @@
         {{ $opts := dict "display" "block" }}
         {{ .Content | $.Page.RenderString $opts }}
     </div>
+    {{- $datasets := site.GetPage "section" "datasets" }}
+    {{- with $datasets }}
+    <div class="docs-family-grid home-dataset-grid">
+      {{- range .Sections.ByWeight }}
+      <a class="docs-family-card" href="{{ .RelPermalink }}">
+        <h2>{{ .LinkTitle }}</h2>
+        <p>{{ .Params.summary | default .Params.description | default .Title }}</p>
+        <span class="docs-family-count">
+          {{- len .RegularPages }}
+          {{- if $isZh }} 个配置{{- else }} configs{{- end -}}
+        </span>
+      </a>
+      {{- end }}
+    </div>
+    {{- end }}
 </article>
 {{- end -}}
