@@ -32,12 +32,6 @@ tocopen = false
 math = true
 mainSections = ["datasets"]
 
-# Soft client-side gate for GitHub Pages (hash only; change by updating passwordHash).
-[params.siteGate]
-enabled = true
-passwordHash = "0d686a96ac2bb3e48d870e470b6d3d6ea774a2aee4a9d5a8d35c1f53a74a7afb"
-storageKey = "pde-docs-gate-v2"
-
 [params.label]
 text = "PDE Dataset Docs"
 
