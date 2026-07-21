@@ -14,7 +14,7 @@ defaultContentLanguageInSubdir = false
 [params]
 env = "production"
 author = "Gzh"
-defaultTheme = "auto"
+defaultTheme = "light"
 disableLangToggle = false
 displayFullLangName = true
 ShowReadingTime = false
